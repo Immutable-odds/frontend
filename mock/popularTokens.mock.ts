@@ -4,8 +4,8 @@ export const popularTokens = [
 		icon: "/svgs/tokens/usdt.svg",
 	},
 	{
-		token: "BUSD",
-		icon: "/svgs/tokens/busd.svg",
+		token: "ETH",
+		icon: "/svgs/tokens/eth.svg",
 	},
 	{
 		token: "BTC",

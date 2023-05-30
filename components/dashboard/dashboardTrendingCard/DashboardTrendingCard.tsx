@@ -5,7 +5,8 @@ import "swiper/css";
 import styles from "./DashboardTrendingCard.module.scss";
 import Image from "next/legacy/image";
 import { Countdown, OddsCard } from "@/shared";
-import { convertEpochToFormattedDate } from "@/utils";
+import { convertEpochToFormattedDate, formatMatches } from "@/utils";
+import { footballMatches } from "@/mock";
 
 const DashboardTrendingCard = () => {
 	return (
@@ -18,6 +19,7 @@ const DashboardTrendingCard = () => {
 			<Card
 				epochTime={1757859200}
 				odds={{ winOdds: 2.45, drawOdds: 3.45, lossOdds: 4.56 }}
+				match={footballMatches[8]}
 			/>
 		</div>
 	);
@@ -32,9 +34,10 @@ interface CardProps {
 		lossOdds: number;
 		drawOdds: number;
 	};
+	match?: any;
 }
 
-const Card = ({ epochTime, odds }: CardProps) => {
+const Card = ({ epochTime, odds, match }: CardProps) => {
 	const formattedDate = convertEpochToFormattedDate(epochTime);
 
 	return (
@@ -42,7 +45,7 @@ const Card = ({ epochTime, odds }: CardProps) => {
 			<div className={styles.card_header}>
 				<div className={styles.small_row}>
 					<div className={styles.icon}>
-						<Image src="/svgs/premier-league.svg" layout="fill" alt="" />
+						<Image src={"/svgs/premier-league.svg"} layout="fill" alt="" />
 					</div>
 					<div className={styles.text}>
 						<h3>Premier League</h3>
@@ -62,12 +65,12 @@ const Card = ({ epochTime, odds }: CardProps) => {
 					<div className={styles.icon_block}>
 						<div className={styles.icon_container}>
 							<div className={styles.icon}>
-								<Image src="/svgs/real-madrid.svg" layout="fill" alt="" />
+								<Image src={match.homeTeam.crest} layout="fill" alt="" />
 							</div>
 						</div>
 					</div>
 					<div className={styles.text}>
-						<h4>Real Madrid</h4>
+						<h4>{match.homeTeam.shortName}</h4>
 					</div>
 				</div>
 				<div className={styles.block}>
@@ -87,6 +90,7 @@ const Card = ({ epochTime, odds }: CardProps) => {
 						lossOdds={odds.lossOdds}
 						showTitle
 						className={styles.odds_block}
+						data={match}
 					/>
 					<Countdown epochTime={epochTime} />
 				</div>
@@ -94,12 +98,12 @@ const Card = ({ epochTime, odds }: CardProps) => {
 					<div className={styles.icon_block}>
 						<div className={styles.icon_container}>
 							<div className={styles.icon}>
-								<Image src="/svgs/man-city.svg" layout="fill" alt="" />
+								<Image src={match.awayTeam.crest} layout="fill" alt="" />
 							</div>
 						</div>
 					</div>
 					<div className={styles.text}>
-						<h4>man city</h4>
+						<h4>{match.awayTeam.shortName}</h4>
 					</div>
 				</div>
 			</div>
