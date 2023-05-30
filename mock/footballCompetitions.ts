@@ -92,29 +92,6 @@ export const competitions: any[] = [
 		lastUpdated: "2022-03-20T09:20:44Z",
 	},
 	{
-		id: 2018,
-		area: {
-			id: 2077,
-			name: "Europe",
-			code: "EUR",
-			flag: "https://crests.football-data.org/EUR.svg",
-		},
-		name: "European Championship",
-		code: "EC",
-		type: "CUP",
-		emblem: "https://crests.football-data.org/EUR.svg",
-		plan: "TIER_ONE",
-		currentSeason: {
-			id: 1537,
-			startDate: "2024-06-14",
-			endDate: "2024-07-14",
-			currentMatchday: 1,
-			winner: null,
-		},
-		numberOfAvailableSeasons: 17,
-		lastUpdated: "2021-07-20T18:34:04Z",
-	},
-	{
 		id: 2015,
 		area: {
 			id: 2081,
