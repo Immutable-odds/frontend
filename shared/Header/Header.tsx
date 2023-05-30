@@ -6,6 +6,7 @@ import { Logo, Button } from "@/shared";
 import styles from "./Header.module.scss";
 import { scrollTo } from "@/utils";
 import Image from "next/legacy/image";
+import { navLinks } from "@/mock";
 
 const Header = () => {
 	const router = useRouter();
@@ -92,22 +93,31 @@ const Header = () => {
 				>
 					<nav className={styles.header_nav}>
 						<ul className={styles.header_navList}>
-							{/* {navLinks.map(({ title, name, external, url }, index) => {
-              return (
-                <li key={index} className={`${styles.header_navLink} ${title}`} onClick={() => handleNavClick(title)}>
-                  {external ? (
-                    <a href={url} rel="noreferrer" target="_blank">
-                      {name}
-                    </a>
-                  ) : (
-                    <Link href="/">{name}</Link>
-                  )}
-                </li>
-              )
-            })} */}
+							{navLinks.map(({ title, external, url }, index) => {
+								return (
+									<li
+										key={index}
+										className={`${styles.header_navLink} ${title}`}
+										onClick={() => handleNavClick(title)}
+									>
+										{external ? (
+											<a
+												href={url}
+												rel="noreferrer"
+												target="_blank"
+											>
+												{title}
+											</a>
+										) : (
+											<Link href="/">{title}</Link>
+										)}
+									</li>
+								);
+							})}
 						</ul>
 					</nav>
 				</div>
+				<div></div>
 				<div
 					onClick={() => setCollapsed(!collapsed)}
 					className={
