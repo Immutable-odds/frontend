@@ -1,0 +1,23 @@
+@import "@/styles/imports";
+
+.progress {
+	position: relative;
+	overflow: hidden;
+}
+
+.progress_inner {
+	width: 100%;
+	height: 100%;
+	// border: 1px solid $col-black-700;
+	overflow: hidden;
+	background-color: $col-grey-8;
+
+	@include flex(stretch, stretch, nowrap);
+}
+
+.progress_bar {
+	width: 100%;
+	height: 100%;
+	// background: linear-gradient(297.24deg, #96e6a1 8.25%, #d4fc79 91.76%);
+	background-color: $col-primary-4;
+}

@@ -1,0 +1,5 @@
+@import "@/styles/imports";
+
+.section {
+	@include grid(28rem 68.4rem 34.8rem, 2.4rem);
+}

@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-}
+	reactStrictMode: true,
+	swcMinify: true,
+	images: {
+		domains: ["crests.football-data.org", "upload.wikimedia.org"],
+		// remotePatterns: [
+		// 	{
+		// 		protocol: "https",
+		// 		hostname: "*",
+		// 	},
+		// ],
+	},
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

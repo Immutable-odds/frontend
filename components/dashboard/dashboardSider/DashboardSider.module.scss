@@ -1,0 +1,47 @@
+@import "@/styles/imports";
+
+.container {
+	width: 100%;
+	padding: 2.4rem;
+	background-color: $col-grey-9;
+	border-radius: 1.6rem;
+	min-height: 72rem;
+	.block {
+		margin-top: 2.4rem;
+		.title {
+			margin-bottom: 2.4rem;
+			h3 {
+				@extend %text-14;
+				color: $col-grey-3;
+			}
+		}
+		.row {
+			@include flex(flex-start, center);
+			margin-bottom: 2.4rem;
+			padding: 1rem 0.8rem;
+			border-radius: 0.4rem;
+			.icon {
+				position: relative;
+				width: 2.4rem;
+				height: 2.4rem;
+				margin-right: 0.8rem;
+				border-radius: 50%;
+				overflow: hidden;
+			}
+			.text {
+				p {
+					@extend %text-14;
+					color: $col-grey-4;
+				}
+			}
+			&[data-active="true"] {
+				background-color: $col-primary-4;
+				.text {
+					p {
+						color: $col-white;
+					}
+				}
+			}
+		}
+	}
+}

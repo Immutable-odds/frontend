@@ -1,0 +1,8 @@
+@import "@/styles/imports";
+
+.text {
+	p {
+		@extend %text-14;
+		color: $col-grey-4;
+	}
+}

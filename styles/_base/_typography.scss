@@ -1,0 +1,54 @@
+@font-face {
+	font-family: "Moderat-300";
+	src: url("/fonts/moderat/Moderat-Light.woff2");
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Moderat-400";
+	src: url("/fonts/moderat/Moderat-Regular.woff2");
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Moderat-500";
+	src: url("/fonts/moderat/Moderat-Medium.woff2");
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Moderat-600";
+	src: url("/fonts/moderat/Moderat-Bold.woff2");
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Moderat-700";
+	src: url("/fonts/moderat/Moderat-Black.woff2");
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+}
+
+section,
+article,
+blockquote,
+div,
+span,
+nav,
+p,
+ul,
+li,
+a {
+	font-size: 1.4rem;
+	line-height: 2.4rem;
+	color: $col-grey-1;
+}
