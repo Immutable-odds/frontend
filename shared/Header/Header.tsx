@@ -24,41 +24,41 @@ const Header = () => {
 		event.stopPropagation();
 	};
 
-	useEffect(() => {
-		const element = ref.current;
-		const navList =
-			element?.children[0].children[1].children[0].children[0].childNodes;
-		if (typeof document !== "undefined") {
-			const sections = document.querySelectorAll("section");
-			const navLi = document.querySelectorAll("li");
-			window.onscroll = () => {
-				let current: any = "";
+	// useEffect(() => {
+	// 	const element = ref.current;
+	// 	const navList =
+	// 		element?.children[0].children[1].children[0].children[0].childNodes;
+	// 	if (typeof document !== "undefined") {
+	// 		const sections = document.querySelectorAll("section");
+	// 		const navLi = document.querySelectorAll("li");
+	// 		window.onscroll = () => {
+	// 			let current: any = "";
 
-				sections.forEach(section => {
-					const sectionTop = section.offsetTop;
-					if (scrollY >= sectionTop - 150) {
-						current = section.getAttribute("id");
-					}
-				});
+	// 			sections.forEach(section => {
+	// 				const sectionTop = section.offsetTop;
+	// 				if (scrollY >= sectionTop - 150) {
+	// 					current = section.getAttribute("id");
+	// 				}
+	// 			});
 
-				navList?.forEach((li: any) => {
-					// console.log(current)
-					// if (scrollY == 0) {
-					//   if (li.classList.contains('home')) {
-					//     li.classList.add('active-nav')
-					//   }
-					// }else{
+	// 			navList?.forEach((li: any) => {
+	// 				// console.log(current)
+	// 				// if (scrollY == 0) {
+	// 				//   if (li.classList.contains('home')) {
+	// 				//     li.classList.add('active-nav')
+	// 				//   }
+	// 				// }else{
 
-					// }
-					li.classList.remove("active-nav");
-					if (li.classList.contains(current)) {
-						li.classList.add("active-nav");
-					}
-				});
-			};
-			// console.log(navList)
-		}
-	}, []);
+	// 				// }
+	// 				li.classList.remove("active-nav");
+	// 				if (li.classList.contains(current)) {
+	// 					li.classList.add("active-nav");
+	// 				}
+	// 			});
+	// 		};
+	// 		// console.log(navList)
+	// 	}
+	// }, []);
 
 	useEffect(() => {
 		const handleClickOutside = () => {
@@ -92,7 +92,7 @@ const Header = () => {
 					}
 				>
 					<nav className={styles.header_nav}>
-						<ul className={styles.header_navList}>
+						{/* <ul className={styles.header_navList}>
 							{navLinks.map(({ title, external, url }, index) => {
 								return (
 									<li
@@ -114,7 +114,7 @@ const Header = () => {
 									</li>
 								);
 							})}
-						</ul>
+						</ul> */}
 					</nav>
 				</div>
 				<div></div>
