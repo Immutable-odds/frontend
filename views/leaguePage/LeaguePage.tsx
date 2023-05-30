@@ -30,7 +30,7 @@ const LeaguePage = () => {
 				(fixture: any) => fixture.status !== "FINISHED"
 			);
 			setLoading(false);
-			setFixtures(formatMatches(filteredFixtures));
+			setFixtures(formatMatches(fixtureResponse.data.matches));
 		}
 	}, [fixtureResponse]);
 
