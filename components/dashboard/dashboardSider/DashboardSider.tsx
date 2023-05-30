@@ -17,7 +17,23 @@ const DashboardSider = () => {
 	return (
 		<div className={styles.container}>
 			<SearchBox />
-			{router.asPath === "/football" ? (
+			{router.asPath === "/" ? (
+				<div className={styles.block}>
+					<div className={styles.title}>
+						<h3>Popular Tokens</h3>
+					</div>
+					{popularTokens.map((token: any, index) => (
+						<div className={styles.row} key={index}>
+							<div className={styles.icon}>
+								<Image src={token.icon} layout="fill" alt="" />
+							</div>
+							<div className={styles.text}>
+								<p>{token.token}</p>
+							</div>
+						</div>
+					))}
+				</div>
+			) : (
 				matchList.map((match: any, index: number) => (
 					<div className={styles.block} key={index}>
 						<div className={styles.title}>
@@ -61,22 +77,6 @@ const DashboardSider = () => {
 						))}
 					</div>
 				))
-			) : (
-				<div className={styles.block}>
-					<div className={styles.title}>
-						<h3>Popular Tokens</h3>
-					</div>
-					{popularTokens.map((token: any, index) => (
-						<div className={styles.row} key={index}>
-							<div className={styles.icon}>
-								<Image src={token.icon} layout="fill" alt="" />
-							</div>
-							<div className={styles.text}>
-								<p>{token.token}</p>
-							</div>
-						</div>
-					))}
-				</div>
 			)}
 		</div>
 	);
