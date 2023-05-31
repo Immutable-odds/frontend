@@ -61,29 +61,64 @@ const Card = ({ epochTime, odds, match }: CardProps) => {
 				</div>
 			</div>
 			<div className={styles.card_body}>
-				<div className={styles.block}>
-					<div className={styles.icon_block}>
-						<div className={styles.icon_container}>
-							<div className={styles.icon}>
-								<Image src={match.homeTeam.crest} layout="fill" alt="" />
+				<div className={styles.row}>
+					<div className={styles.block}>
+						<div className={styles.icon_block}>
+							<div className={styles.icon_container}>
+								<div className={styles.icon}>
+									<Image
+										src={match.homeTeam.crest}
+										layout="fill"
+										alt=""
+									/>
+								</div>
 							</div>
 						</div>
+						<div className={styles.text}>
+							<h4>{match.homeTeam.shortName}</h4>
+						</div>
 					</div>
-					<div className={styles.text}>
-						<h4>{match.homeTeam.shortName}</h4>
+					<div className={styles.block}>
+						<div className={styles.text} style={{ marginBottom: "1.6rem" }}>
+							<p>
+								{formattedDate?.dayOfWeek} {formattedDate?.day}{" "}
+								{formattedDate?.monthOfYear} | {formattedDate?.hours}:
+								{formattedDate?.minutes}
+							</p>
+						</div>
+						<div className={styles.text}>
+							<h1>VS</h1>
+						</div>
+						<div className={styles.desk_block}>
+							<OddsCard
+								winOdds={odds.winOdds}
+								drawOdds={odds.drawOdds}
+								lossOdds={odds.lossOdds}
+								showTitle
+								className={styles.odds_block}
+								data={match}
+							/>
+							<Countdown epochTime={epochTime} />
+						</div>
+					</div>
+					<div className={styles.block}>
+						<div className={styles.icon_block}>
+							<div className={styles.icon_container}>
+								<div className={styles.icon}>
+									<Image
+										src={match.awayTeam.crest}
+										layout="fill"
+										alt=""
+									/>
+								</div>
+							</div>
+						</div>
+						<div className={styles.text}>
+							<h4>{match.awayTeam.shortName}</h4>
+						</div>
 					</div>
 				</div>
-				<div className={styles.block}>
-					<div className={styles.text} style={{ marginBottom: "1.6rem" }}>
-						<p>
-							{formattedDate?.dayOfWeek} {formattedDate?.day}{" "}
-							{formattedDate?.monthOfYear} | {formattedDate?.hours}:
-							{formattedDate?.minutes}
-						</p>
-					</div>
-					<div className={styles.text}>
-						<h1>VS</h1>
-					</div>
+				<div className={styles.mob_block}>
 					<OddsCard
 						winOdds={odds.winOdds}
 						drawOdds={odds.drawOdds}
@@ -93,18 +128,6 @@ const Card = ({ epochTime, odds, match }: CardProps) => {
 						data={match}
 					/>
 					<Countdown epochTime={epochTime} />
-				</div>
-				<div className={styles.block}>
-					<div className={styles.icon_block}>
-						<div className={styles.icon_container}>
-							<div className={styles.icon}>
-								<Image src={match.awayTeam.crest} layout="fill" alt="" />
-							</div>
-						</div>
-					</div>
-					<div className={styles.text}>
-						<h4>{match.awayTeam.shortName}</h4>
-					</div>
 				</div>
 			</div>
 		</div>

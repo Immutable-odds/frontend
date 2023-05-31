@@ -12,6 +12,7 @@ import { isEmpty } from "lodash";
 import { Fetcher } from "@/utils/fetcher";
 import styles from "./DashboardView.module.scss";
 import { footballMatches } from "@/mock";
+import { ButtonNav } from "@/shared";
 
 const DashboardFootballView = () => {
 	const [matches, setMatches] = useState<any[]>([]);
@@ -33,17 +34,25 @@ const DashboardFootballView = () => {
 
 	return (
 		<div className={styles.section}>
-			<div className={styles.block}>
+			<div className={styles.sider_block}>
 				<DashboardSider />
 			</div>
 			<div className={styles.block}>
 				<DashboardPointsCard />
+				<div className={styles.mob_button_nav}>
+					<ButtonNav />
+				</div>
 				<DashboardTrendingCard />
 				{matchList.map((matchesData, index) => (
 					<LeagueContainer data={matchesData} key={index} />
 				))}
 			</div>
-			<DashboardStakeSider />
+			<div>
+				<div className={styles.button_nav}>
+					<ButtonNav />
+				</div>
+				<DashboardStakeSider />
+			</div>
 		</div>
 	);
 };

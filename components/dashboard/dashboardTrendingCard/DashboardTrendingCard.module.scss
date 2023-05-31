@@ -6,6 +6,27 @@
 	border-radius: 1.6rem;
 	margin: 2.4rem 0;
 	padding: 0.4rem;
+	.text {
+		h1 {
+			@extend %title-32;
+			font-family: $font-700;
+		}
+		h3,
+		h4 {
+			@extend %text-18;
+			font-family: $font-700;
+			text-transform: capitalize;
+		}
+		h4 {
+			@extend %text-16;
+		}
+		p {
+			color: $col-grey-4;
+		}
+	}
+	.row {
+		@include flex(space-between);
+	}
 	.header {
 		@include flex(space-between);
 		background-color: $col-grey-9;
@@ -43,7 +64,6 @@
 		}
 		.card_body {
 			padding: 1.6rem 5.6rem 2.4rem;
-			@include flex(space-between);
 			.block {
 				@include flex(center, center, column);
 				.icon_block {
@@ -51,7 +71,8 @@
 					height: 12rem;
 					background-color: $col-grey-10;
 					border-radius: 50%;
-					padding: 1.6rem;
+					// padding: 1.6rem;
+					@extend %center;
 					margin-bottom: 1.8rem;
 					.icon_container {
 						width: 8.8rem;
@@ -71,23 +92,35 @@
 				}
 			}
 		}
+		.mob_block {
+			display: none;
+			@extend %center;
+			margin-top: 1.6rem;
+		}
 	}
-	.text {
-		h1 {
-			@extend %title-32;
-			font-family: $font-700;
-		}
-		h3,
-		h4 {
-			@extend %text-18;
-			font-family: $font-700;
-			text-transform: capitalize;
-		}
-		h4 {
-			@extend %text-16;
-		}
-		p {
-			color: $col-grey-4;
+	@include screenMax("mobile") {
+		.card {
+			.card_body {
+				padding: 1.6rem;
+				.icon_block {
+					width: 8rem !important;
+					height: 8rem !important;
+					.icon_container {
+						width: 6.4rem !important;
+						height: 6.4rem !important;
+						.icon {
+							width: 3.5rem !important;
+							height: 3.5rem !important;
+						}
+					}
+				}
+				.desk_block {
+					display: none;
+				}
+				.mob_block {
+					display: block;
+				}
+			}
 		}
 	}
 }

@@ -7,7 +7,7 @@ import {
 	DashboardStakeSider,
 } from "@/components/dashboard";
 import styles from "./DashboardView.module.scss";
-import { Select } from "@/shared";
+import { ButtonNav, Select } from "@/shared";
 import { CryptoBet } from "@/types";
 
 const DashboardCryptoView = () => {
@@ -25,11 +25,14 @@ const DashboardCryptoView = () => {
 	}, [network]);
 	return (
 		<div className={styles.section}>
-			<div className={styles.block}>
+			<div className={styles.sider_block}>
 				<DashboardSider />
 			</div>
 			<div className={styles.block}>
 				<DashboardPointsCard />
+				<div className={styles.mob_button_nav}>
+					<ButtonNav />
+				</div>
 				<div className={styles.row}>
 					<div className={styles.text}>
 						<h1>All Tokens / Pairs</h1>
@@ -49,7 +52,12 @@ const DashboardCryptoView = () => {
 				</div>
 				<CryptoContainer cryptoBets={cryptoBetList} />
 			</div>
-			<DashboardStakeSider />
+			<div>
+				<div className={styles.button_nav}>
+					<ButtonNav />
+				</div>
+				<DashboardStakeSider />
+			</div>
 		</div>
 	);
 };

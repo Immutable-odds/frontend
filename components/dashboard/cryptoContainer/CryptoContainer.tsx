@@ -87,6 +87,53 @@ const Card = ({ bet }: CardProps) => {
 					type="crypto"
 				/>
 			</div>
+			<div className={styles.mob_header}>
+				<div className={styles.small_row}>
+					<div className={styles.icon_container}>
+						<div className={styles.icon}>
+							<Image src={bet.icon1} layout="fill" alt="" />
+						</div>
+						{bet.icon2 && (
+							<div className={styles.icon}>
+								<Image src={bet.icon2} layout="fill" alt="" />
+							</div>
+						)}
+					</div>
+					<div className={styles.text}>
+						<p>
+							{bet.token1}
+							{bet.token2 && `/${bet.token2}`}
+						</p>
+					</div>
+				</div>
+			</div>
+			<div className={styles.mob_body}>
+				<div className={styles.row}>
+					<div className={styles.text}>
+						<h5>Due Date</h5>
+					</div>
+					<div className={styles.text}>
+						<p>
+							{date}, {formattedTime}{" "}
+						</p>
+					</div>
+				</div>
+				<div className={styles.row}>
+					<div className={styles.text}>
+						<h5>Bet Condition</h5>
+					</div>
+					<div className={styles.text}>
+						<span>{bet.betCondition}</span>
+					</div>
+				</div>
+				<OddsCard
+					winOdds={2.45}
+					drawOdds={3.45}
+					lossOdds={4.45}
+					data={bet}
+					type="crypto"
+				/>
+			</div>
 		</div>
 	);
 };

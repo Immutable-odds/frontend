@@ -24,7 +24,7 @@
 		}
 	}
 	.header_nav {
-		min-width: 35%;
+		min-width: 20%;
 		margin-right: 5.5rem;
 
 		.header_navList {
@@ -39,17 +39,40 @@
 					font-weight: 600;
 					transition: $all-transition;
 					text-transform: capitalize;
+					position: relative;
+					&::after {
+						content: "";
+						width: 100%;
+						height: 0.4rem;
+						background-color: $col-primary-4;
+						left: 0;
+						position: absolute;
+						display: none;
+						bottom: -2.8rem;
+					}
 					&:hover {
-						color: #f9603d;
+						color: $col-primary-4;
 					}
 				}
-				@include screenMax("tablet") {
+				&[data-active="true"] {
+					a {
+						transition: all 0.2s ease-out;
+						pointer-events: none;
+						font-weight: 600;
+						color: $col-primary-4;
+
+						&::after {
+							display: block !important;
+						}
+					}
+				}
+				@include screenMax("mobile") {
 					@include flex(flex-end, center, nowrap);
 				}
 			}
 		}
 	}
-	@include screenMax("tablet") {
+	@include screenMax("mobile") {
 		padding: 3rem 2.4rem;
 		.header_nav {
 			margin-right: 0;
@@ -70,7 +93,7 @@
 			}
 		}
 	}
-	@include screenMax("tablet") {
+	@include screenMax("mobile") {
 		.header_nav {
 			.header_navList {
 				.header_navLink {
@@ -90,14 +113,14 @@
 	transition: transform 0.3s ease-out;
 	@include flex(center, center);
 
-	@include screenMax("tablet") {
+	@include screenMax("mobile") {
 		order: 3;
-		width: 100%;
+		width: calc(100% - 4.8rem);
 		height: 100%;
 		position: fixed;
 		top: 10rem;
-		left: 0;
-		background-color: rgba($col-white, 0.9);
+		left: 2.4rem;
+		background-color: $col-grey-9;
 		z-index: 10;
 		padding: 4rem 7%;
 		margin-left: 0;
@@ -107,7 +130,7 @@
 }
 
 .header_wrapper__collapsed {
-	@include screenMax("tablet") {
+	@include screenMax("mobile") {
 		transform: translateX(101vw);
 	}
 }
@@ -116,7 +139,7 @@
 	padding: 1.4rem 4.4rem 1rem;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 	transition: $all-transition;
-	@include screenMax("tablet") {
+	@include screenMax("mobile") {
 		padding: 2.4rem 1.4rem;
 	}
 }
@@ -131,7 +154,7 @@
 	border: none;
 	width: 45px;
 
-	@include screenMax("tablet") {
+	@include screenMax("mobile") {
 		order: 2;
 		margin-left: auto;
 		@include flex(center, flex-end, column nowrap);

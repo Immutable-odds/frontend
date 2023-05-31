@@ -15,7 +15,7 @@ const Header = () => {
 	const [dropDown, setDropDown] = useState<boolean>(false);
 	const ref = useRef<any>(null);
 	const handleNavClick = (id: string) => {
-		scrollTo({ id });
+		// scrollTo({ id });
 		setCollapsed(true);
 	};
 
@@ -70,6 +70,28 @@ const Header = () => {
 			document.removeEventListener("click", handleClickOutside);
 		};
 	}, []);
+	const checkActive = (url: string) => {
+		let isActive = url === router.asPath;
+		if (
+			(url === "/football" &&
+				[
+					"/brazil",
+					"/england",
+					"/europe",
+					"/spain",
+					"/france",
+					"/germany",
+					"/italy",
+					"/netherlands",
+					"/portugal",
+				].some(partialUrl => router.asPath.includes(`/football${partialUrl}`))) ||
+			url === "/football"
+		) {
+			return (isActive = true);
+		}
+
+		return isActive;
+	};
 	return (
 		<header
 			className={`${styles.header} ${scroll ? styles.header_scrolled : ""}`}
@@ -92,12 +114,13 @@ const Header = () => {
 					}
 				>
 					<nav className={styles.header_nav}>
-						{/* <ul className={styles.header_navList}>
+						<ul className={styles.header_navList}>
 							{navLinks.map(({ title, external, url }, index) => {
 								return (
 									<li
 										key={index}
 										className={`${styles.header_navLink} ${title}`}
+										data-active={checkActive(url)}
 										onClick={() => handleNavClick(title)}
 									>
 										{external ? (
@@ -109,12 +132,12 @@ const Header = () => {
 												{title}
 											</a>
 										) : (
-											<Link href="/">{title}</Link>
+											<Link href={url}>{title}</Link>
 										)}
 									</li>
 								);
 							})}
-						</ul> */}
+						</ul>
 					</nav>
 				</div>
 				<div></div>

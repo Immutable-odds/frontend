@@ -14,6 +14,7 @@ import OddsCard from "./oddsCard/OddsCard";
 import DetailContainer from "./detailContainer/DetailContainer";
 import BreadCrumb from "./breadCrumb/BreadCrumb";
 import Select from "./select/Select";
+import ButtonNav from "./buttonNav/ButtonNav";
 
 export {
 	Nprogress,
@@ -32,4 +33,5 @@ export {
 	DetailContainer,
 	BreadCrumb,
 	Select,
+	ButtonNav,
 };

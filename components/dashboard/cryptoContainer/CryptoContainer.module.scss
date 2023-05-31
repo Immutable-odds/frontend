@@ -1,7 +1,8 @@
 @import "@/styles/imports";
 
 .container {
-	.text {
+	.text,
+	.desktop_text {
 		h3 {
 			@extend %text-18;
 			line-height: 2rem;
@@ -34,7 +35,8 @@
 		border: 0.1rem solid $col-grey-8;
 		border-radius: 1.6rem;
 		margin-top: 2.4rem;
-		.header {
+		.header,
+		.mob_header {
 			background-color: $col-grey-9;
 			border-radius: 1.6rem;
 			padding: 0.8rem 2.2rem 0.8rem 1.2rem;
@@ -50,7 +52,11 @@
 				}
 			}
 		}
-		.body {
+		.mob_header {
+			display: none;
+		}
+		.body,
+		.mob_body {
 			padding: 1.6rem 1.2rem 0.4rem;
 			@include grid(30% 50% 20%, 0.1rem);
 			.small_row {
@@ -72,6 +78,50 @@
 				&:nth-child(2) {
 					margin-left: -1.2rem;
 				}
+			}
+		}
+		.mob_body {
+			display: none;
+		}
+	}
+	@include screenMax("mobile") {
+		.desktop_text {
+			display: none;
+		}
+		.card {
+			width: 100%;
+			.header {
+				display: none;
+			}
+			.body {
+				display: none;
+			}
+			.mob_header {
+				@include flex();
+				.icon_container {
+					width: 3.6rem;
+					margin-right: 0.4rem;
+					@include flex();
+					flex-wrap: nowrap;
+				}
+				.icon {
+					position: relative;
+					width: 2.4rem;
+					height: 2.4rem;
+					flex-shrink: 0;
+					overflow: hidden;
+					border-radius: 50%;
+					&:nth-child(2) {
+						margin-left: -1.2rem;
+					}
+				}
+			}
+			.mob_body {
+				display: block;
+				padding: 1.6rem;
+			}
+			.row {
+				margin-bottom: 1.6rem;
 			}
 		}
 	}

@@ -15,4 +15,19 @@
 			font-family: $font-700;
 		}
 	}
+	.mob_button_nav {
+		display: none;
+	}
+	@include screenMax("mobile") {
+		display: block;
+		.sider_block {
+			display: none;
+		}
+		.button_nav {
+			display: none;
+		}
+		.mob_button_nav {
+			display: block;
+		}
+	}
 }

@@ -42,4 +42,16 @@
 			border-right: 0.1rem solid $col-grey-7;
 		}
 	}
+	@include screenMax("mobile") {
+		@include grid(repeat(3, 1fr), 1.1rem);
+		background-color: transparent;
+		.button {
+			background-color: $col-grey-8;
+			border-radius: 0.8rem;
+			overflow: hidden;
+		}
+		&[data-type="crypto"] {
+			@include grid(repeat(2, 1fr), 1.6rem);
+		}
+	}
 }
