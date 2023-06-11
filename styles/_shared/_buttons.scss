@@ -13,6 +13,10 @@
 		transform: scale(1.01);
 		transition: $all-transition;
 	}
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
 	@include screenMax("mobile") {
 		padding: 2.4rem;
 	}
@@ -34,10 +38,7 @@
 		transition: $all-transition;
 		transform: translate(0.4rem, 0.4rem);
 	}
-	&:disabled {
-		opacity: 0.5;
-		cursor: not-allowed;
-	}
+
 	color: $col-white;
 }
 

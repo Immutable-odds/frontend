@@ -61,6 +61,22 @@ const Countdown: React.FC<CountdownProps> = ({ epochTime }) => {
 		};
 	}, [calculateTimeLeft]);
 
+	if (
+		timeLeft.years === 0 &&
+		timeLeft.months === 0 &&
+		timeLeft.weeks === 0 &&
+		timeLeft.days === 0 &&
+		timeLeft.hours === 0 &&
+		timeLeft.minutes === 0 &&
+		timeLeft.seconds === 0
+	) {
+		return (
+			<div className={styles.text}>
+				<p>Finished</p>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.text}>
 			<p>
@@ -69,8 +85,7 @@ const Countdown: React.FC<CountdownProps> = ({ epochTime }) => {
 				{timeLeft.weeks > 0 ? `${timeLeft.weeks}W: ` : ""}
 				{timeLeft.days > 0 ? `${timeLeft.days}D: ` : ""}
 				{timeLeft.hours > 0 ? `${timeLeft.hours}h: ` : ""}
-				{timeLeft.minutes}m:{" "}
-				{timeLeft.seconds}s
+				{timeLeft.minutes}m: {timeLeft.seconds}s
 			</p>
 		</div>
 	);

@@ -50,9 +50,9 @@
 		//   }
 		.select_smallRow {
 			width: 100%;
-			@include screenMax("tablet") {
-				justify-content: center;
-			}
+			// @include screenMax("tablet") {
+			// 	justify-content: center;
+			// }
 		}
 	}
 	@include screenMax("tablet") {
@@ -76,6 +76,7 @@
 
 .select_body {
 	min-width: 7rem;
+	width: 100%;
 	border-radius: 0.4rem;
 	padding: 1.55rem 1.3rem 0;
 	position: absolute;

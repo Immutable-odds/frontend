@@ -10,6 +10,8 @@ interface Props {
 	suffix?: string;
 	description?: string;
 	className?: string;
+	textClassName?: string;
+	textType?: "gain" | "loss";
 }
 
 const DetailContainer = ({
@@ -19,9 +21,11 @@ const DetailContainer = ({
 	prefix,
 	suffix,
 	className,
+	textClassName,
+	textType,
 }: Props) => {
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${className}`}>
 			<div className={styles.row}>
 				<div className={styles.text}>
 					<p>{title}</p>
@@ -37,12 +41,12 @@ const DetailContainer = ({
 					</div>
 				)}
 			</div>
-			<div className={`${styles.text} ${className}`}>
-				<p>
+			<div className={`${styles.text} ${textClassName}`} data-type={textType}>
+				<h5>
 					{prefix}
 					{typeof value === "number" ? formatNumber(value) : value}
 					{suffix}
-				</p>
+				</h5>
 			</div>
 		</div>
 	);

@@ -8,7 +8,15 @@ import {
 } from "@/components/dashboard";
 import styles from "./DashboardView.module.scss";
 import { ButtonNav, Select } from "@/shared";
-import { CryptoBet } from "@/types";
+import { CryptoBet, SelectOption } from "@/types";
+
+const networkList: SelectOption[] = [
+	{ label: "all", value: "all networks" },
+	{ label: "eth", value: "ethereum" },
+	{ label: "bsc", value: "binance smart chain" },
+	{ label: "heco", value: "heco" },
+	{ label: "cardano", value: "cardano" },
+];
 
 const DashboardCryptoView = () => {
 	const [cryptoBetList, setCryptoBetList] = useState<CryptoBet[]>(cryptoBets);
@@ -38,16 +46,7 @@ const DashboardCryptoView = () => {
 						<h1>All Tokens / Pairs</h1>
 					</div>
 					<div className={styles.small_row}>
-						<Select
-							options={[
-								"all networks",
-								"ethereum",
-								"binance smart chain",
-								"heco",
-								"cardano",
-							]}
-							onOptionChange={setNetwork}
-						/>
+						<Select options={networkList} onOptionChange={setNetwork} />
 					</div>
 				</div>
 				<CryptoContainer cryptoBets={cryptoBetList} />

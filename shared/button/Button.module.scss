@@ -1,4 +1,4 @@
-@import '@/styles/imports';
+@import "@/styles/imports";
 
 // .gold-gradient {
 //   @extend %btn-gold-gradient;
@@ -54,6 +54,10 @@
 
 .primary {
 	@extend %btn-primary;
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
 }
 
 .transparent {

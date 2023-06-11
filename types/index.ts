@@ -29,3 +29,8 @@ export interface CryptoBet {
 	};
 	timeStamp: number;
 }
+
+export interface SelectOption {
+	label: string;
+	value: string;
+}

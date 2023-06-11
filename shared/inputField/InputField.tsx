@@ -8,6 +8,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	label?: string;
 	password?: boolean;
 	className?: string;
+	suffix?: string;
 	// onChange?: (e: any) => void;
 	// onBlur?: (e: any) => void;
 	// onFocus?: (e: any) => void;
@@ -31,6 +32,7 @@ const InputField = ({
 	required,
 	min,
 	max,
+	suffix,
 	...options
 }: Props) => {
 	const [inputType, setInputType] = useState<string>(type);
@@ -82,6 +84,11 @@ const InputField = ({
 							layout="fill"
 							alt=""
 						/>
+					</div>
+				)}
+				{suffix && (
+					<div className={styles.text}>
+						<p>{suffix}</p>
 					</div>
 				)}
 			</div>

@@ -1,12 +1,9 @@
-import { Button } from "@/shared";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Select.module.scss";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { InputField } from "@/shared";
-// import { chains } from '@/mock';
 import SmallLoader from "@/shared/loaders/smallLoader/SmallLoader";
-import { useGlobalContext } from "@/contexts/AppContext";
+import { shortenTitle } from "@/utils";
+import { SelectOption } from "@/types";
 
 export interface OptionProps {
 	label: string;
@@ -14,7 +11,7 @@ export interface OptionProps {
 }
 
 export interface SelectProps {
-	options?: any[];
+	options?: SelectOption[];
 	onOptionChange?: (option?: any) => void;
 	defaultOptionIndex?: number;
 	className?: string;
@@ -22,17 +19,19 @@ export interface SelectProps {
 	icon?: string;
 	title?: string;
 	isTransparent?: boolean;
+	defaultOption?: string;
 }
 
 const Select: React.FunctionComponent<SelectProps> = ({
 	options,
 	onOptionChange,
-	defaultOptionIndex = 0,
+	defaultOptionIndex = -1,
 	className,
 	iconClass,
 	icon,
 	title,
 	isTransparent = false,
+	defaultOption = "Select an Option",
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selectedOptionIndex, setSelectedOptionIndex] =
@@ -48,7 +47,7 @@ const Select: React.FunctionComponent<SelectProps> = ({
 		setIsOpen(false);
 
 		if (onOptionChange) {
-			onOptionChange(options![selectedIndex]);
+			onOptionChange(options![selectedIndex].value);
 		}
 	};
 
@@ -68,11 +67,7 @@ const Select: React.FunctionComponent<SelectProps> = ({
 			{!options ? (
 				<SmallLoader />
 			) : (
-				<div
-					className={styles.select_header}
-					//buttonType="transparent"
-					onClick={toggling}
-				>
+				<div className={styles.select_header} onClick={toggling}>
 					<div className={styles.select_smallRow}>
 						<div className={styles.flex}>
 							{icon && (
@@ -82,7 +77,14 @@ const Select: React.FunctionComponent<SelectProps> = ({
 							)}
 							<p>
 								{title ? title + ":" : ""}{" "}
-								<span>{options![selectedOptionIndex]}</span>
+								<span>
+									{selectedOptionIndex === -1
+										? defaultOption
+										: shortenTitle(
+												options![selectedOptionIndex].value,
+												42
+										  )}
+								</span>
 							</p>
 						</div>
 						<div className={`${styles.select_dropDownImage}`}>
@@ -94,20 +96,16 @@ const Select: React.FunctionComponent<SelectProps> = ({
 
 			{isOpen && (
 				<div className={styles.select_body}>
-					{/* <InputField /> */}
 					<ul className={styles.select_listContainer}>
-						{options!.map((option, index) =>
+						{options!.map((option: SelectOption, index) =>
 							index !== selectedOptionIndex ? (
 								<li
 									onClick={onOptionClicked(index)}
 									key={index}
 									className={styles.select_listItem}
 								>
-									<div
-										//buttonType="transparent"
-										className={styles.select_row}
-									>
-										<p>{option}</p>
+									<div className={styles.select_row}>
+										<p>{option.value}</p>
 									</div>
 								</li>
 							) : null

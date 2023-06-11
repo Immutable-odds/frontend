@@ -1,0 +1,40 @@
+@import "@/styles/imports";
+
+.section {
+	.row {
+		width: 100%;
+		@include flex(space-between, center);
+	}
+	.small_row,
+	.margin_row {
+		width: 100%;
+		@include flex(flex-start, center);
+	}
+	.margin_row {
+		margin-top: 2.4rem;
+	}
+	.button {
+		span {
+			display: none;
+		}
+	}
+	@include screenMax("mobile") {
+		.button {
+			border-radius: 50%;
+			width: 5.6rem;
+			height: 5.6rem;
+			padding: 0;
+			position: fixed;
+			z-index: 10;
+			right: 2.4rem;
+			bottom: 3rem;
+			p {
+				display: none;
+			}
+			span {
+				display: block;
+				font-size: 2rem;
+			}
+		}
+	}
+}

@@ -1,0 +1,185 @@
+@import "@/styles/imports";
+
+.container {
+	width: 42.6rem;
+	margin-bottom: 4rem;
+	margin-top: 4rem;
+	padding-top: 4rem;
+	&:nth-child(3n + 2) {
+		margin-left: 4rem;
+		margin-right: 4rem;
+	}
+	.text {
+		h3 {
+			@extend %text-16;
+			text-align: center;
+		}
+		p {
+			@extend %text-14;
+		}
+	}
+	.card {
+		min-height: 35.8rem;
+		width: 100%;
+		background-color: $col-grey-9;
+		border-radius: 1.6rem;
+		padding: 5.6rem 2.4rem 2.4rem;
+		position: relative;
+		.icon_block {
+			width: 8rem;
+			height: 8rem;
+			position: absolute;
+			border-radius: 50%;
+			border: 0.1rem solid $col-grey-8;
+			background-color: $col-grey-10;
+			left: calc(50% - 4rem);
+			top: -4rem;
+			@extend %center;
+			.icon_container {
+				width: 4.8rem;
+				height: 3.2rem;
+				@include flex(center);
+				flex-wrap: nowrap;
+				.icon {
+					position: relative;
+					width: 3.2rem;
+					height: 3.2rem;
+					flex-shrink: 0;
+					overflow: hidden;
+					border-radius: 50%;
+					&:nth-child(2) {
+						margin-left: -1.4rem;
+					}
+				}
+			}
+		}
+		.block {
+			width: 100%;
+			background-color: $col-grey-8;
+			border-radius: 0.8rem;
+			padding: 1.6rem;
+		}
+		.details_container {
+			padding: 1.6rem 0;
+			&:not(:last-child) {
+				border-bottom: 0.1rem solid $col-grey-8;
+			}
+		}
+		.button_container {
+			@include grid(repeat(2, 1fr), 1.6rem);
+			width: 100%;
+			margin-top: 2.8rem;
+			.button {
+				background-color: $col-error-1;
+				border-radius: 10rem;
+				color: #f84040;
+				padding: 0.8rem;
+				&:last-child {
+					background-color: $col-success-1;
+					color: $col-success-10;
+				}
+			}
+		}
+		.time_container {
+			position: absolute;
+			bottom: -10%;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: $col-grey-8;
+			padding: 0.8rem 2.4rem;
+			border-radius: 10rem;
+			&[data-type="finished"] {
+				bottom: -5%;
+				&[data-value="yes"] {
+					background-color: $col-success-10;
+				}
+				&[data-value="no"] {
+					background-color: $col-error-10;
+				}
+			}
+		}
+		.input {
+			width: 70%;
+		}
+		.select_container {
+			width: 70%;
+			border: 0.1rem solid $col-grey-8;
+			border-radius: 0.8rem;
+			.select {
+				border: none;
+			}
+		}
+		.long_button {
+			width: 100%;
+			padding: 0.8rem;
+			margin-top: 1.2rem;
+		}
+		.back_button {
+			cursor: pointer;
+			@include flex(flex-start, center);
+			position: absolute;
+			left: 2.4rem;
+			top: 1.6rem;
+			.back_icon {
+				position: relative;
+				width: 2.4rem;
+				height: 2.4rem;
+				margin-right: 0.8rem;
+			}
+		}
+		.options_block {
+			position: absolute;
+			right: 0;
+			top: -3.2rem;
+			.more_icon {
+				position: relative;
+				width: 2.4rem;
+				height: 2.4rem;
+				margin-left: 1.6rem;
+				cursor: pointer;
+				.more_details {
+					position: absolute;
+					right: 0;
+					top: 2rem;
+					min-width: 15rem;
+					padding: 1.6rem;
+					border-radius: 1.6rem;
+					background-color: $col-grey-8;
+					display: none;
+				}
+				&:hover {
+					.more_details {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+	.edit_icon {
+		position: relative;
+		width: 2.4rem;
+		height: 2.4rem;
+		margin-left: 0.8rem;
+		cursor: pointer;
+	}
+	.row {
+		@include flex(space-between, center, nowrap);
+		margin-bottom: 1.6rem;
+	}
+	.small_row {
+		@include flex(flex-start, center, nowrap);
+	}
+	@include screenMax("mobile") {
+		&:nth-child(3n + 2) {
+			margin-left: 0;
+			margin-right: 0;
+		}
+		.card {
+			.button_container {
+				.button {
+					padding: 1.2rem 0.4rem;
+				}
+			}
+		}
+	}
+}

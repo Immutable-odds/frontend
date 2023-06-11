@@ -61,3 +61,10 @@
 	border: none !important;
 	padding: none !important;
 }
+
+.text {
+	p {
+		@extend %text-16;
+		color: $col-grey-4;
+	}
+}

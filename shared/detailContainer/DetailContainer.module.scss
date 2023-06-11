@@ -34,12 +34,23 @@
 			font-family: $font-700;
 		}
 		p,
-		h6 {
+		h6,
+		h5 {
 			@extend %text-14;
 			text-transform: capitalize;
 		}
-		h6 {
-			@extend %text-14;
+		h5 {
+			font-family: $font-700;
+		}
+		&[data-type="loss"] {
+			h5 {
+				color: $col-error-4;
+			}
+		}
+		&[data-type="gain"] {
+			h5 {
+				color: $col-success-4;
+			}
 		}
 	}
 	&:not(:last-child) {
