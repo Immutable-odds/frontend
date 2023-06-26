@@ -68,11 +68,17 @@ const AdvanceSelect: React.FunctionComponent<SelectProps> = ({
 				<div className={styles.select_header} onClick={toggling}>
 					<div className={styles.select_smallRow}>
 						<div className={styles.flex}>
-							{icon && (
-								<div className={`${styles.icon} ${iconClass}`}>
-									<Image src={icon} layout="fill" alt="" />
-								</div>
-							)}
+							{selectedOptionIndex === -1
+								? null
+								: options[selectedOptionIndex].icon && (
+										<div className={`${styles.icon} ${iconClass}`}>
+											<Image
+												src={options[selectedOptionIndex].icon!}
+												layout="fill"
+												alt=""
+											/>
+										</div>
+								  )}
 							<p>
 								{title ? title + ":" : ""}{" "}
 								<span>

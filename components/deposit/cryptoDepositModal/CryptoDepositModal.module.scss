@@ -1,0 +1,260 @@
+@import "@/styles/imports";
+
+.modal {
+	position: fixed;
+	z-index: 12;
+	inset: 0;
+	width: 100%;
+	height: 100vh;
+	overflow-y: hidden;
+	background-color: rgba(38, 38, 38, 0.7);
+	backdrop-filter: blur(15px);
+	cursor: default;
+	display: none;
+	&[data-active="true"] {
+		@include flex(center, center, column);
+	}
+	.closeModal_container {
+		position: absolute;
+		// top: 2rem;
+		right: -4.6rem;
+		background-color: $col-grey-10;
+		width: 3.2rem;
+		height: 3.2rem;
+		@extend %center;
+		border-radius: 0.8rem;
+		.closeModal {
+			min-width: auto;
+			min-height: auto;
+			width: 1rem;
+			height: 1rem;
+			position: relative;
+			transition: all 0.3s linear;
+			cursor: pointer;
+			span {
+				height: 1rem;
+				width: 0.2rem;
+				border-radius: 25%;
+				background-color: $col-white;
+				transform: rotate(45deg);
+				display: block;
+				// position: absolute;
+				// left: 0;
+				padding: 0;
+				margin-left: 0.4rem;
+			}
+			span:last-child {
+				transform: rotate(-45deg);
+				margin-top: -1rem;
+				// left: 1rem;
+			}
+		}
+	}
+	.text,
+	.center_text,
+	.qr_text,
+	.loading_text {
+		h3 {
+			@extend %title-24;
+			color: $col-white;
+			margin-bottom: 0.8rem;
+		}
+		h5 {
+			@extend %text-16;
+		}
+		p {
+			color: $col-white;
+		}
+	}
+	.container {
+		width: 90rem;
+		height: 58rem;
+		background-color: $col-grey-9;
+		border-radius: 0.8rem;
+		position: relative;
+		@include flex();
+		.body_container {
+			width: 50rem;
+			background-color: $col-grey-10;
+			height: 100%;
+			border-bottom-left-radius: 0.8rem;
+			border-top-left-radius: 0.8rem;
+			padding: 5.6rem 5.4rem;
+			overflow-y: hidden;
+			.body {
+				height: 40rem;
+				overflow-y: scroll;
+				// padding-bottom: 5rem;
+				@include noScrollBar;
+				margin-top: 4rem;
+			}
+			.button_block {
+				@include grid(repeat(2, 1fr), 0.8rem);
+				border: 0.1rem solid $col-grey-8;
+				border-radius: 10rem;
+				width: 18rem;
+				background-color: $col-grey-9;
+				padding: 0.4rem;
+				margin-top: 2.4rem;
+				margin-bottom: 3.2rem;
+				.button_container {
+					padding: 0;
+					.tab_button {
+						padding: 0.4rem 1.6rem;
+						@extend %text-14;
+						font-family: $font;
+						color: $col-grey-4;
+						border-radius: 10rem;
+						&[data-active="true"] {
+							background-color: $col-primary-4;
+							font-family: $font-700;
+							color: $col-grey-1;
+						}
+					}
+				}
+				@include screenMax("mobile") {
+					margin: 2.4rem 0;
+					width: 100%;
+				}
+			}
+			.block {
+				margin-bottom: 1.6rem;
+			}
+			.select {
+				border: 0.1rem solid $col-grey-8;
+				border-radius: 0.8rem;
+				width: 100%;
+				background-color: transparent;
+				margin-top: 0.8rem;
+			}
+			.small_select {
+				width: 36%;
+				border-radius: 0.4rem;
+				border: none;
+				padding: 1.6rem;
+				margin-left: 0.8rem;
+				background-color: $col-grey-8;
+			}
+			.row {
+				@include flex(space-between, center, nowrap);
+			}
+			.button {
+				width: 100%;
+				margin-top: 4rem;
+			}
+			.copy_container {
+				width: 100%;
+				background-color: $col-grey-9;
+				border: 0.1rem solid $col-grey-8;
+				padding: 1.7rem;
+				border-radius: 0.8rem;
+				margin-top: 0.8rem;
+				@include flex(space-between, center);
+				.copy {
+					position: relative;
+					width: 2.4rem;
+					height: 2.4rem;
+					cursor: pointer;
+				}
+			}
+		}
+		.center {
+			@extend %center;
+			width: calc(100% - 50rem);
+			height: 100%;
+			.center_block {
+				@extend %center;
+				max-width: 30rem;
+				.qr_description {
+					position: relative;
+					width: 8rem;
+					height: 8rem;
+					margin-bottom: 2.4rem;
+				}
+				.qr_code {
+					position: relative;
+					width: 30rem;
+					height: 30rem;
+					margin-top: 2.4rem;
+				}
+				.center_text {
+					max-width: 26.8rem;
+					text-align: center;
+					h5 {
+						color: $col-white;
+					}
+				}
+				.qr_text {
+					text-align: center;
+				}
+			}
+		}
+		&[data-type="LOADING"] {
+			width: 54rem;
+			height: 50rem;
+			background-color: $col-grey-10;
+			.center {
+				width: 100%;
+				.center_block {
+					@extend %center;
+					max-width: 100%;
+					.loading_icon {
+						width: 10rem;
+						height: 10rem;
+						position: relative;
+						margin-bottom: 4rem;
+						animation: rotateCircle 6s linear infinite;
+					}
+					.loading_text {
+						text-align: center;
+						max-width: 41rem;
+						p {
+							color: $col-grey-4;
+						}
+						a {
+							color: #f5f5f5;
+							@extend %text-16;
+							text-decoration: underline;
+						}
+					}
+					.button {
+						width: 100%;
+						margin: 5.6rem 0 1.6rem;
+					}
+				}
+			}
+		}
+	}
+	@include screenMax("mobile") {
+		.closeModal_container {
+			display: none;
+		}
+		.container {
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+			height: 85vh;
+			transition: $all-transition;
+			.body_container {
+				width: 100%;
+				padding: 4rem 2.4rem;
+				.body {
+					height: auto;
+				}
+			}
+		}
+		.select {
+			height: 5.6rem;
+			@include flex(center, flex-start, column);
+		}
+	}
+}
+
+@keyframes rotateCircle {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

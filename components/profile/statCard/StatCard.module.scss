@@ -1,0 +1,40 @@
+@import "@/styles/imports";
+
+.card {
+	width: 100%;
+	background-color: $col-grey-9;
+	border-radius: 1.6rem;
+	padding: 2.4rem;
+	height: 32rem;
+	.text {
+		h3 {
+			@extend %text-18;
+			font-family: $font-700;
+			margin-bottom: 0.8rem;
+		}
+		h6 {
+			@extend %text-14;
+			color: $col-grey-4;
+		}
+		p {
+			@extend %text-16;
+			color: $col-grey-1;
+			font-family: $font-700;
+		}
+	}
+	.row {
+		@include flex();
+		margin-top: 1.6rem;
+		padding-bottom: 1.6rem;
+
+		.icon {
+			position: relative;
+			height: 4rem;
+			width: 4rem;
+			margin-right: 1.6rem;
+		}
+		&:not(:last-child) {
+			border-bottom: 0.1rem solid $col-grey-8;
+		}
+	}
+}

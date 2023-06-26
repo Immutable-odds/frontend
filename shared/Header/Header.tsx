@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { Logo, Button } from "@/shared";
 import styles from "./Header.module.scss";
-import { scrollTo } from "@/utils";
+import { ConnectWallet } from "@/shared";
 import Image from "next/legacy/image";
 import { navLinks } from "@/mock";
 
@@ -72,26 +72,33 @@ const Header = () => {
 	}, []);
 	const checkActive = (url: string) => {
 		let isActive = url === router.asPath;
+		const path = router.asPath;
 		if (
-			(url === "/football" &&
-				[
-					"/brazil",
-					"/england",
-					"/europe",
-					"/spain",
-					"/france",
-					"/germany",
-					"/italy",
-					"/netherlands",
-					"/portugal",
-				].some(partialUrl => router.asPath.includes(`/football${partialUrl}`))) ||
-			url === "/football"
+			url === "/" &&
+			containsLink(path, [
+				"/football",
+				"/brazil",
+				"/england",
+				"/europe",
+				"/spain",
+				"/france",
+				"/germany",
+				"/italy",
+				"/netherlands",
+				"/portugal",
+			])
 		) {
 			return (isActive = true);
 		}
+		if (
+			url === "/settings" &&
+			containsLink(path, ["/funds", "/transactions", "/history"])
+		)
+			isActive = true;
 
 		return isActive;
 	};
+
 	return (
 		<header
 			className={`${styles.header} ${scroll ? styles.header_scrolled : ""}`}
@@ -140,7 +147,9 @@ const Header = () => {
 						</ul>
 					</nav>
 				</div>
-				<div></div>
+				<div className={styles.button}>
+					<ConnectWallet />
+				</div>
 				<div
 					onClick={() => setCollapsed(!collapsed)}
 					className={
@@ -156,3 +165,7 @@ const Header = () => {
 };
 
 export default Header;
+
+const containsLink = (path: string, links: string[]): boolean => {
+	return links.some(link => path.includes(link));
+};

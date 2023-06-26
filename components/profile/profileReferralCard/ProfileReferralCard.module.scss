@@ -1,0 +1,64 @@
+@import "@/styles/imports";
+
+.card {
+	width: 100%;
+	background-color: $col-grey-9;
+	border-radius: 1.6rem;
+	padding: 2.4rem;
+	height: 45rem;
+	.text {
+		p {
+			color: rgba($col-grey-1, 0.8);
+			@extend %text-16;
+			font-family: $font-700;
+		}
+		span {
+			font-family: $font;
+			color: $col-grey-8;
+			@extend %text-12;
+		}
+	}
+	.body {
+		height: calc(100% - 4rem);
+	}
+	.small_card {
+		width: 100%;
+		padding-bottom: 1.6rem;
+		margin-top: 1.6rem;
+		@include flex(space-between, center);
+		.row {
+			@include flex(flex-start, center);
+			.icon {
+				position: relative;
+				width: 4rem;
+				height: 4rem;
+				margin-right: 1.6rem;
+				border-radius: 50%;
+				overflow: hidden;
+			}
+		}
+		.status {
+			padding: 0.2rem 0.8rem;
+			border-radius: 10rem;
+			p {
+				@extend %text-12;
+				text-transform: capitalize;
+			}
+			&[data-type="active"] {
+				background-color: $col-success-1;
+				p {
+					color: $col-success-4;
+				}
+			}
+			&[data-type="inactive"] {
+				background-color: $col-grey-6;
+			}
+		}
+		&:not(:last-child) {
+			border-bottom: 0.1rem solid $col-grey-8;
+		}
+	}
+	@include screenMax("mobile") {
+		height: auto;
+	}
+}

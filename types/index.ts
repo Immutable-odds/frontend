@@ -33,4 +33,5 @@ export interface CryptoBet {
 export interface SelectOption {
 	label: string;
 	value: string;
+	icon?: string;
 }

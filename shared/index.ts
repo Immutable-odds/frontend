@@ -17,6 +17,7 @@ import ButtonNav from "./buttonNav/ButtonNav";
 import Title from "./title/Title";
 import { PredictionModal } from "./modals";
 import AdvanceSelect from "./selects/advancedSelect/AdvancedSelect";
+import ConnectWallet from "./connectWallet/ConnectWallet";
 
 export {
 	Nprogress,
@@ -38,4 +39,5 @@ export {
 	Title,
 	PredictionModal,
 	AdvanceSelect,
+	ConnectWallet,
 };

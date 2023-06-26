@@ -74,6 +74,9 @@
 	}
 	@include screenMax("mobile") {
 		padding: 3rem 2.4rem;
+		.button {
+			display: none;
+		}
 		.header_nav {
 			margin-right: 0;
 			.header_navList {

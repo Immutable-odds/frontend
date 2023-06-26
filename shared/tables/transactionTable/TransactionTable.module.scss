@@ -1,0 +1,97 @@
+@import "@/styles/imports";
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	.container {
+		border: 0.1rem solid $col-grey-8;
+		border-radius: 1.6rem;
+		padding: 3.2rem;
+		margin-top: 1.6rem;
+	}
+	.table_row,
+	.table_title {
+		width: 100%;
+		@include flex(space-between);
+		.cell {
+			width: 15%;
+			h3 {
+				@extend %text-16;
+				color: $col-white;
+			}
+			h6 {
+				@extend %text-14;
+				color: $col-grey-4;
+				display: none;
+			}
+			p {
+				@extend %text-14;
+				color: rgba($col-grey-3, 0.8);
+			}
+			&:first-child {
+				width: 20%;
+			}
+			&:not(:nth-child(3)) {
+				h3 {
+					text-transform: capitalize;
+				}
+			}
+			&:last-child {
+				width: 10%;
+			}
+			&[data-type="successful"] {
+				h3 {
+					color: $col-success-4;
+				}
+			}
+			&[data-type="failed"] {
+				h3 {
+					color: $col-error-4;
+				}
+			}
+			&[data-type="processing"] {
+				h3 {
+					color: $col-warning-4;
+				}
+			}
+		}
+	}
+	.table_title {
+		background-color: $col-grey-9;
+		color: $col-grey-3;
+		border-radius: 0.8rem;
+		padding: 1.6rem 3.2rem;
+	}
+	.table_row {
+		margin-bottom: 4rem;
+	}
+	@include screenMax("mobile") {
+		.container {
+			border: none;
+			padding: 0;
+		}
+		.table_title {
+			display: none;
+		}
+		.table_row {
+			display: block;
+			border: 0.1rem solid $col-grey-8;
+			border-radius: 1.6rem;
+			padding: 1.6rem;
+			margin-top: 1.6rem;
+			.cell {
+				@include flex(space-between);
+				width: 100% !important;
+				h6 {
+					display: block;
+				}
+				h3 {
+					font-size: 1.4rem;
+				}
+				&:not(:last-child) {
+					margin-bottom: 1.6rem;
+				}
+			}
+		}
+	}
+}

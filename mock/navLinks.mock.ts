@@ -18,4 +18,10 @@ export const navLinks: NavLink[] = [
 		url: "/predictions",
 		external: false,
 	},
+	{
+		id: 2,
+		title: "profile settings",
+		url: "/settings",
+		external: false,
+	},
 ];
