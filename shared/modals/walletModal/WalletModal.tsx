@@ -1,7 +1,7 @@
 import Button from "@/shared/button/Button";
 import InputField from "@/shared/inputField/InputField";
 import Image from "next/legacy/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./WalletModal.module.scss";
 
 interface Props {
@@ -11,6 +11,16 @@ interface Props {
 
 const WalletModal = ({ setOpenModal, openModal }: Props) => {
 	const [emailAddress, setEmailAddress] = useState<string>("");
+	useEffect(() => {
+		const handleClickOutside = () => {
+			setOpenModal(false);
+		};
+
+		document.addEventListener("click", handleClickOutside);
+		return () => {
+			document.removeEventListener("click", handleClickOutside);
+		};
+	}, [setOpenModal]);
 	return (
 		<div className={styles.modal} data-active={openModal}>
 			<div className={styles.container} onClick={(e: any) => e.stopPropagation()}>

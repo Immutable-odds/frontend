@@ -9,7 +9,13 @@ const ConnectWallet = () => {
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	return (
 		<>
-			<Button className={styles.button} onClick={() => setOpenModal(true)}>
+			<Button
+				className={styles.button}
+				onClick={(e: any) => {
+					setOpenModal(true);
+					e.stopPropagation();
+				}}
+			>
 				ConnectWallet
 			</Button>
 			<WalletModal openModal={openModal} setOpenModal={setOpenModal} />
