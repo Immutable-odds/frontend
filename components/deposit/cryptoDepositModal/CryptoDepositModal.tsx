@@ -6,6 +6,7 @@ import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import QRCode from "react-qr-code";
 import styles from "./CryptoDepositModal.module.scss";
 
 interface Props {
@@ -18,6 +19,10 @@ enum Status {
 	LOADING = "LOADING",
 	SUCCESS = "SUCCESS",
 }
+enum MobileView {
+	DEFAULT = "DEFAULT",
+	QRCODE = "QRCODE",
+}
 
 const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 	const router = useRouter();
@@ -27,6 +32,8 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 		tokenAddress: string;
 	}>({ token: "", network: "", tokenAddress: "" });
 	const [status, setStatus] = useState<Status>(Status.IDLE);
+	const [mobileView, setMobileView] = useState<MobileView>(MobileView.DEFAULT);
+	const [disabled, setDisabled] = useState<boolean>(true);
 	const handleCopy = useCopy();
 	useEffect(() => {
 		const handleClickOutside = () => {
@@ -44,6 +51,11 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 				...depositDetails,
 				tokenAddress: "122t3t3yui88whuwueu738ueu738",
 			});
+		}
+	}, [depositDetails.token, depositDetails.network]);
+	useEffect(() => {
+		if (depositDetails.token && depositDetails.network) {
+			setDisabled(false);
 		}
 	}, [depositDetails.token, depositDetails.network]);
 	const handleTokenSelect = (option: any) => {
@@ -67,7 +79,6 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 			};
 		});
 	};
-
 	const handleSubmit = () => {
 		setStatus(Status.LOADING);
 	};
@@ -89,92 +100,181 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 				</div>
 				{status === Status.IDLE && (
 					<>
-						<div className={styles.body_container}>
-							<div className={styles.text}>
-								<h3>Pay with Crypto</h3>
-								<p>
-									Select any of our acceptable stable coins to fund your
-									wallet
-								</p>
-							</div>
-							<div className={styles.body}>
-								<div className={styles.block}>
-									<div className={styles.text}>
-										<h6>Payment Token</h6>
-									</div>
-									<AdvanceSelect
-										options={tokenList()}
-										className={styles.select}
-										onOptionChange={handleTokenSelect}
-										defaultOption="Select a token"
-										objectOption="token"
-										object={depositDetails}
-									/>
+						{mobileView === MobileView.DEFAULT && (
+							<div className={styles.body_container}>
+								<div className={styles.text}>
+									<h3>Pay with Crypto</h3>
+									<p>
+										Select any of our acceptable stable coins to fund
+										your wallet
+									</p>
 								</div>
-								<div className={styles.block}>
-									<div className={styles.text}>
-										<h6>Network</h6>
-									</div>
-									<AdvanceSelect
-										options={networks}
-										className={styles.select}
-										onOptionChange={handleNetworkSelect}
-										defaultOption="Select a network"
-										objectOption="network"
-										object={depositDetails}
-									/>
-								</div>
-								{depositDetails.tokenAddress && (
+								<div className={styles.body}>
 									<div className={styles.block}>
 										<div className={styles.text}>
-											<h6>Copy Address</h6>
+											<h6>Payment Token</h6>
 										</div>
-										<div className={styles.copy_container}>
+										<AdvanceSelect
+											options={tokenList()}
+											className={styles.select}
+											onOptionChange={handleTokenSelect}
+											defaultOption="Select a token"
+											objectOption="token"
+											object={depositDetails}
+										/>
+									</div>
+									<div className={styles.block}>
+										<div className={styles.text}>
+											<h6>Network</h6>
+										</div>
+										<AdvanceSelect
+											options={networks}
+											className={styles.select}
+											onOptionChange={handleNetworkSelect}
+											defaultOption="Select a network"
+											objectOption="network"
+											object={depositDetails}
+										/>
+									</div>
+									{depositDetails.tokenAddress && (
+										<div className={styles.desk_block}>
 											<div className={styles.text}>
-												<h5>{depositDetails.tokenAddress}</h5>
+												<h6>Copy Address</h6>
 											</div>
-											<div
-												className={styles.copy}
-												onClick={() =>
-													handleCopy(
-														depositDetails.tokenAddress
-													)
-												}
-											>
-												<Image
-													src="/svgs/icon-copy.svg"
-													layout="fill"
-													alt=""
-												/>
+											<div className={styles.copy_container}>
+												<div className={styles.text}>
+													<h5>{depositDetails.tokenAddress}</h5>
+												</div>
+												<div
+													className={styles.copy}
+													onClick={() =>
+														handleCopy(
+															depositDetails.tokenAddress
+														)
+													}
+												>
+													<Image
+														src="/svgs/icon-copy.svg"
+														layout="fill"
+														alt=""
+													/>
+												</div>
 											</div>
+										</div>
+									)}
+									{depositDetails.token && depositDetails.network && (
+										<Button
+											className={styles.button}
+											onClick={handleSubmit}
+										>
+											I have made payment
+										</Button>
+									)}
+									<Button
+										className={styles.mob_button}
+										onClick={() => setMobileView(MobileView.QRCODE)}
+										disabled={disabled}
+									>
+										Confirm
+									</Button>
+								</div>
+							</div>
+						)}
+						{mobileView === MobileView.QRCODE && (
+							<div className={styles.body_container}>
+								<div className={styles.text}>
+									<h3>Pay with Crypto</h3>
+									<p>
+										Select any of our acceptable stable coins to fund
+										your wallet
+									</p>
+								</div>
+								<div className={styles.body}>
+									<div className={styles.mob_container}>
+										<div className={styles.qr_text}>
+											<h5>
+												Scan QR code or copy and paste the address
+												into your wallet.
+											</h5>
+										</div>
+										<div className={styles.qr_code}>
+											<QRCode
+												size={256}
+												style={{
+													height: "auto",
+													maxWidth: "100%",
+													width: "100%",
+												}}
+												value={depositDetails.tokenAddress}
+												viewBox={`0 0 256 256`}
+											/>
 										</div>
 									</div>
-								)}
-								{depositDetails.token && depositDetails.network && (
+									{depositDetails.tokenAddress && (
+										<div className={styles.mob_block}>
+											<div className={styles.text}>
+												<h6>Copy Address</h6>
+											</div>
+											<div className={styles.copy_container}>
+												<div className={styles.text}>
+													<h5>{depositDetails.tokenAddress}</h5>
+												</div>
+												<div
+													className={styles.copy}
+													onClick={() =>
+														handleCopy(
+															depositDetails.tokenAddress
+														)
+													}
+												>
+													<Image
+														src="/svgs/icon-copy.svg"
+														layout="fill"
+														alt=""
+													/>
+												</div>
+											</div>
+										</div>
+									)}
+									{depositDetails.token && depositDetails.network && (
+										<Button
+											className={styles.button}
+											onClick={handleSubmit}
+										>
+											I have made payment
+										</Button>
+									)}
+									{/* {mobileView === MobileView.DEFAULT} */}
 									<Button
-										className={styles.button}
-										onClick={handleSubmit}
+										className={styles.mob_button}
+										onClick={() => setMobileView(MobileView.QRCODE)}
+										disabled={disabled}
 									>
-										I have made payment
+										Confirm
 									</Button>
-								)}
+								</div>
 							</div>
-						</div>
-						<div className={styles.center}>
+						)}
+						<div className={styles.desk_center}>
 							<div className={styles.center_block}>
 								{depositDetails.tokenAddress ? (
 									<>
 										<div className={styles.qr_text}>
 											<h5>
-												After selecting your Token, the QR code
-												for sending funds would be displayed here
+												Scan QR code or copy and paste the address
+												into your wallet.
 											</h5>
 										</div>
 										<div className={styles.qr_code}>
-											<Image
-												src="/svgs/qr-code.svg"
-												layout="fill"
-												alt=""
+											<QRCode
+												size={256}
+												style={{
+													height: "auto",
+													maxWidth: "100%",
+													width: "100%",
+												}}
+												value={depositDetails.tokenAddress}
+												viewBox={`0 0 256 256`}
 											/>
 										</div>
 									</>
