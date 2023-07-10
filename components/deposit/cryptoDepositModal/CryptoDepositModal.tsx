@@ -79,7 +79,6 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 	const handleSubmit = () => {
 		setStatus(Status.LOADING);
 	};
-	console.log(status);
 
 	return (
 		<div className={styles.modal} data-active={openModal}>

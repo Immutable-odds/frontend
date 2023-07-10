@@ -2,6 +2,7 @@ import { Button, InputField } from "@/shared";
 import { formatNum } from "@/utils";
 import Image from "next/legacy/image";
 import React, { useState } from "react";
+import WithdrawModal from "../withdrawModal/WithdrawModal";
 import styles from "./WithdrawCard.module.scss";
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 
 const WithdrawCard = ({ type = "wallet", balance }: Props) => {
 	const [withdrawAmount, setWithdrawAmount] = useState<number>(0);
+	const [openModal, setOpenModal] = useState<boolean>(true);
 	return (
 		<div className={styles.card}>
 			{type === "wallet" ? (
@@ -42,6 +44,7 @@ const WithdrawCard = ({ type = "wallet", balance }: Props) => {
 			<Button buttonType="transparent" className={styles.button}>
 				Withdraw
 			</Button>
+			<WithdrawModal openModal={openModal} setOpenModal={setOpenModal} />
 		</div>
 	);
 };
