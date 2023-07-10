@@ -19,10 +19,6 @@ enum Status {
 	LOADING = "LOADING",
 	SUCCESS = "SUCCESS",
 }
-enum MobileView {
-	DEFAULT = "DEFAULT",
-	QRCODE = "QRCODE",
-}
 
 const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 	const router = useRouter();
@@ -32,8 +28,6 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 		tokenAddress: string;
 	}>({ token: "", network: "", tokenAddress: "" });
 	const [status, setStatus] = useState<Status>(Status.IDLE);
-	const [mobileView, setMobileView] = useState<MobileView>(MobileView.DEFAULT);
-	const [disabled, setDisabled] = useState<boolean>(true);
 	const handleCopy = useCopy();
 	useEffect(() => {
 		const handleClickOutside = () => {
@@ -54,10 +48,13 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 		}
 	}, [depositDetails.token, depositDetails.network]);
 	useEffect(() => {
-		if (depositDetails.token && depositDetails.network) {
-			setDisabled(false);
+		if (status === Status.LOADING) {
+			const timeout = setTimeout(() => {
+				setStatus(Status.SUCCESS);
+			}, 5000);
+			return () => clearTimeout(timeout);
 		}
-	}, [depositDetails.token, depositDetails.network]);
+	}, [status]);
 	const handleTokenSelect = (option: any) => {
 		setDepositDetails(depositDetail => ({
 			...depositDetail,
@@ -82,6 +79,8 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 	const handleSubmit = () => {
 		setStatus(Status.LOADING);
 	};
+	console.log(status);
+
 	return (
 		<div className={styles.modal} data-active={openModal}>
 			<div
@@ -100,8 +99,8 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 				</div>
 				{status === Status.IDLE && (
 					<>
-						{mobileView === MobileView.DEFAULT && (
-							<div className={styles.body_container}>
+						<div className={styles.body_container}>
+							<div className={styles.body}>
 								<div className={styles.text}>
 									<h3>Pay with Crypto</h3>
 									<p>
@@ -109,34 +108,57 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 										your wallet
 									</p>
 								</div>
-								<div className={styles.body}>
-									<div className={styles.block}>
-										<div className={styles.text}>
-											<h6>Payment Token</h6>
-										</div>
-										<AdvanceSelect
-											options={tokenList()}
-											className={styles.select}
-											onOptionChange={handleTokenSelect}
-											defaultOption="Select a token"
-											objectOption="token"
-											object={depositDetails}
-										/>
+								<div className={styles.block}>
+									<div className={styles.text}>
+										<h6>Payment Token</h6>
 									</div>
-									<div className={styles.block}>
-										<div className={styles.text}>
-											<h6>Network</h6>
-										</div>
-										<AdvanceSelect
-											options={networks}
-											className={styles.select}
-											onOptionChange={handleNetworkSelect}
-											defaultOption="Select a network"
-											objectOption="network"
-											object={depositDetails}
-										/>
+									<AdvanceSelect
+										options={tokenList()}
+										className={styles.select}
+										onOptionChange={handleTokenSelect}
+										defaultOption="Select a token"
+										objectOption="token"
+										object={depositDetails}
+									/>
+								</div>
+								<div className={styles.block}>
+									<div className={styles.text}>
+										<h6>Network</h6>
 									</div>
-									{depositDetails.tokenAddress && (
+									<AdvanceSelect
+										options={networks}
+										className={styles.select}
+										onOptionChange={handleNetworkSelect}
+										defaultOption="Select a network"
+										objectOption="network"
+										object={depositDetails}
+									/>
+								</div>
+								{depositDetails.tokenAddress && (
+									<>
+										<div className={styles.mob_container}>
+											<div
+												className={styles.text}
+												style={{ textAlign: "center" }}
+											>
+												<h5>
+													Scan QR code or copy and paste the
+													address into your wallet.
+												</h5>
+											</div>
+											<div className={styles.qr_code}>
+												<QRCode
+													size={256}
+													style={{
+														height: "auto",
+														maxWidth: "100%",
+														width: "100%",
+													}}
+													value={depositDetails.tokenAddress}
+													viewBox={`0 0 256 256`}
+												/>
+											</div>
+										</div>
 										<div className={styles.desk_block}>
 											<div className={styles.text}>
 												<h6>Copy Address</h6>
@@ -161,100 +183,18 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 												</div>
 											</div>
 										</div>
-									)}
-									{depositDetails.token && depositDetails.network && (
-										<Button
-											className={styles.button}
-											onClick={handleSubmit}
-										>
-											I have made payment
-										</Button>
-									)}
+									</>
+								)}
+								{depositDetails.token && depositDetails.network && (
 									<Button
-										className={styles.mob_button}
-										onClick={() => setMobileView(MobileView.QRCODE)}
-										disabled={disabled}
+										className={styles.button}
+										onClick={handleSubmit}
 									>
-										Confirm
+										I have made payment
 									</Button>
-								</div>
+								)}
 							</div>
-						)}
-						{mobileView === MobileView.QRCODE && (
-							<div className={styles.body_container}>
-								<div className={styles.text}>
-									<h3>Pay with Crypto</h3>
-									<p>
-										Select any of our acceptable stable coins to fund
-										your wallet
-									</p>
-								</div>
-								<div className={styles.body}>
-									<div className={styles.mob_container}>
-										<div className={styles.qr_text}>
-											<h5>
-												Scan QR code or copy and paste the address
-												into your wallet.
-											</h5>
-										</div>
-										<div className={styles.qr_code}>
-											<QRCode
-												size={256}
-												style={{
-													height: "auto",
-													maxWidth: "100%",
-													width: "100%",
-												}}
-												value={depositDetails.tokenAddress}
-												viewBox={`0 0 256 256`}
-											/>
-										</div>
-									</div>
-									{depositDetails.tokenAddress && (
-										<div className={styles.mob_block}>
-											<div className={styles.text}>
-												<h6>Copy Address</h6>
-											</div>
-											<div className={styles.copy_container}>
-												<div className={styles.text}>
-													<h5>{depositDetails.tokenAddress}</h5>
-												</div>
-												<div
-													className={styles.copy}
-													onClick={() =>
-														handleCopy(
-															depositDetails.tokenAddress
-														)
-													}
-												>
-													<Image
-														src="/svgs/icon-copy.svg"
-														layout="fill"
-														alt=""
-													/>
-												</div>
-											</div>
-										</div>
-									)}
-									{depositDetails.token && depositDetails.network && (
-										<Button
-											className={styles.button}
-											onClick={handleSubmit}
-										>
-											I have made payment
-										</Button>
-									)}
-									{/* {mobileView === MobileView.DEFAULT} */}
-									<Button
-										className={styles.mob_button}
-										onClick={() => setMobileView(MobileView.QRCODE)}
-										disabled={disabled}
-									>
-										Confirm
-									</Button>
-								</div>
-							</div>
-						)}
+						</div>
 						<div className={styles.desk_center}>
 							<div className={styles.center_block}>
 								{depositDetails.tokenAddress ? (
@@ -303,14 +243,14 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 				{status === Status.LOADING && (
 					<div className={styles.center}>
 						<div className={styles.center_block}>
-							<div className={styles.loading_icon}>
+							<div className={styles.status_icon} data-type="rotate">
 								<Image
 									src="/svgs/icon-loading.svg"
 									layout="fill"
 									alt=""
 								/>
 							</div>
-							<div className={styles.loading_text}>
+							<div className={styles.status_text}>
 								<h3>Confirming Payment</h3>
 								<p>
 									Payment confirmation takes up to 5min. While we are
@@ -324,7 +264,39 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 							>
 								Go to Dashboard
 							</Button>
-							<div className={styles.loading_text}>
+							<div className={styles.status_text}>
+								<Link href="/settings/transactions">
+									View Transaction
+								</Link>
+							</div>
+						</div>
+					</div>
+				)}
+				{status === Status.SUCCESS && (
+					<div className={styles.center}>
+						<div className={styles.center_block}>
+							<div className={styles.status_icon}>
+								<Image
+									src="/svgs/icon-success.svg"
+									layout="fill"
+									alt=""
+								/>
+							</div>
+							<div className={styles.status_text}>
+								<h3>Payment Successful</h3>
+								<p>
+									Your payment has been successfully confirmed, you can
+									use your new wallet balance to make any bets or
+									predictions on the platform
+								</p>
+							</div>
+							<Button
+								className={styles.button}
+								onClick={() => router.push("/settings")}
+							>
+								Go to Dashboard
+							</Button>
+							<div className={styles.status_text}>
 								<Link href="/settings/transactions">
 									View Transaction
 								</Link>
