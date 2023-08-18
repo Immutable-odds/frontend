@@ -8,6 +8,7 @@ import { useWeb3React } from "@web3-react/core";
 import { approveTransaction, stakeCustomBet } from "@/utils/callContract";
 import { useStore } from "@/contexts/StoreContext";
 import { saveUserBet } from "@/services/API";
+import { getDaysFactor } from "@/utils/getDaysFactor";
 
 const DashboardStakeSider = () => {
 	const { active, library } = useWeb3React()
@@ -124,26 +125,20 @@ const DashboardStakeSider = () => {
 													value={totalOdds}
 												/>
 												<DetailContainer
-													title="My Stake Amount"
+													title="Your stake amount"
 													value={stakeAmount}
 													prefix="$"
 												/>
 												<DetailContainer
-													title="Potential Win"
+													title="Expected payout"
 													value={stakeAmount * totalOdds}
 													prefix="$"
-													description="hdlskdijn"
+													description="Total amount you'll earn if your bet wins"
 												/>
 												<DetailContainer
-													title="Expected Payout"
-													value={stakeAmount * totalOdds}
-													prefix="$"
-													description="hdlskdijn"
-												/>
-												<DetailContainer
-													title="Days Factor"
-													value={5}
-													description="hdlskdijn"
+													title="Days factor"
+													value={getDaysFactor(stake?.timestamp)}
+													description="Duration of this pool"
 												/>
 											</div>
 										</div>
