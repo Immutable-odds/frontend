@@ -22,6 +22,7 @@ const Header = () => {
 		setDropDown(!dropDown);
 		event.stopPropagation();
 	};
+	
 
 	// useEffect(() => {
 	// 	const element = ref.current;
@@ -69,12 +70,11 @@ const Header = () => {
 			document.removeEventListener("click", handleClickOutside);
 		};
 	}, []);
-	
 	const checkActive = (url: string) => {
 		let isActive = url === router.asPath;
 		const path = router.asPath;
 		if (
-			url === "/" ||
+			url === "/" &&
 			containsLink(path, [
 				"/football",
 				"/brazil",
@@ -88,11 +88,11 @@ const Header = () => {
 				"/portugal",
 			])
 		) {
-			isActive = true;
+			return (isActive = true);
 		}
 		if (
-			url === "/settings" ||
-			containsLink(path, ["/funds", "/transactions", "/history"])
+			url === "/settings" &&
+			containsLink(path, ["/funds", "/bet-history"])
 		)
 			isActive = true;
 

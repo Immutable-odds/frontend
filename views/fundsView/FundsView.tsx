@@ -33,7 +33,6 @@ const FundsView = () => {
 				getUserAllocations({ uuid: userData?.uuid }),
 				getUserPoolIds(userData.uuid)
 			])
-			// console.log(!allocations || !userPoolIds.length, allocationResponse?.result, poolIdResponse?.result, "data retrieved");
 			setAllocations(allocationResponse?.result?.total ?? 0)
 			setUserPoolIds(poolIdResponse?.result ?? [])
 		}

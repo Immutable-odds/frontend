@@ -17,8 +17,6 @@ const BetsView = () => {
 
         const loadData = async () => {
             const data = await getUserBets(userData?.uuid)
-            console.log(data, "data retrieved");
-
             setBetHistory(data?.result ?? [])
         }
         loadData();
@@ -29,7 +27,11 @@ const BetsView = () => {
             <div className={styles.row}>
                 <Title title="Bet History" className={styles.title} />
             </div>
-            <BetHistoryList data={betHistory} />
+            {Array.isArray(betHistory) && betHistory.length ? <BetHistoryList data={betHistory} /> : (
+                <div>
+                    <p>Nothing to show</p>
+                </div>
+            )}
         </section>
     );
 };
