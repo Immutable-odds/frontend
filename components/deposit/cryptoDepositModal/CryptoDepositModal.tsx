@@ -39,14 +39,14 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 		};
 	}, [setOpenModal]);
 
-	useEffect(() => {
-		if (depositDetails.token && depositDetails.network) {
-			setDepositDetails((d) => ({
-				...d,
-				tokenAddress: "122t3t3yui88whuwueu738ueu738",
-			}));
-		}
-	}, [depositDetails.token, depositDetails.network]);
+	// useEffect(() => {
+	// 	if (depositDetails.token && depositDetails.network) {
+	// 		setDepositDetails((d) => ({
+	// 			...d,
+	// 			tokenAddress: "122t3t3yui88whuwueu738ueu738",
+	// 		}));
+	// 	}
+	// }, [depositDetails.token, depositDetails.network]);
 	const handleTokenSelect = (option: any) => {
 		setDepositDetails(depositDetail => ({
 			...depositDetail,
