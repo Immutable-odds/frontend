@@ -1,0 +1,38 @@
+@import "@/styles/imports";
+
+.layout {
+	height: 100%;
+	width: 100%;
+	background-color: $col-grey-10;
+}
+
+.layout_breadcrumbs {
+	padding: 5rem 14.3rem 1.5rem;
+}
+
+.layout_breadcrumbsBtn {
+	opacity: 0.5;
+	column-gap: 1.6rem;
+	padding: 0;
+
+	@include flex(flex-start, center, nowrap);
+}
+
+.layout_breadcrumbsText {
+	font-weight: 550;
+}
+.layout_row {
+	@include grid(repeat(4, 1fr), 2.4rem);
+	padding: 16.4rem 4rem 10rem;
+	@include screenMax("mobile") {
+		padding: 16.4rem 2.4rem 10rem;
+		display: block;
+	}
+}
+
+.layout_content {
+	width: 100%;
+	position: relative;
+	transition: $all-transition;
+	grid-column: span 3;
+}

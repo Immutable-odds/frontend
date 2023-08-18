@@ -1,0 +1,107 @@
+@import "@/styles/imports";
+
+.card {
+	padding: 0.4rem;
+	border: 0.1rem solid $col-grey-8;
+	border-radius: 1.6rem;
+	margin-top: 2.4rem;
+	width: 100%;
+	.text,
+	.mob_text,
+	.desk_text {
+		h3 {
+			@extend %text-14;
+			color: $col-grey-3;
+			margin-top: 0.8rem;
+			text-transform: capitalize;
+		}
+		h4 {
+			@extend %text-14;
+			color: $col-grey-3;
+		}
+		p {
+			@extend %text-14;
+			color: $col-grey-4;
+			text-transform: capitalize;
+		}
+	}
+	.mob_text {
+		display: none;
+	}
+	.header {
+		background-color: $col-grey-9;
+		border-radius: 1.6rem;
+		padding: 0.8rem 1.2rem;
+		@include flex(space-between, center);
+		.small_row {
+			@include flex(flex-start, center);
+		}
+		.icon {
+			position: relative;
+			width: 2.4rem;
+			height: 2.4rem;
+			margin-right: 1.6rem;
+			overflow: hidden;
+			border-radius: 50%;
+			margin-right: 0.4rem;
+		}
+		.bet_result {
+			padding: 0.2rem 0.8rem;
+			border-radius: 10rem;
+			@extend %center;
+			p {
+				@extend %text-12;
+				font-family: $font-700;
+				text-transform: capitalize;
+			}
+			&[data-type="won"] {
+				background-color: $col-success-1;
+				p {
+					color: $col-success-4;
+				}
+			}
+			&[data-type="lost"] {
+				background-color: $col-error-1;
+				p {
+					color: $col-error;
+				}
+			}
+			&[data-type="open"] {
+				background-color: $col-warning-1;
+				p {
+					color: $col-warning-4;
+				}
+			}
+		}
+	}
+	.body {
+		padding: 1.6rem 1.2rem 0.4rem;
+		@include grid(repeat(6, 1fr) 5%, 1rem);
+		&[data-type="crypto"] {
+			@include grid(repeat(4, 1fr) 30% 8%, 1rem);
+		}
+	}
+	@include screenMax("mobile") {
+		.mob_text {
+			display: block;
+		}
+		.desk_text {
+			display: none;
+		}
+		.body {
+			display: block;
+		}
+		.block {
+			@include flex(space-between, center);
+			width: 100%;
+			&:not(:last-child) {
+				margin-bottom: 1.6rem;
+			}
+		}
+		.text {
+			h3 {
+				margin-top: 0;
+			}
+		}
+	}
+}

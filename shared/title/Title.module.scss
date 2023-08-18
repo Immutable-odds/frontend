@@ -1,0 +1,18 @@
+@import "@/styles/imports";
+
+.title {
+	margin-bottom: 2.4rem;
+	h1 {
+		@extend %title-32;
+		color: $col-white;
+		margin-bottom: 1rem;
+		text-transform: capitalize;
+		font-weight: 700;
+		font-family: $font-700;
+	}
+	p {
+		font-size: 1.6rem;
+		color: $col-white-dull;
+		font-weight: 500;
+	}
+}

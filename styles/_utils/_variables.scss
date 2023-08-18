@@ -1,0 +1,108 @@
+// colors
+
+$col-primary: #151515;
+$col-secondary: #1a1b20;
+$col-white-dull: #cacaca;
+$col-text-secondary: #b1b5c3;
+
+$col-white: #ffffff;
+
+//Primary
+
+$col-primary-10: #553122;
+$col-primary-9: #6e3f2c;
+$col-primary-8: #92553b;
+$col-primary-7: #b76a4a;
+$col-primary-6: #c3714e;
+$col-primary-5: #dc7f58;
+$col-primary-4: #f48d62;
+$col-primary-3: #fcdcce;
+$col-primary-2: #fdeee7;
+$col-primary-1: #fef4ef;
+
+// Green
+
+$col-green: #091909;
+$col-green-100: #1c4b1c;
+$col-green-200: #2f7d2e;
+$col-green-300: #41af40;
+$col-green-400: #54e153;
+$col-green-500: #6dfb6c;
+$col-green-600: #8efc8d;
+$col-green-700: #aefdae;
+$col-green-800: #cefece;
+$col-green-900: #efffef;
+
+// Grey
+
+$col-grey: #21201b;
+$col-grey-10: #0f0e0e;
+$col-grey-9: #171717;
+$col-grey-8: #262626;
+$col-grey-7: #333333;
+$col-grey-6: #666666;
+$col-grey-5: #808080;
+$col-grey-4: #999999;
+$col-grey-3: #e6e6e6;
+$col-grey-2: #f0f0f0;
+$col-grey-1: #fafafa;
+
+$col-error-10: #3e0c0c;
+$col-error-9: #500f0f;
+$col-error-8: #6b1414;
+$col-error-7: #861a1a;
+$col-error-6: #8e1b1b;
+$col-error-5: #a01f1f;
+$col-error-4: #b22222;
+$col-error-3: #e7baba;
+$col-error-2: #f3dede;
+$col-error-1: #f7e9e9;
+$col-error: #f84040;
+
+$col-warning-10: #563a0c;
+$col-warning-9: #6e4a0f;
+$col-warning-8: #936314;
+$col-warning-7: #b87c19;
+$col-warning-6: #c4841a;
+$col-warning-5: #dd951e;
+$col-warning-4: #f5a521;
+$col-warning-3: #fce3ba;
+$col-warning-2: #fef2de;
+$col-warning-1: #fef6e9;
+
+$col-success-10: #054205;
+$col-success-9: #065506;
+$col-success-8: #087108;
+$col-success-7: #0a8e0a;
+$col-success-6: #0a970a;
+$col-success-5: #0caa0c;
+$col-success-4: #0dbd0d;
+$col-success-3: #b4ebb4;
+$col-success-2: #dbf5db;
+$col-success-1: #e7f8e7;
+
+// Blue
+
+$col-blue-10: #004359;
+$col-blue-9: #005673;
+$col-blue-8: #007399;
+$col-blue-7: #008fbf;
+$col-blue-6: #0099cc;
+$col-blue-5: #00ace6;
+$col-blue-4: #00bfff;
+$col-blue-3: #b0ebff;
+$col-blue-2: #d9f5ff;
+$col-blue-1: #e6f9ff;
+$col-blue-gradient: linear-gradient(89.94deg, #5070f0 0.9%, #3dcbf2 99.95%);
+
+// fonts
+$font: "Moderat-400";
+$font-300: "Moderat-300";
+$font-500: "Moderat-500";
+$font-600: "Moderat-600";
+$font-700: "Moderat-700";
+
+$z-indexes: ("level-four", "level-three", "level-two", "level-one");
+
+//transition
+$all-transition: all 0.3s ease-out;

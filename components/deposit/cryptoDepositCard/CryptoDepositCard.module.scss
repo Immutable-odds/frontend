@@ -1,0 +1,29 @@
+@import "@/styles/imports";
+
+.card {
+	width: 60rem;
+	background-color: $col-grey-10;
+	border: 0.1rem solid $col-grey-8;
+	border-radius: 1.6rem;
+	padding: 2rem;
+	@include flex(flex-start, center);
+	cursor: pointer;
+	.icon {
+		position: relative;
+		width: 6rem;
+		height: 6rem;
+		margin-right: 1.6rem;
+	}
+	.text {
+		h3 {
+			@extend %text-18;
+			font-family: $font-700;
+		}
+		p {
+			color: $col-grey-4;
+		}
+	}
+	@include screenMax("mobile") {
+		width: 100%;
+	}
+}

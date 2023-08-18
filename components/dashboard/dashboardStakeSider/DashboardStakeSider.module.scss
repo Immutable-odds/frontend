@@ -1,0 +1,239 @@
+@import "@/styles/imports";
+
+.container {
+	width: 100%;
+
+	.referral_container {
+		width: 100%;
+		height: 13rem;
+		position: relative;
+		margin: 2.4rem 0;
+		.referral {
+			padding: 2.4rem;
+			position: relative;
+		}
+	}
+	.text {
+		h1 {
+			@extend %title-24;
+			font-family: $font-700;
+		}
+		h2 {
+			@extend %text-18;
+			font-family: $font-700;
+		}
+		h3 {
+			@extend %text-16;
+			color: $col-white;
+		}
+		h4 {
+			@extend %text-14;
+			font-family: $font-700;
+		}
+		h5,
+		span {
+			@extend %text-14;
+			font-family: $font-700;
+			margin-top: 0.4rem;
+			cursor: pointer;
+			color: $col-primary-4;
+		}
+		h6 {
+			@extend %text-12;
+			color: rgba($col-grey-4, 0.6);
+		}
+		p {
+			@extend %text-14;
+			text-transform: capitalize;
+		}
+		span {
+			color: $col-blue-4;
+		}
+		&[data-active="true"] {
+			h4 {
+				text-transform: uppercase;
+			}
+		}
+	}
+	.small_row {
+		@include flex(flex-start, center);
+	}
+	.card {
+		padding: 0.4rem;
+		border: 0.1rem solid $col-grey-8;
+		border-radius: 1.6rem;
+		width: 100%;
+		// min-height: 63rem;
+		.header {
+			background-color: $col-grey-9;
+			border-radius: 1.6rem;
+			padding: 0.8rem 2.2rem 0.8rem 1.2rem;
+			@include flex(space-between, center);
+			.staked_amount {
+				width: 2.4rem;
+				height: 2.4rem;
+				border-radius: 50%;
+				@extend %center;
+				background-color: $col-blue-4;
+				margin-left: 0.8rem;
+			}
+		}
+		.body {
+			.empty_body {
+				@extend %center;
+				margin-top: 12rem;
+				margin-bottom: 30rem;
+				.empty_icon {
+					position: relative;
+					width: 8rem;
+					height: 8rem;
+					margin-bottom: 2.4rem;
+				}
+				.empty_text {
+					max-width: 27rem;
+				}
+			}
+			.box {
+				border-radius: 1.2rem;
+				background-color: $col-grey-9;
+				margin-top: 0.8rem;
+				.box_header {
+					border-bottom: 0.1rem solid $col-grey-8;
+					padding: 1.6rem;
+					@include flex(space-between, center);
+					.small_icon_container {
+						width: 2.4rem;
+						height: 2.4rem;
+						border-radius: 50%;
+						overflow: hidden;
+						background-color: $col-grey-7;
+						@extend %center;
+						position: relative;
+						.small_icon {
+							position: relative;
+							width: 1.5rem;
+							height: 1.5rem;
+							border-radius: 50%;
+							overflow: hidden;
+						}
+						&:nth-child(2) {
+							margin-left: -1rem;
+						}
+					}
+					.close {
+						width: 1.4rem;
+						height: 1.4rem;
+						margin-left: 1rem;
+						position: relative;
+						cursor: pointer;
+						span {
+							position: absolute;
+							display: block;
+							width: 1.4rem;
+							height: 0.2rem;
+							background-color: $col-grey-4;
+							&:first-child {
+								margin-top: 0.5rem;
+								rotate: 45deg;
+								top: -0.5rem;
+							}
+							&:last-child {
+								rotate: -45deg;
+								margin-bottom: 0.5rem;
+							}
+						}
+					}
+				}
+				.box_body {
+					padding: 0.8rem 1.6rem 1.6rem 4.8rem;
+					@include flex(space-between);
+				}
+			}
+		}
+		.payment_body {
+			padding: 2rem 2.4rem;
+			.details_card {
+				border: 0.1rem solid $col-grey-8;
+				border-radius: 0.8rem;
+				margin-top: 2.4rem;
+				padding: 0.4rem;
+				.details_header {
+					background-color: $col-grey-9;
+					border-radius: 0.4rem;
+					padding: 0.8rem 1.2rem;
+				}
+				.detail_body {
+					padding: 0 1.6rem;
+				}
+			}
+		}
+		.chevron_icon {
+			display: none;
+			position: relative;
+			width: 3.2rem;
+			height: 3.2rem;
+			margin-left: 2rem;
+			margin-top: 0.5rem;
+			rotate: 180deg;
+		}
+		.button {
+			width: 100%;
+			padding: 0.8rem;
+			margin-top: 2.4rem;
+		}
+	}
+	@include screenMax("mobile") {
+		position: fixed;
+		top: calc(100dvh - 7rem);
+		background-color: $col-primary;
+		width: 100%;
+		left: 0;
+		height: 7rem;
+		z-index: 11;
+		padding: 1rem 0;
+		overflow-y: hidden;
+		transition: $all-transition;
+		.referral_container {
+			display: none;
+		}
+		.card {
+			height: 90%;
+			border: none;
+			.header {
+				background-color: transparent;
+			}
+			.body_container {
+				overflow-y: scroll;
+				height: 100%;
+				@include noScrollBar;
+				padding-bottom: 10rem;
+				.body {
+					.empty_body {
+						margin: 20rem 0 0;
+					}
+				}
+			}
+			.chevron_icon {
+				display: block;
+			}
+		}
+		.button {
+			padding: 1.6rem !important;
+		}
+		&[data-active="true"] {
+			height: 100vh;
+			padding: 2.4rem 1rem;
+			top: 0;
+			transition: $all-transition;
+			.card {
+				height: 90%;
+				.header {
+					background-color: $col-grey-9;
+				}
+				.chevron_icon {
+					rotate: 0deg;
+				}
+			}
+		}
+	}
+}

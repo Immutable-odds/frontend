@@ -1,0 +1,23 @@
+@import "@/styles/imports";
+
+.breadcrumb {
+	@include flex(flex-start, center);
+	margin-bottom: 2.4rem;
+}
+
+.text {
+	h6,
+	a {
+		@extend %text-14;
+	}
+	h6 {
+		font-weight: 600;
+		font-family: $font-500;
+		// text-transform: uppercase;
+	}
+	span {
+		color: $col-grey-3;
+		margin-right: 0.4rem;
+		text-transform: capitalize;
+	}
+}

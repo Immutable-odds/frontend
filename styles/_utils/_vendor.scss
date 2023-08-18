@@ -1,0 +1,53 @@
+#nprogress {
+  .bar {
+    background-color: $col-white !important;
+    height: 4px !important;
+  }
+
+  .peg {
+    box-shadow: none !important;
+  }
+}
+
+.swiper {
+  position: static !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  top: 9rem !important;
+  opacity: 0 !important;
+  right: 12.5rem !important;
+  &::after {
+    font-size: 3.34rem !important;
+  }
+  width: 3.34rem !important;
+  height: 3.34rem !important;
+}
+.swiper-button-prev {
+  left: inherit !important;
+  right: 21rem !important;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+section {
+  @include flex(space-between, center);
+  width: 100%;
+  @include screenMax('mobile') {
+    justify-content: center;
+  }
+}
+
+.flex-between {
+  @include flex(space-between, center);
+  width: 100%;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}

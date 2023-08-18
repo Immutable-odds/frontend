@@ -1,0 +1,183 @@
+@import "@/styles/imports";
+
+.modal {
+	position: fixed;
+	z-index: 12;
+	inset: 0;
+	width: 100%;
+	height: 100vh;
+	overflow-y: hidden;
+	background-color: rgba(38, 38, 38, 0.7);
+	backdrop-filter: blur(15px);
+	cursor: default;
+	display: none;
+	&[data-active="true"] {
+		@include flex(center, center, column);
+	}
+	.closeModal_container {
+		position: absolute;
+		// top: 2rem;
+		right: -4.6rem;
+		background-color: $col-grey-10;
+		width: 3.2rem;
+		height: 3.2rem;
+		@extend %center;
+		border-radius: 0.8rem;
+		.closeModal {
+			min-width: auto;
+			min-height: auto;
+			width: 1rem;
+			height: 1rem;
+			position: relative;
+			transition: all 0.3s linear;
+			cursor: pointer;
+			span {
+				height: 1rem;
+				width: 0.2rem;
+				border-radius: 25%;
+				background-color: $col-white;
+				transform: rotate(45deg);
+				display: block;
+				// position: absolute;
+				// left: 0;
+				padding: 0;
+				margin-left: 0.4rem;
+			}
+			span:last-child {
+				transform: rotate(-45deg);
+				margin-top: -1rem;
+				// left: 1rem;
+			}
+		}
+	}
+	.text {
+		h3 {
+			@extend %title-24;
+			color: $col-white;
+			margin-bottom: 0.8rem;
+		}
+		p {
+			color: $col-white;
+		}
+	}
+	.container {
+		width: 90rem;
+		height: 60rem;
+		background-color: $col-grey-9;
+		border-radius: 0.8rem;
+		position: relative;
+		@include flex();
+		.body_container {
+			width: 50rem;
+			background-color: $col-grey-10;
+			height: 100%;
+			border-bottom-left-radius: 0.8rem;
+			border-top-left-radius: 0.8rem;
+			padding: 5.6rem 5.4rem;
+			overflow-y: hidden;
+			.body {
+				height: 40rem;
+				overflow-y: scroll;
+				padding-bottom: 5rem;
+				@include noScrollBar;
+			}
+			.button_block {
+				@include grid(repeat(2, 1fr), 0.8rem);
+				border: 0.1rem solid $col-grey-8;
+				border-radius: 10rem;
+				width: 18rem;
+				background-color: $col-grey-9;
+				padding: 0.4rem;
+				margin-top: 2.4rem;
+				margin-bottom: 3.2rem;
+				.button_container {
+					padding: 0;
+					.tab_button {
+						padding: 0.4rem 1.6rem;
+						@extend %text-14;
+						font-family: $font;
+						color: $col-grey-4;
+						border-radius: 10rem;
+						&[data-active="true"] {
+							background-color: $col-primary-4;
+							font-family: $font-700;
+							color: $col-grey-1;
+						}
+					}
+				}
+				@include screenMax("mobile") {
+					margin: 2.4rem 0;
+					width: 100%;
+				}
+			}
+			.block {
+				margin-bottom: 1.6rem;
+			}
+			.select {
+				border: 0.1rem solid $col-grey-8;
+				border-radius: 0.8rem;
+				width: 100%;
+				background-color: transparent;
+				margin-top: 0.8rem;
+			}
+			.small_select {
+				width: 36%;
+				border-radius: 0.4rem;
+				border: none;
+				padding: 1.6rem;
+				margin-left: 0.8rem;
+				background-color: $col-grey-8;
+			}
+			.row {
+				@include flex(space-between, center, nowrap);
+			}
+			.button {
+				width: 100%;
+				margin-top: 5.8rem;
+			}
+		}
+	}
+  .body {
+    width: 100%;
+    // border-bottom: 0.1rem solid rgba(19, 34, 54, 1);
+    padding: 4rem 0;
+  }
+  
+  .card {
+    width: 100%;
+    background-color: rgba(38, 38, 38, 0.7);
+    border: 0.1rem solid transparent;
+    border-radius: 0.4rem;
+    padding: 1.6rem 2.6rem;
+    @include flex(flex-start, center);
+    cursor: pointer;
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+    .icon {
+      position: relative;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-right: 1.7rem;
+    }
+  }
+  
+  .footer {
+    padding: 1.7rem 2.4rem;
+  }
+	@include screenMax("mobile") {
+		.closeModal_container {
+			display: none;
+		}
+		.container {
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+			height: 85vh;
+			transition: $all-transition;
+			.body_container {
+				width: 100%;
+			}
+		}
+	}
+}

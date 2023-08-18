@@ -1,0 +1,21 @@
+@import "@/styles/imports";
+
+.searchBox {
+	width: 100%;
+	min-height: 4rem;
+	// padding: 0.8rem;
+	// border: 0.1rem solid $col-grey;
+	border-radius: 0.8rem;
+	transition: $all-transition;
+	@include flex(center, center);
+	@include screenMax("tablet") {
+		width: 100%;
+	}
+	&:focus-within {
+		border-color: $col-primary-5;
+		transition: $all-transition;
+	}
+	.input {
+		@include flex(flex-start, center);
+	}
+}

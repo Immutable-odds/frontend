@@ -1,0 +1,126 @@
+@import "@/styles/imports";
+
+.container {
+	width: 100%;
+	border: 0.1rem solid $col-grey-8;
+	border-radius: 1.6rem;
+	margin: 2.4rem 0;
+	padding: 0.4rem;
+	.text {
+		h1 {
+			@extend %title-32;
+			font-family: $font-700;
+		}
+		h3,
+		h4 {
+			@extend %text-18;
+			font-family: $font-700;
+			text-transform: capitalize;
+		}
+		h4 {
+			@extend %text-16;
+		}
+		p {
+			color: $col-grey-4;
+		}
+	}
+	.row {
+		@include flex(space-between);
+	}
+	.header {
+		@include flex(space-between);
+		background-color: $col-grey-9;
+		border-radius: 1.2rem;
+		padding: 1.5rem 2.4rem;
+		margin-bottom: 0.8rem;
+	}
+	.card {
+		background-color: $col-grey-9;
+		border-radius: 1.2rem;
+		// padding: 1.5rem 2rem;
+		width: 100%;
+		height: 32.2rem;
+		.card_header {
+			padding: 1.4rem 2rem;
+			border-bottom: 0.1rem solid $col-grey-8;
+			@include flex(space-between);
+			.small_row {
+				@include flex(flex-start, center);
+			}
+			.share_icon {
+				width: 2.4rem;
+				height: 2.4rem;
+				position: relative;
+				margin-right: 0.8rem;
+			}
+			.icon {
+				width: 3.2rem;
+				height: 3.2rem;
+				position: relative;
+				border-radius: 50%;
+				overflow: hidden;
+				margin-right: 0.8rem;
+			}
+		}
+		.card_body {
+			padding: 1.6rem 5.6rem 2.4rem;
+			.block {
+				@include flex(center, center, column);
+				.icon_block {
+					width: 12rem;
+					height: 12rem;
+					background-color: $col-grey-10;
+					border-radius: 50%;
+					// padding: 1.6rem;
+					@extend %center;
+					margin-bottom: 1.8rem;
+					.icon_container {
+						width: 8.8rem;
+						height: 8.8rem;
+						background-color: $col-grey-7;
+						border-radius: 50%;
+						padding: 1.6rem;
+						.icon {
+							width: 5.6rem;
+							height: 5.6rem;
+							position: relative;
+						}
+					}
+				}
+				.odds_block {
+					margin: 4rem 0 1.6rem;
+				}
+			}
+		}
+		.mob_block {
+			display: none;
+			@extend %center;
+			margin-top: 1.6rem;
+		}
+	}
+	@include screenMax("mobile") {
+		.card {
+			.card_body {
+				padding: 1.6rem;
+				.icon_block {
+					width: 8rem !important;
+					height: 8rem !important;
+					.icon_container {
+						width: 6.4rem !important;
+						height: 6.4rem !important;
+						.icon {
+							width: 3.5rem !important;
+							height: 3.5rem !important;
+						}
+					}
+				}
+				.desk_block {
+					display: none;
+				}
+				.mob_block {
+					display: block;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,62 @@
+@import "@/styles/imports";
+
+.card {
+	width: 60rem;
+	border: 0.1rem solid $col-grey-8;
+	border-radius: 1.6rem;
+	padding: 4rem;
+	margin-bottom: 2.4rem;
+	.text {
+		color: $col-grey-1;
+		h1 {
+			@extend %title-56;
+			margin-top: 0.8rem;
+		}
+		p {
+			@extend %text-18;
+		}
+	}
+	.input {
+		margin-top: 2.4rem;
+		div {
+			background-color: $col-grey-9;
+			height: 5.6rem;
+		}
+	}
+	.row {
+		@include flex(flex-start, center);
+		.icon {
+			position: relative;
+			width: 2.4rem;
+			height: 2.4rem;
+			margin-right: 0.8rem;
+		}
+	}
+	.button {
+		width: 100%;
+		margin-top: 2.4rem;
+		border: 0.1rem solid $col-primary-4;
+		border-radius: 10rem;
+		&:hover,
+		&:focus {
+			transform: scale(1);
+		}
+	}
+	@include screenMax("mobile") {
+		width: 100%;
+		padding: 2.4rem;
+		.text {
+			h1 {
+				font-size: 3.2rem;
+				line-height: 4rem;
+			}
+			p {
+				font-size: 1.4rem;
+				line-height: 2.4rem;
+			}
+		}
+		.button {
+			padding: 1.2rem;
+		}
+	}
+}

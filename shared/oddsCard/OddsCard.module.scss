@@ -1,0 +1,57 @@
+@import "@/styles/imports";
+
+.container {
+	@include grid(repeat(3, 1fr), 0.2rem);
+	// padding: 0.8rem 0;
+	background-color: $col-grey-8;
+	border-radius: 0.8rem;
+	overflow: hidden;
+	&[data-type="crypto"] {
+		@include grid(repeat(2, 1fr), 0.2rem);
+	}
+	.button {
+		padding: 0;
+		.box {
+			padding: 0.8rem 1.6rem;
+			width: 100%;
+			@extend %center;
+			// background-color: transparent;
+
+			.text {
+				h3 {
+					@extend %text-16;
+					color: $col-grey-1;
+				}
+				p {
+					@extend %text-12;
+					color: $col-grey-4;
+				}
+			}
+
+			&[data-active="true"] {
+				background-color: $col-success-4 !important;
+				.text {
+					h3,
+					p {
+						color: $col-white;
+					}
+				}
+			}
+		}
+		&:not(:last-child) {
+			border-right: 0.1rem solid $col-grey-7;
+		}
+	}
+	@include screenMax("mobile") {
+		@include grid(repeat(3, 1fr), 1.1rem);
+		background-color: transparent;
+		.button {
+			background-color: $col-grey-8;
+			border-radius: 0.8rem;
+			overflow: hidden;
+		}
+		&[data-type="crypto"] {
+			@include grid(repeat(2, 1fr), 1.6rem);
+		}
+	}
+}

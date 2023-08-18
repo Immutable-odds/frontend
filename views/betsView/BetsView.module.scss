@@ -1,0 +1,34 @@
+@import "@/styles/imports";
+
+.section {
+	display: block;
+	.row {
+		@include flex(space-between);
+		margin-top: 2.4rem;
+	}
+	.block {
+		width: 40rem;
+		.arrow_icon {
+			position: relative;
+			width: 37rem;
+			height: 24rem;
+			margin-top: 4rem;
+		}
+	}
+	.text {
+		h3 {
+			@extend %title-32;
+			font-family: $font-700;
+			margin-bottom: 1.6rem;
+		}
+		p {
+			@extend %text-16;
+			color: $col-grey-4;
+		}
+	}
+	@include screenMax("mobile") {
+		.title {
+			display: none;
+		}
+	}
+}

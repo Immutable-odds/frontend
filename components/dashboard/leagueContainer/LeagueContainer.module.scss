@@ -1,0 +1,83 @@
+@import "@/styles/imports";
+
+.container {
+	.text {
+		h3 {
+			@extend %text-18;
+			line-height: 2rem;
+			font-family: $font-700;
+		}
+		h5 {
+			@extend %text-12;
+			color: $col-grey-4;
+		}
+		h6 {
+			@extend %text-10;
+			color: $col-grey-4;
+		}
+		p,
+		span {
+			@extend %text-14;
+		}
+		span {
+			color: $col-primary-4;
+		}
+	}
+	.chevron {
+		position: relative;
+		width: 2rem;
+		height: 2rem;
+		margin-left: 0.4rem;
+	}
+	.large_icon {
+		position: relative;
+		width: 3.2rem;
+		height: 2rem;
+		border-radius: 0.4rem;
+		overflow: hidden;
+		margin-right: 0.8rem;
+	}
+	.small_row {
+		@include flex(flex-start, center);
+	}
+	.row {
+		@include flex(space-between, center);
+	}
+	.card {
+		padding: 0.4rem;
+		border: 0.1rem solid $col-grey-8;
+		border-radius: 1.6rem;
+		margin-top: 2.4rem;
+		.header {
+			background-color: $col-grey-9;
+			border-radius: 1.6rem;
+			padding: 0.8rem 2.2rem 0.8rem 1.2rem;
+			.title_container {
+				@include grid(repeat(3, 1fr), 0.1rem);
+				width: 19.1rem;
+				.title {
+					width: 100%;
+					@extend %center;
+				}
+			}
+		}
+		.body {
+			padding: 1.6rem 1.2rem 0.4rem;
+			@include flex(space-between, center);
+			.small_row {
+				margin-bottom: 0.8rem;
+			}
+			.icon {
+				position: relative;
+				width: 2.4rem;
+				height: 2.4rem;
+				margin-right: 1.6rem;
+				overflow: hidden;
+				border-radius: 50%;
+			}
+		}
+	}
+	&:not(:first-child) {
+		margin-top: 2.4rem;
+	}
+}

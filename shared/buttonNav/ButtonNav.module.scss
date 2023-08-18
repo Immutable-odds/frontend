@@ -1,0 +1,29 @@
+@import "@/styles/imports";
+.container {
+	@include grid(repeat(2, 1fr), 0.8rem);
+	border: 0.1rem solid $col-grey-8;
+	border-radius: 10rem;
+	width: 26.3rem;
+	margin-left: auto;
+	background-color: $col-grey-9;
+	padding: 0.4rem;
+	.button_container {
+		padding: 0;
+		.button {
+			padding: 0.4rem 1.6rem;
+			@extend %text-14;
+			font-family: $font;
+			color: $col-grey-4;
+			border-radius: 10rem;
+			&[data-active="true"] {
+				background-color: $col-primary-4;
+				font-family: $font-700;
+				color: $col-grey-1;
+			}
+		}
+	}
+	@include screenMax("mobile") {
+		margin: 2.4rem 0;
+		width: 100%;
+	}
+}

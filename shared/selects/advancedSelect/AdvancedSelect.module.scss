@@ -1,0 +1,151 @@
+@import "@/styles/imports";
+
+.select {
+	// @include screenMin('tablet') {
+	// 	margin-left: 2rem;
+	// }
+	min-width: 7rem;
+	border-radius: 10rem;
+	border: 0.2rem solid $col-grey-8;
+	padding: 1rem 1.6rem;
+	margin-right: 0.8rem;
+	background-color: $col-grey-9;
+	min-height: 2rem;
+	position: relative;
+	&[data-type="true"] {
+		background-color: $col-grey-9;
+		border: 0.1rem solid $col-grey-6;
+	}
+	.select_header {
+		@include flex(space-between, center, row nowrap);
+		padding: 0;
+		width: 100%;
+		position: relative;
+		cursor: pointer;
+		.select_smallRow,
+		.select_row {
+			@include flex(space-between, center);
+			div {
+				margin-right: 0.8rem;
+			}
+			p,
+			span {
+				@extend %text-14;
+				color: $col-white;
+				text-transform: capitalize;
+				// @include screenMax('tablet') {
+				// 	display: none;
+				// }
+			}
+			span {
+				font-family: $font-700;
+			}
+		}
+		//   @include screenMax("ssm-mobile") {
+		//     min-width: 100%;
+		//     max-width: 100%;
+		//     &:not(:last-child) {
+		//       margin-bottom: 2rem;
+		//     }
+		//   }
+		.select_smallRow {
+			width: 100%;
+			// @include screenMax("tablet") {
+			// 	justify-content: center;
+			// }
+		}
+	}
+	@include screenMax("tablet") {
+		width: auto;
+		padding: 0.7rem 1rem;
+		// margin-right: 0.5rem;
+		margin: 1rem 0.5rem 1rem 0;
+	}
+}
+
+.icon {
+	position: relative;
+	width: 2.4rem;
+	height: 2.4rem;
+	margin-right: 0.4rem;
+}
+
+.flex {
+	@include flex(flex-start, center);
+}
+
+.select_body {
+	min-width: 7rem;
+	width: 100%;
+	border-radius: 0.4rem;
+	padding: 1.55rem 1.3rem 0;
+	position: absolute;
+	top: 4.5rem;
+	right: 0;
+	background-color: $col-primary;
+	z-index: 2;
+	max-height: 30rem;
+	overflow-y: scroll;
+	@include noScrollBar;
+	@include screenMax("tablet") {
+		// left: -1rem;
+		top: 3.5rem;
+	}
+}
+
+.select_listItem {
+	// border-bottom: 0.1rem solid #1a1b20;
+	cursor: pointer;
+}
+
+.select_row {
+	@include flex(flex-start, center);
+	padding-bottom: 2rem;
+	p {
+		font-size: 1.4rem;
+		font-weight: 500;
+		line-height: 1.8rem;
+		text-transform: capitalize;
+		white-space: nowrap;
+	}
+}
+
+.select_tokenImage {
+	position: relative;
+	width: 2.4rem;
+	height: 2.4rem;
+	margin-right: 0.8rem;
+	@include screenMax("tablet") {
+		margin-right: 0 !important;
+		width: 4rem;
+		height: 4rem;
+	}
+}
+
+.select_dropDown_tokenImage {
+	position: relative;
+	width: 1.1rem;
+	height: 0.7rem;
+	// margin-right: 0.8rem;
+	@include screenMax("tablet") {
+		// margin-right: 0 !important;
+		width: 2.4rem;
+		height: 2.4rem;
+	}
+}
+
+.select_dropDownImage {
+	width: 2rem;
+	height: 2rem;
+	position: relative;
+	margin-right: 0 !important;
+}
+
+.select_dropDown {
+	position: absolute;
+	right: 2.4rem;
+	top: 50%;
+	@include screenMax("tablet") {
+		display: none;
+	}
+}
