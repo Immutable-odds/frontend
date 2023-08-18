@@ -58,7 +58,7 @@ const DashboardCryptoView = () => {
 						<Select options={networkList} onOptionChange={setNetwork} />
 					</div>
 				</div>
-				{cryptoBetList.length ? <CryptoContainer cryptoBets={cryptoBetList} /> : <p>No current pool</p>}
+				{cryptoBetList.length ? <CryptoContainer cryptoBets={cryptoBetList} /> : <p>No available pool to display</p>}
 
 			</div>
 			<div>

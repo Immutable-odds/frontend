@@ -43,9 +43,9 @@ const DashboardFootballView = () => {
 					<ButtonNav />
 				</div>
 				<DashboardTrendingCard />
-				{matchList.map((matchesData, index) => (
+				{matches.length ? matchList.map((matchesData, index) => (
 					<LeagueContainer data={matchesData} key={index} />
-				))}
+				)) : <p>No available pool to display</p>}
 			</div>
 			<div>
 				<div className={styles.button_nav}>
