@@ -1,24 +1,12 @@
 import React from "react";
 import type { ReactElement } from "react";
-import { ProfileLayout } from "@/layout";
-import { ProfileView } from "@/views";
-import { useWeb3React } from "@web3-react/core";
-import { ConnectWallet } from "@/shared";
+import { useRouter } from "next/router";
+import { PreLoader } from "@/shared/loaders";
 
-const Profile = (): ReactElement => {
-	const { account } = useWeb3React()
-	return (
-		<ProfileLayout>
-			{!account ? (
-				<div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '25%' }}>
-					<ConnectWallet />
-				</div>
-			) :
-				<ProfileView />
-			}
-
-		</ProfileLayout>
-	);
+const Settings = (): ReactElement => {
+	const router = useRouter();
+	router.replace("/settings/profile");
+	return <PreLoader />;
 };
 
-export default Profile;
+export default Settings;

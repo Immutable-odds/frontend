@@ -1,0 +1,8 @@
+@import "@/styles/imports";
+
+.section {
+	@include grid(repeat(2, 1fr), 4rem);
+	@include screenMax("mobile") {
+		display: block;
+	}
+}

@@ -1,0 +1,51 @@
+@import "@/styles/imports";
+
+.container {
+	border: 0.1rem solid $col-grey-8;
+	border-radius: 0.8rem;
+	width: 100%;
+	padding: 2.4rem;
+	.text {
+		h1 {
+			@extend %title-40;
+			font-family: $font-700;
+			color: $col-grey-1;
+			text-align: center;
+		}
+		h2,
+		h3 {
+			@extend %title-24;
+			color: $col-grey-1;
+			font-family: $font-700;
+		}
+		h3 {
+			text-align: center;
+		}
+		h4 {
+			@extend %text-16;
+			color: $col-grey-1;
+			font-family: $font-700;
+		}
+		h5 {
+			@extend %text-14;
+			color: $col-grey-1;
+			margin-bottom: 0.4rem;
+			text-align: center;
+		}
+		p {
+			@extend %text-14;
+			color: $col-grey-4;
+		}
+	}
+	.row {
+		@include flex();
+		flex-wrap: nowrap;
+		margin-top: 3.2rem;
+		.icon {
+			position: relative;
+			width: 4rem;
+			height: 4rem;
+			margin-right: 1.6rem;
+		}
+	}
+}

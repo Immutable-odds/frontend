@@ -17,6 +17,7 @@ import convertEpochToFormattedDate from "./convertEpoch";
 import { scrollTo } from "./scrollTo";
 import { formatMatches, formatCompetitons } from "./formatMatches";
 import { getPoolStage } from "./getPoolStage";
+import truncateHash from "./truncateHash";
 
 export {
 	toggleScroll,
@@ -39,5 +40,6 @@ export {
 	scrollTo,
 	formatMatches,
 	formatCompetitons,
-	getPoolStage
+	getPoolStage,
+	truncateHash,
 };

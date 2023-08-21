@@ -22,23 +22,23 @@ const DashboardCryptoView = () => {
 	const [cryptoBetList, setCryptoBetList] = useState<any[]>([]);
 	const [network, setNetwork] = useState<string>("");
 
-	const effectCalled = useRef(false)
+	const effectCalled = useRef(false);
 	useEffect(() => {
 		if (effectCalled.current) return;
 		effectCalled.current = true;
 
 		const loadData = async () => {
-			const data = await getPoolsByType("crypto")
-			setCryptoBetList(data?.result)
-		}
+			const data = await getPoolsByType("crypto");
+			setCryptoBetList(data?.result);
+		};
 
 		loadData();
-	}, [cryptoBetList])
+	}, [cryptoBetList]);
 
 	const filteredListByNetwork = useMemo(() => {
-		if(network === "all") return cryptoBetList;
-		return cryptoBetList.filter(item => item.network === network)
-	} ,[cryptoBetList])
+		if (network === "all") return cryptoBetList;
+		return cryptoBetList.filter(item => item.network === network);
+	}, [cryptoBetList]);
 
 	return (
 		<div className={styles.section}>
@@ -58,8 +58,11 @@ const DashboardCryptoView = () => {
 						<Select options={networkList} onOptionChange={setNetwork} />
 					</div>
 				</div>
-				{cryptoBetList.length ? <CryptoContainer cryptoBets={cryptoBetList} /> : <p>No available pool to display</p>}
-
+				{cryptoBetList.length ? (
+					<CryptoContainer cryptoBets={cryptoBetList} />
+				) : (
+					<p>No available pool to display</p>
+				)}
 			</div>
 			<div>
 				<div className={styles.button_nav}>

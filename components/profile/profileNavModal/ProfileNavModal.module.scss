@@ -1,0 +1,76 @@
+@import "@/styles/imports";
+
+.modal {
+	position: fixed;
+	z-index: 12;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 85dvh;
+	overflow-y: hidden;
+	background-color: $col-grey-10;
+	// backdrop-filter: blur(15px);
+	cursor: default;
+	display: none;
+	&[data-active="true"] {
+		display: block;
+	}
+	.text {
+		h3 {
+			@extend %title-24;
+			color: $col-white;
+			margin-bottom: 0.8rem;
+		}
+		p {
+			color: $col-white;
+		}
+	}
+	.container {
+		width: 100%;
+		padding: 2.4rem;
+		.block {
+			margin-top: 1rem;
+			width: 100%;
+			.title {
+				margin-bottom: 2.4rem;
+				h3 {
+					@extend %text-14;
+					color: $col-grey-3;
+				}
+			}
+			.row {
+				@include flex(flex-start, center);
+				// margin-bottom: 2.4rem;
+				padding: 1rem 0.8rem;
+				border-radius: 0.4rem;
+				.icon {
+					position: relative;
+					width: 2.4rem;
+					height: 2.4rem;
+					margin-right: 0.8rem;
+					border-radius: 50%;
+					overflow: hidden;
+				}
+				.text {
+					p {
+						@extend %text-14;
+						color: $col-grey-4;
+						text-transform: capitalize;
+					}
+				}
+				&[data-active="true"] {
+					background-color: $col-primary-4;
+					.text {
+						p {
+							color: $col-white;
+							font-family: $font-700;
+						}
+					}
+				}
+			}
+			&:not(:last-child) {
+				border-bottom: 0.1rem solid $col-grey-8;
+			}
+		}
+	}
+}

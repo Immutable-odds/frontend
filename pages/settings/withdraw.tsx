@@ -1,7 +1,7 @@
 import React from "react";
 import type { ReactElement } from "react";
 import { ProfileLayout } from "@/layout";
-import { FundsView } from "@/views";
+import { WithdrawView } from "@/views";
 import { useWeb3React } from "@web3-react/core";
 import { ConnectWallet } from "@/shared";
 
@@ -14,7 +14,7 @@ const Funds = (): ReactElement => {
 					<ConnectWallet />
 				</div>
 			) : */}
-			<FundsView />
+			<WithdrawView />
 			{/* } */}
 		</ProfileLayout>
 	);

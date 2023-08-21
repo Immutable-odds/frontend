@@ -22,7 +22,6 @@ const Header = () => {
 		setDropDown(!dropDown);
 		event.stopPropagation();
 	};
-	
 
 	// useEffect(() => {
 	// 	const element = ref.current;
@@ -92,7 +91,14 @@ const Header = () => {
 		}
 		if (
 			url === "/settings" &&
-			containsLink(path, ["/funds", "/bet-history"])
+			containsLink(path, [
+				"/profile",
+				"/funds",
+				"/transactions",
+				"/history",
+				"/bet-history",
+				"/withdraw",
+			])
 		)
 			isActive = true;
 

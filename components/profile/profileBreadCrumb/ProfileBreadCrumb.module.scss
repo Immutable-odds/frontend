@@ -1,0 +1,32 @@
+@import "@/styles/imports";
+
+.breadcrumb {
+	@include flex(flex-start, center);
+	cursor: pointer;
+	display: none;
+	.text {
+		h4,
+		p {
+			@extend %text-14;
+			text-transform: capitalize;
+		}
+		h4 {
+			color: $col-white;
+			font-family: $font-700;
+		}
+		p {
+			@extend %text-14;
+			color: $col-grey-4;
+		}
+	}
+	.chevron {
+		position: relative;
+		width: 2.4rem;
+		height: 2.4rem;
+		margin: 0 0.8rem;
+		rotate: -90deg;
+	}
+	@include screenMax("mobile") {
+		display: flex;
+	}
+}

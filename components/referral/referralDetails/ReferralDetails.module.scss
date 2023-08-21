@@ -1,0 +1,75 @@
+@import "@/styles/imports";
+
+.container {
+	.title_container,
+	.body_container,
+	.small_container {
+		background-color: $col-grey-9;
+		border: 0.1rem solid $col-grey-8;
+		border-radius: 0.8rem;
+		width: 100%;
+		padding: 2.4rem;
+	}
+	.title_container {
+		margin-bottom: 1.6rem;
+		@include flex(space-around);
+	}
+	.body_container {
+		.small_container {
+			margin: 2.4rem 0;
+			@include flex(space-between);
+			.icon {
+				position: relative;
+				width: 2.4rem;
+				height: 2.4rem;
+				cursor: pointer;
+			}
+		}
+	}
+	.text {
+		h1 {
+			@extend %title-40;
+			font-family: $font-700;
+			color: $col-grey-1;
+			text-align: center;
+		}
+		h2,
+		h3 {
+			@extend %title-24;
+			color: $col-grey-1;
+			font-family: $font-700;
+		}
+		h3 {
+			text-align: center;
+		}
+		h4 {
+			@extend %text-16;
+			color: $col-grey-1;
+		}
+		h5 {
+			@extend %text-14;
+			color: $col-grey-1;
+			margin-bottom: 0.4rem;
+			text-align: center;
+		}
+		p {
+			@extend %text-14;
+			color: $col-grey-4;
+		}
+	}
+	.row {
+		@include grid(repeat(4, 1fr), 2.4rem);
+		.card {
+			cursor: pointer;
+			.icon {
+				position: relative;
+				width: 100%;
+				height: 9rem;
+				margin-bottom: 0.8rem;
+			}
+		}
+	}
+	@include screenMax("mobile") {
+		margin: 4rem 0 2.4rem;
+	}
+}
