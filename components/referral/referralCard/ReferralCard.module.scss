@@ -7,6 +7,12 @@
 	width: 100%;
 	padding: 2.4rem;
 	.text {
+		h3 {
+			@extend %title-24;
+			color: $col-grey-1;
+			font-family: $font-700;
+			margin-bottom: 2.4rem;
+		}
 		p {
 			color: rgba($col-grey-1, 0.8);
 			@extend %text-16;
@@ -59,6 +65,6 @@
 		}
 	}
 	@include screenMax("mobile") {
-		height: auto;
+		margin-top: 8rem;
 	}
 }

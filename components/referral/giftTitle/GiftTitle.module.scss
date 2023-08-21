@@ -21,4 +21,10 @@
 			color: $col-grey-4;
 		}
 	}
+	@include screenMax("mobile") {
+		@include flex(center, center);
+		.text {
+			text-align: center;
+		}
+	}
 }
