@@ -3,6 +3,7 @@ import { CryptoBet } from "@/types";
 import Image from "next/legacy/image";
 import React from "react";
 import styles from "./CryptoContainer.module.scss";
+import { getPoolStage } from "@/utils";
 
 interface Props {
 	cryptoBets: CryptoBet[];
@@ -24,20 +25,32 @@ interface CardProps {
 	bet: any;
 }
 
-const Card = ({ bet }: CardProps) => {
-	const localTime = new Date(bet.timestamp).toLocaleString(undefined, {
+const getTimeAndDate = (datetime: string | number) => {
+	const localTime = new Date(datetime).toLocaleString(undefined, {
 		timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 	});
 	const [date, time] = localTime.split(", ");
 	const formattedTime = time.slice(0, -3);
 
+	return { date, time: formattedTime }
+}
+
+const Card = ({ bet }: CardProps) => {
+	const betClosingTime = getTimeAndDate(bet?.poolData?.duration)
+	const poolClosingTime = getTimeAndDate(bet?.poolData?.stakeDuration)
+	const poolStage = getPoolStage(bet)
+
+	const poolStatusText = poolStage === 'open'
+		? `${poolStage}: ${betClosingTime.date}, ${betClosingTime.time}`
+		: poolStage === 'vesting' ? `${poolStage}: ${poolClosingTime.date}, ${poolClosingTime.time}`
+			: poolStage
 	return (
 		<div className={styles.card}>
 			<div className={styles.header}>
 				<div className={styles.card_row}>
 					<div className={styles.text}>
 						<p>
-							{date}, {formattedTime}{" "}
+							{poolStatusText}
 						</p>
 					</div>
 					<div className={styles.text}>
@@ -114,7 +127,7 @@ const Card = ({ bet }: CardProps) => {
 					</div>
 					<div className={styles.text}>
 						<p>
-							{date}, {formattedTime}{" "}
+							{poolStatusText}
 						</p>
 					</div>
 				</div>

@@ -54,13 +54,13 @@
 				font-family: $font-700;
 				text-transform: capitalize;
 			}
-			&[data-type="won"] {
+			&[data-type="closed"] {
 				background-color: $col-success-1;
 				p {
 					color: $col-success-4;
 				}
 			}
-			&[data-type="lost"] {
+			&[data-type="vesting"] {
 				background-color: $col-error-1;
 				p {
 					color: $col-error;

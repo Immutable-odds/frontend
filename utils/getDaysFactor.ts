@@ -1,4 +1,5 @@
-export function getDaysFactor(timestamp) {
+export function getDaysFactor(datetime: string | number) {
+    const timestamp = new Date(datetime).getTime()
     const timeNow = Date.now()
     const millisecondsPerHour = 3600000;
     const millisecondsPerDay = 86400000;

@@ -1,6 +1,6 @@
 import { formatISODate } from "@/mock";
 import { Icon } from "@/shared";
-import { formatNum, stringShortner } from "@/utils";
+import { formatNum, getPoolStage, stringShortner } from "@/utils";
 import styles from "./BetHistoryCard.module.scss";
 
 enum BETTYPE {
@@ -58,8 +58,8 @@ const BetHistoryCard = ({ bet }: any) => {
 						</h4>
 					</div>
 				</div>
-				<div className={styles.bet_result} data-type={bet.status}>
-					<p>{getBetStatus(bet.status)}</p>
+				<div className={styles.bet_result} data-type={getPoolStage(bet?.poolDetails)}>
+					<p>{getPoolStage(bet?.poolDetails)}</p>
 				</div>
 			</div>
 			<div className={styles.body} data-type={bet.betType}>

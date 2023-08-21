@@ -68,15 +68,8 @@ const ProfileView = () => {
 	const stats = useMemo(() => ({
 		bets: bets?.totalBets ?? 0,
 		amountWon: bets?.totalWon ?? 0,
-		pointsWon: 0
+		pointsWon: bets?.totalPoints ?? 0
 	}), [bets])
-
-	const financeStats = useMemo(() => {
-		return {
-			balance,
-			points: 0
-		}
-	}, [balance])
 
 	return (
 
@@ -122,8 +115,8 @@ const ProfileView = () => {
 					</div>
 					<div className={styles.finance}>
 						<ProfileBalanceCard
-							balance={parseFloat(financeStats.balance)}
-							points={financeStats.points}
+							balance={parseFloat(balance)}
+							points={stats.pointsWon}
 						/>
 					</div>
 					<div className={styles.double_column}>

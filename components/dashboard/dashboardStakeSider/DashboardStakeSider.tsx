@@ -137,7 +137,7 @@ const DashboardStakeSider = () => {
 												/>
 												<DetailContainer
 													title="Days factor"
-													value={getDaysFactor(stake?.timestamp)}
+													value={getDaysFactor(stake?.poolData?.stakeDuration)}
 													description="Duration of this pool"
 												/>
 											</div>

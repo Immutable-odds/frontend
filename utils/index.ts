@@ -16,6 +16,7 @@ import copyText from "./copyText";
 import convertEpochToFormattedDate from "./convertEpoch";
 import { scrollTo } from "./scrollTo";
 import { formatMatches, formatCompetitons } from "./formatMatches";
+import { getPoolStage } from "./getPoolStage";
 
 export {
 	toggleScroll,
@@ -38,4 +39,5 @@ export {
 	scrollTo,
 	formatMatches,
 	formatCompetitons,
+	getPoolStage
 };

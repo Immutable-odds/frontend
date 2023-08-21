@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import styles from "./FundsView.module.scss";
 import { useStore } from "@/contexts/StoreContext";
-import { getUserAllocations, getUserPoolIds } from "@/services/API";
+import { getUserAllocations, getUserBetStats, getUserPoolIds } from "@/services/API";
 import { withdrawFunds } from "@/utils/callContract";
 import { useWeb3React } from "@web3-react/core";
 import { toast } from "react-toastify";
@@ -18,7 +18,7 @@ enum View {
 
 const FundsView = () => {
 	const [userData] = useStore()
-	const [allocations, setAllocations] = useState<number>(0)
+	const [earnings, setEarnings] = useState<{ totalWon: number; totalPoints: number }>({ totalWon: 0, totalPoints: 0 })
 	const [userPoolIds, setUserPoolIds] = useState<number[]>([])
 	const [view, setView] = useState<View>(View.WITHDRAW);
 	const { active, library } = useWeb3React()
@@ -30,10 +30,13 @@ const FundsView = () => {
 	useEffect(() => {
 		const loadData = async () => {
 			const [allocationResponse, poolIdResponse] = await Promise.all([
-				getUserAllocations({ uuid: userData?.uuid }),
+				getUserBetStats(userData?.uuid),
 				getUserPoolIds(userData.uuid)
 			])
-			setAllocations(allocationResponse?.result?.total ?? 0)
+			setEarnings({
+				totalWon: allocationResponse?.result?.totalWon ?? 0,
+				totalPoints: allocationResponse?.result?.totalPoints ?? 0,
+			})
 			setUserPoolIds(poolIdResponse?.result ?? [])
 		}
 		if (userData?.uuid) loadData();
@@ -45,7 +48,7 @@ const FundsView = () => {
 				poolIds: userPoolIds,
 				signer: library?.getSigner()
 			});
-			if(result) toast.success("Allocations withdrawn to your wallet")
+			if (result) toast.success("Allocations withdrawn to your wallet")
 		} catch (error) {
 			console.log("Error:", error);
 			toast.error("Transaction failed")
@@ -87,8 +90,8 @@ const FundsView = () => {
 				{view === View.DEPOSIT && <CryptoDepositCard />}
 				{view === View.WITHDRAW && (
 					<div className={styles.block_large}>
-						<WithdrawCard balance={allocations} disableBtn={!allocations || !userPoolIds.length} onWithdraw={handleWithdraw} />
-						<WithdrawCard balance={0.00} type="points" disableBtn={true} onWithdraw={handleWithdraw} />
+						<WithdrawCard balance={earnings.totalWon} disableBtn={!earnings.totalWon || !userPoolIds.length} onWithdraw={handleWithdraw} />
+						<WithdrawCard balance={earnings.totalPoints} type="points" disableBtn={true} onWithdraw={handleWithdraw} />
 					</div>
 				)}
 			</div>

@@ -1,11 +1,9 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper";
 import "swiper/css";
 import styles from "./DashboardTrendingCard.module.scss";
 import Image from "next/legacy/image";
 import { Countdown, OddsCard } from "@/shared";
-import { convertEpochToFormattedDate, formatMatches } from "@/utils";
+import { convertEpochToFormattedDate } from "@/utils";
 import { footballMatches } from "@/mock";
 
 const DashboardTrendingCard = () => {
