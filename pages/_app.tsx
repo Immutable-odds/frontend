@@ -8,15 +8,16 @@ import "react-toastify/dist/ReactToastify.css";
 import { ethers } from "ethers";
 import { Web3ReactProvider } from "@web3-react/core";
 import { StoreProvider } from "@/contexts/StoreContext";
+import { PreLoader } from "@/shared/loaders";
 
-const getLibrary = (provider) => {
-	const library = new ethers.providers.Web3Provider(provider)
-	library.pollingInterval = 8000 // frequency provider is polling
-	return library
-}
+const getLibrary = provider => {
+	const library = new ethers.providers.Web3Provider(provider);
+	library.pollingInterval = 8000; // frequency provider is polling
+	return library;
+};
 
 export default function App({ Component, pageProps }: AppProps) {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	useEffect(() => {
 		const load = setTimeout(() => setIsLoading(false), 2000);
 		return () => {
@@ -33,8 +34,9 @@ export default function App({ Component, pageProps }: AppProps) {
 						<React.Fragment>
 							<Component {...pageProps} />
 						</React.Fragment>
-					) : // <PreLoader />
-						null}
+					) : (
+						<PreLoader />
+					)}
 					<ToastContainer
 						position="top-right"
 						autoClose={2000}

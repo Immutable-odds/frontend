@@ -9,7 +9,7 @@ import useSWR from "swr";
 import styles from "./DashboardSider.module.scss";
 import { Fetcher } from "@/utils/fetcher";
 
-const DashboardSider = ({ page }: {page?: string}) => {
+const DashboardSider = ({ page }: { page?: string }) => {
 	const router = useRouter();
 	const [competitionList, setCompetitionList] = useState<any[]>([]);
 	const { data: competitionsResponse } = useSWR<any>("pool/getFootballCompetitions", Fetcher);
