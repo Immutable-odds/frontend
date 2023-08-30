@@ -19,18 +19,18 @@ const LeaguePage = () => {
 	const [loading, setLoading] = useState(true);
 	const leagueQuery: any = router.query.league;
 	const { data: fixtureResponse } = useSWR<any>(
-		leagueQuery ? `/api/football/fetchLeagueMatches?id=${leagueQuery}` : null,
+		leagueQuery ? `pool/getFootballPoolsByCompetitionId/${leagueQuery}` : null,
 		Fetcher
 	);
 
 	useEffect(() => {
 		if (!isEmpty(fixtureResponse)) {
-			if (!fixtureResponse.data.matches) return;
-			const filteredFixtures = fixtureResponse.data.matches.filter(
+			if (!fixtureResponse?.result.matches) return;
+			const filteredFixtures = fixtureResponse?.result?.matches.filter(
 				(fixture: any) => fixture.status !== "FINISHED"
 			);
 			setLoading(false);
-			setFixtures(formatMatches(fixtureResponse.data.matches));
+			setFixtures(formatMatches(fixtureResponse?.result?.matches));
 		}
 	}, [fixtureResponse]);
 

@@ -6,32 +6,13 @@ import {
 	LeagueContainer,
 } from "@/components/dashboard";
 import { formatMatches } from "@/utils";
-import React, { useEffect, useRef, useState } from "react";
-import useSWR from "swr";
-import { isEmpty } from "lodash";
-import { Fetcher } from "@/utils/fetcher";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./DashboardView.module.scss";
-import { footballMatches } from "@/mock";
 import { ButtonNav } from "@/shared";
 import { getPoolsByType } from "@/services/API";
 
 const DashboardFootballView = () => {
 	const [matches, setMatches] = useState<any[]>([]);
-	// const { data: fixtureResponse } = useSWR<any>(
-	// 	`/api/football/fetchRecentMatches`,
-	// 	Fetcher
-	// );
-
-	// useEffect(() => {
-	// 	if (!isEmpty(fixtureResponse)) {
-	// 		if (!fixtureResponse.data.matches) return;
-	// 		const filteredFixtures = fixtureResponse.data.matches.filter(
-	// 			(fixture: any) => fixture.status !== "FINISHED"
-	// 		);
-	// 		setMatches(filteredFixtures);
-	// 	}
-	// }, [fixtureResponse]);
-
 	const effectCalled = useRef(false)
 	useEffect(() => {
 		if (effectCalled.current) return;
@@ -40,15 +21,13 @@ const DashboardFootballView = () => {
 		const loadData = async () => {
 			const data = await getPoolsByType("football")
 			setMatches(data?.result)
-
 			console.log(data?.result);
-			
 		}
 
 		loadData();
 	}, [matches])
 
-	const matchList = formatMatches(footballMatches);
+	const matchList = useMemo(() => formatMatches(matches), [matches]);
 
 	return (
 		<div className={styles.section}>
@@ -61,7 +40,7 @@ const DashboardFootballView = () => {
 					<ButtonNav />
 				</div>
 				{/* <DashboardTrendingCard /> */}
-				{[].length ? matchList.map((matchesData, index) => (
+				{matchList.length ? matchList.map((matchesData, index) => (
 					<LeagueContainer data={matchesData} key={index} />
 				)) : <p>No available pool to display</p>}
 			</div>

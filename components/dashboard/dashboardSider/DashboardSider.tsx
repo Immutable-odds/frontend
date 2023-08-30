@@ -1,19 +1,31 @@
-import { competitions, popularTokens } from "@/mock";
+import { popularTokens } from "@/mock";
 import { SearchBox } from "@/shared";
-import { formatCompetitons, formatMatches, shortenTitle } from "@/utils";
+import { formatCompetitons, shortenTitle } from "@/utils";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useSWR from "swr";
 import styles from "./DashboardSider.module.scss";
+import { Fetcher } from "@/utils/fetcher";
 
 const DashboardSider = ({ page }: {page?: string}) => {
 	const router = useRouter();
-	const matchList = formatCompetitons(competitions);
+	const [competitionList, setCompetitionList] = useState<any[]>([]);
+	const { data: competitionsResponse } = useSWR<any>("pool/getFootballCompetitions", Fetcher);
 	const checkActive = (url: string) => {
 		let isActive = url === router.asPath;
 		return isActive;
 	};
+	
+	useEffect(() => {
+		if(competitionsResponse?.result?.length){
+			const _competitionList = formatCompetitons(competitionsResponse.result);
+			console.log(_competitionList);
+			
+			setCompetitionList(_competitionList)
+		}
+	}, [competitionsResponse, competitionList])
 	return (
 		<div className={styles.container}>
 			<SearchBox />
@@ -34,7 +46,7 @@ const DashboardSider = ({ page }: {page?: string}) => {
 					))}
 				</div>
 			) : (
-				matchList.map((match: any, index: number) => (
+				competitionList.map((match: any, index: number) => (
 					<div className={styles.block} key={index}>
 						<div className={styles.title}>
 							<h3>{match.area.name}</h3>

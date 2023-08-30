@@ -51,9 +51,6 @@ export const formatCompetitons = (competitions: any[]) => {
 				code: item.code,
 				type: item.type,
 				icon: item.emblem,
-				plan: item.plan,
-				currentSeason: item.currentSeason,
-				numberOfAvailableSeasons: item.numberOfAvailableSeasons,
 				lastUpdated: item.lastUpdated,
 			}, // You can add matches here if available
 		});

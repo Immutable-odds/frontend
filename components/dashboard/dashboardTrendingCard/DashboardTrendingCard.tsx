@@ -17,7 +17,7 @@ const DashboardTrendingCard = () => {
 			<Card
 				epochTime={1757859200}
 				odds={{ winOdds: 2.45, drawOdds: 3.45, lossOdds: 4.56 }}
-				match={footballMatches[8]}
+				match={footballMatches[0]}
 			/>
 		</div>
 	);
