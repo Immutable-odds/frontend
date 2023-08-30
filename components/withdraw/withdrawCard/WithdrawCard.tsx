@@ -8,19 +8,24 @@ import { toast } from "react-toastify";
 interface Props {
 	type?: "wallet" | "points";
 	balance: number;
-	onWithdraw: () => void,
-	disableBtn?: boolean
+	onWithdraw: () => void;
+	disableBtn?: boolean;
 }
 
-const WithdrawCard = ({ type = "wallet", balance, disableBtn = false, onWithdraw }: Props) => {
+const WithdrawCard = ({
+	type = "wallet",
+	balance,
+	disableBtn = false,
+	onWithdraw,
+}: Props) => {
 	const [withdrawAmount, setWithdrawAmount] = useState<number>(0);
 	const handleWithdraw = () => {
-		if(withdrawAmount > balance) {
-			toast.error("Error: Insufficient funds for withdrawal")
+		if (withdrawAmount > balance) {
+			toast.error("Error: Insufficient funds for withdrawal");
 			return;
 		}
-		onWithdraw()
-	}
+		onWithdraw();
+	};
 	return (
 		<div className={styles.card}>
 			{type === "wallet" ? (
@@ -49,7 +54,12 @@ const WithdrawCard = ({ type = "wallet", balance, disableBtn = false, onWithdraw
 				value={withdrawAmount}
 				onChange={(e: any) => setWithdrawAmount(e.target.value)}
 			/>
-			<Button buttonType="transparent" className={styles.button} onClick={handleWithdraw} disabled={!!disableBtn}>
+			<Button
+				buttonType="transparent"
+				className={styles.button}
+				onClick={handleWithdraw}
+				disabled={!!disableBtn}
+			>
 				Withdraw
 			</Button>
 		</div>

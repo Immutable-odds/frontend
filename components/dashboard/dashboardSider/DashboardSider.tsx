@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import styles from "./DashboardSider.module.scss";
 
-const DashboardSider = ({ page }: {page?: string}) => {
+const DashboardSider = ({ page }: { page?: string }) => {
 	const router = useRouter();
 	const matchList = formatCompetitons(competitions);
 	const checkActive = (url: string) => {

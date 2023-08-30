@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import OddsCard from "../../../shared/oddsCard/OddsCard";
 import styles from "./LeagueContainer.module.scss";
+import { Icon } from "@/shared";
 
 interface Props {
 	data: any;
@@ -19,13 +20,10 @@ const LeagueContainer = ({ data, showAll = false, league }: Props) => {
 						<div className={styles.container} key={index}>
 							<div className={styles.row}>
 								<div className={styles.small_row}>
-									<div className={styles.large_icon}>
-										<Image
-											src={data.area.flag}
-											layout="fill"
-											alt=""
-										/>
-									</div>
+									<Icon
+										src={data.area.flag}
+										className={styles.large_icon}
+									/>
 									<div className={styles.text}>
 										<h3>
 											{data.area.name === "Spain" &&
@@ -116,17 +114,13 @@ const Card = ({ match }: any) => {
 			<div className={styles.body}>
 				<div className={styles.block}>
 					<div className={styles.small_row}>
-						<div className={styles.icon}>
-							<Image src={match.homeTeam.crest} layout="fill" alt="" />
-						</div>
+						<Icon src={match.homeTeam.crest} className={styles.icon} />
 						<div className={styles.text}>
 							<p>{match.homeTeam.shortName}</p>
 						</div>
 					</div>
 					<div className={styles.small_row}>
-						<div className={styles.icon}>
-							<Image src={match.awayTeam.crest} layout="fill" alt="" />
-						</div>
+						<Icon src={match.awayTeam.crest} className={styles.icon} />
 						<div className={styles.text}>
 							<p>{match.awayTeam.shortName}</p>
 						</div>
