@@ -31,8 +31,6 @@ const LeaguePage = () => {
 			const filteredFixtures = matches.filter(
 				(fixture: any) => fixture.status === "FINISHED"
 			);
-			console.log(filteredFixtures);
-
 			setLoading(false);
 			setFixtures(formatMatches(filteredFixtures));
 		}
