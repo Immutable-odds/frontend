@@ -9,7 +9,7 @@ import { Button, ConnectWallet } from "@/shared";
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./ProfileView.module.scss";
 import { useWeb3React } from "@web3-react/core";
-import { getUserBetStats, getUserBets } from "@/services/API";
+import { fetchUserInvites, getUserBetStats, getUserBets } from "@/services/API";
 import { useStore } from "@/contexts/StoreContext";
 import { getWalletBalance } from "@/utils/callContract";
 
@@ -42,6 +42,13 @@ const ProfileView = () => {
 	const [bets, setBets] = useState<any>(null)
 	const [chartData, setChartData] = useState<any[]>([]);
 	const [view, setView] = useState<MobileView>(MobileView.STATS);
+	const [referralData, setReferralData] = useState<{
+		referralId: string;
+		totalInvited: number,
+		earnings: number;
+		invites: string[]
+	}>(null)
+
 	useEffect(() => {
 		const data = generateMockData();
 		setChartData(data);
@@ -55,6 +62,14 @@ const ProfileView = () => {
 		if (userData?.uuid) {
 			getBets(userData.uuid)
 		}
+	}, [userData])
+
+	useEffect(() => {
+		const loadData = async (uuid) => {
+			const data = await fetchUserInvites(uuid)
+			setReferralData(data?.result);
+		}
+		if (userData?.uuid)  loadData(userData.uuid)
 	}, [userData])
 
 	useEffect(() => {
@@ -127,7 +142,7 @@ const ProfileView = () => {
 						/>
 					</div>
 					<div className={styles.referral}>
-						<ProfileReferralCard />
+						<ProfileReferralCard referrals={referralData?.invites ?? []} />
 					</div>
 				</>
 			)}

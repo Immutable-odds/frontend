@@ -61,4 +61,8 @@
 	@include screenMax("mobile") {
 		height: auto;
 	}
+	.icon_container {
+		width: 4rem;
+		height: 4rem;
+	}
 }

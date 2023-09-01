@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./ReferralCard.module.scss";
 import { referrals } from "@/mock";
+import { Icon } from "@/shared";
 
 const ReferralCard = ({ invites }) => {
 	return (
@@ -13,7 +14,7 @@ const ReferralCard = ({ invites }) => {
 					<div key={index} className={styles.small_card}>
 						<div className={styles.row}>
 							<div className={styles.icon}>
-								{/* <Image src={referral.icon} fill sizes="100vw" alt="" /> */}
+								<Icon className={styles.icon_container} />
 							</div>
 							<div className={styles.text}>
 								<p>{referral}</p>
