@@ -14,8 +14,6 @@ interface Props {
 
 const LeagueContainer = ({ data, showAll = false, league }: Props) => {
 	const router = useRouter();
-	console.log(data, "fa");
-	
 	return (
 		<>
 			{data
@@ -91,8 +89,6 @@ const getTimeAndDate = (datetime: string | number) => {
 }
 
 const Card = ({ match }: any) => {
-	console.log(match, "matchses");
-	
 	const betClosingTime = getTimeAndDate(match?.poolData?.duration)
 	const poolClosingTime = getTimeAndDate(match?.poolData?.stakeDuration)
 	const poolStage = getPoolStage(match)
