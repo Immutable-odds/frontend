@@ -9,23 +9,19 @@ import { formatMatches } from "@/utils";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./DashboardView.module.scss";
 import { ButtonNav } from "@/shared";
-import { getPoolsByType } from "@/services/API";
 import Image from "next/image";
+import useSWR from "swr";
+import { Fetcher } from "@/utils/fetcher";
 
 const DashboardFootballView = () => {
 	const [matches, setMatches] = useState<any[]>([]);
-	const effectCalled = useRef(false)
+	const { data: matchResponse } = useSWR<any>("pool/getPoolsByType/football", Fetcher);
+
 	useEffect(() => {
-		if (effectCalled.current) return;
-		effectCalled.current = true;
-
-		const loadData = async () => {
-			const data = await getPoolsByType("football")
-			setMatches(data?.result ?? [])
+		if (matchResponse?.result?.length) {
+			setMatches(matchResponse.result)
 		}
-
-		loadData();
-	}, [matches]);
+	}, [matchResponse]);
 
 	const matchList = useMemo(() => formatMatches(matches), [matches]);
 

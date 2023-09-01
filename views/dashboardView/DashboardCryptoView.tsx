@@ -10,6 +10,8 @@ import { ButtonNav, Select } from "@/shared";
 import { SelectOption } from "@/types";
 import { getPoolsByType } from "@/services/API";
 import Image from "next/image";
+import useSWR from "swr";
+import { Fetcher } from "@/utils/fetcher";
 
 const networkList: SelectOption[] = [
 	{ label: "all networks", value: "all" },
@@ -23,19 +25,13 @@ const DashboardCryptoView = () => {
 	const [cryptoBetList, setCryptoBetList] = useState<any[]>([]);
 	const [network, setNetwork] = useState<string>("");
 	const [isSearching, setIsSearching] = useState<boolean>(false);
+	const { data: cryptoBetResponse } = useSWR<any>("pool/getPoolsByType/crypto", Fetcher);
 
-	const effectCalled = useRef(false);
 	useEffect(() => {
-		if (effectCalled.current) return;
-		effectCalled.current = true;
-
-		const loadData = async () => {
-			const data = await getPoolsByType("crypto");
-			setCryptoBetList(data?.result ?? []);
-		};
-
-		loadData();
-	}, [cryptoBetList]);
+		if (cryptoBetResponse?.result?.length) {
+			setCryptoBetList(cryptoBetResponse.result)
+		}
+	}, [cryptoBetResponse]);
 
 	// const filteredListByNetwork = useMemo(() => {
 	// 	if (network === "all") return cryptoBetList;

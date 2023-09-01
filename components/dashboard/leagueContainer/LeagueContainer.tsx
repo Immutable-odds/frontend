@@ -14,6 +14,8 @@ interface Props {
 
 const LeagueContainer = ({ data, showAll = false, league }: Props) => {
 	const router = useRouter();
+	console.log(data, "fa");
+	
 	return (
 		<>
 			{data
@@ -83,12 +85,14 @@ const getTimeAndDate = (datetime: string | number) => {
 		timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 	});
 	const [date, time] = localTime.split(", ");
-	const formattedTime = time.slice(0, -3);
+	const formattedTime = time?.slice(0, -3);
 
 	return { date, time: formattedTime }
 }
 
 const Card = ({ match }: any) => {
+	console.log(match, "matchses");
+	
 	const betClosingTime = getTimeAndDate(match?.poolData?.duration)
 	const poolClosingTime = getTimeAndDate(match?.poolData?.stakeDuration)
 	const poolStage = getPoolStage(match)
