@@ -31,7 +31,7 @@ const DashboardCryptoView = () => {
 
 		const loadData = async () => {
 			const data = await getPoolsByType("crypto");
-			setCryptoBetList(data?.result);
+			setCryptoBetList(data?.result ?? []);
 		};
 
 		loadData();

@@ -9,7 +9,7 @@ const Transactions = (): ReactElement => {
 	const { account } = useWeb3React();
 	return (
 		<ProfileLayout>
-			{/* {!account ? (
+			{!account ? (
 				<div
 					style={{
 						width: "100%",
@@ -20,9 +20,9 @@ const Transactions = (): ReactElement => {
 				>
 					<ConnectWallet />
 				</div>
-			) : ( */}
-			<BetsView />
-			{/* )} */}
+			) : (
+				<BetsView />
+			)}
 		</ProfileLayout>
 	);
 };

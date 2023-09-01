@@ -9,7 +9,7 @@ const Referral = (): ReactElement => {
 	const { account } = useWeb3React();
 	return (
 		<ProfileLayout>
-			{/* {!account ? (
+			{!account ? (
 				<div
 					style={{
 						width: "100%",
@@ -20,9 +20,9 @@ const Referral = (): ReactElement => {
 				>
 					<ConnectWallet />
 				</div>
-			) : ( */}
-			<ReferralView />
-			{/* )} */}
+			) : (
+				<ReferralView />
+			)}
 		</ProfileLayout>
 	);
 };

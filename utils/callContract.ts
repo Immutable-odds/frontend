@@ -29,7 +29,6 @@ export const callContract = async ({
         const contract = new ethers.Contract(contractAddress, contractABI, signer);
         const transaction = await contract[method](...args);
         const transactionReceipt = await transaction.wait(1);
-        console.log(transactionReceipt); // Do something with the transactionReceipt
         return transactionReceipt;
     } catch (error: any) {
         toast.error(error?.message ?? 'Error calling contract function')
@@ -48,8 +47,6 @@ export const getWalletBalance = async (address: string) => {
 }
 
 export const withdrawFunds = async ({ poolIds, signer }: { poolIds: Array<number>; signer: any }) => {
-    console.log({ poolIds, signer }, "stake args");
-
     const result = await callContract({
         contractAddress: IMMUTABLE_ODDS_CONTRACT_ADDRESS,
         contractABI: IMMUTABLE_ODDS_INTERFACE,
@@ -61,30 +58,26 @@ export const withdrawFunds = async ({ poolIds, signer }: { poolIds: Array<number
     return result;
 }
 
-export const stakeCustomBet = async ({ amount, option, poolId, signer }: { amount: string; poolId: number; option: number; signer: any }) => {
-    console.log({ amount, option, poolId, signer }, "stake args");
-
+export const stakeCustomBet = async ({ amount, option, poolId, ref, signer }: { amount: string; poolId: number; option: number; ref: string; signer: any }) => {
     const value = parseEther(amount)
     const result = await callContract({
         contractAddress: IMMUTABLE_ODDS_CONTRACT_ADDRESS,
         contractABI: IMMUTABLE_ODDS_INTERFACE,
         method: 'betCustom',
-        args: [poolId, value, option],
+        args: [poolId, value, option, ref],
         signer
     })
 
     return result;
 }
 
-export const stakeNativeBet = async ({ amount, option, poolId, signer }: { amount: string; poolId: number; option: number; signer: any }) => {
-    console.log({ amount, option, poolId, signer }, "stake args");
-
+export const stakeNativeBet = async ({ amount, option, poolId, ref, signer }: { amount: string; poolId: number; option: number; ref: string, signer: any }) => {
     const value = parseEther(amount)
     const result = await callContract({
         contractAddress: IMMUTABLE_ODDS_CONTRACT_ADDRESS,
         contractABI: IMMUTABLE_ODDS_INTERFACE,
         method: 'betNative',
-        args: [poolId, option],
+        args: [poolId, option, ref],
         options: {
             value
         },

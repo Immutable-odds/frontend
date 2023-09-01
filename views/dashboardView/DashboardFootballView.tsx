@@ -21,12 +21,13 @@ const DashboardFootballView = () => {
 
 		const loadData = async () => {
 			const data = await getPoolsByType("football")
-			setMatches(data?.result)
-			console.log(data?.result);
+			setMatches(data?.result ?? [])
 		}
 
 		loadData();
 	}, [matches]);
+
+	const matchList = useMemo(() => formatMatches(matches), [matches]);
 
 	// const searchFootballTermOnChange = (searchTerm: string): void => {
 	// 	const lowercaseSearchTerm = searchTerm.toLowerCase();
@@ -66,7 +67,6 @@ const DashboardFootballView = () => {
 	// 	setMatches(formattedMatches);
 	// };
 
-	const matchList = useMemo(() => formatMatches(matches), [matches]);
 
 	return (
 		<div className={styles.section}>
@@ -78,7 +78,7 @@ const DashboardFootballView = () => {
 				<div className={styles.mob_button_nav}>
 					<ButtonNav />
 				</div>
-				{/* <DashboardTrendingCard /> */}
+				{matches.length && <DashboardTrendingCard match={matches[0]} />}
 				{matchList.length ? (
 					matchList.map((matchesData, index) => (
 						<LeagueContainer data={matchesData} key={index} />

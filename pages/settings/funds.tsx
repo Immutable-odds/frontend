@@ -9,13 +9,13 @@ const Funds = (): ReactElement => {
 	const { account } = useWeb3React();
 	return (
 		<ProfileLayout>
-			{/* {!account ? (
+			{!account ? (
 				<div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '25%' }}>
 					<ConnectWallet />
 				</div>
-			) : */}
-			<FundsView />
-			{/* } */}
+			) :
+				<FundsView />
+			}
 		</ProfileLayout>
 	);
 };

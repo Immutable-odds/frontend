@@ -26,10 +26,10 @@ const LeaguePage = () => {
 
 	useEffect(() => {
 		if (!isEmpty(fixtureResponse)) {
-			if (!fixtureResponse?.result.matches) return;
-			const filteredFixtures = fixtureResponse?.result?.matches.filter(
-				(fixture: any) => fixture.status !== "FINISHED"
-			);
+			// if (!fixtureResponse?.result.matches) return;
+			// const filteredFixtures = fixtureResponse?.result?.matches.filter(
+			// 	(fixture: any) => fixture.status !== "FINISHED"
+			// );
 			setLoading(false);
 			setFixtures(formatMatches(fixtureResponse?.result?.matches));
 		}
@@ -38,14 +38,14 @@ const LeaguePage = () => {
 	const breadCrumbPage =
 		fixtures.length &&
 		(fixtures[0].area.name === "Spain" &&
-		fixtures[0].leagues[0].league === "Primera Division"
+			fixtures[0].leagues[0].league === "Primera Division"
 			? "La Liga Santanda"
 			: fixtures[0].leagues[0].league);
 
 	return (
 		<div className={styles.section}>
 			<div className={styles.sidebar}>
-				<DashboardSider />
+				<DashboardSider page="football" />
 			</div>
 			<div className={styles.block}>
 				<BreadCrumb page={breadCrumbPage} />

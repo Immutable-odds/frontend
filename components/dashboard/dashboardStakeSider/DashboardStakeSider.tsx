@@ -1,14 +1,23 @@
 import { useGlobalContext } from "@/contexts/AppContext";
 import { Button, DetailContainer, InputField } from "@/shared";
 import Image from "next/legacy/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import styles from "./DashboardStakeSider.module.scss";
 import { useWeb3React } from "@web3-react/core";
-import { approveTransaction, stakeCustomBet } from "@/utils/callContract";
+import { approveTransaction, stakeCustomBet, stakeNativeBet } from "@/utils/callContract";
 import { useStore } from "@/contexts/StoreContext";
-import { saveUserBet } from "@/services/API";
+import { fetchUserByRefId, saveUserBet } from "@/services/API";
 import { getDaysFactor } from "@/utils/getDaysFactor";
+import { useRouter } from "next/router";
+import { ADDRESS_ZERO } from "@/config";
+
+export enum Option {
+    Nil,
+    Under, // Lose
+    Same, // Draw
+    Over // Win
+}
 
 const DashboardStakeSider = () => {
 	const { active, library } = useWeb3React()
@@ -16,9 +25,19 @@ const DashboardStakeSider = () => {
 	const { stakeSlip, setStakeSlip }: any = useGlobalContext()
 	const [stakeAmount, setStakeAmount] = useState<number>(0)
 	const [showSlip, setShowSlip] = useState<boolean>(false)
+	const [referralAddress, setReferralAddress] = useState<string>(ADDRESS_ZERO)
 	const totalOdds = stakeSlip.reduce((sum: number, number: any) => {
 		return sum + number.odd;
 	}, 0)
+	const router = useRouter();
+	
+	useEffect(() => {
+		const loadData = async (refId) => {
+			const data = await fetchUserByRefId(refId)
+			setReferralAddress(data?.result?.walletAddress ?? ADDRESS_ZERO);
+		}
+		if(router.query?.ref) loadData(router.query.ref)
+	}, [router.query?.ref])
 
 	const handleSubmit = async (stake: any) => {
 		try {
@@ -30,24 +49,40 @@ const DashboardStakeSider = () => {
 			}
 			const signer = library?.getSigner()
 
-			const payment = await approveTransaction({
-				amount: stakeAmount.toString(),
-				address: stake.poolData?.paymentToken,
-				signer
-			});
-			if (!payment) return;
-
-			let stakeOption = 0;
+			let stakeOption = Option.Nil;
+			let stakeResult;
 			if (stake?.betType === 'crypto') {
-				stakeOption = stake.stake === "i agree" ? 3 : 1
+				stakeOption = stake.stake === "i agree" ? Option.Over : Option.Under
+			} else {
+				stakeOption = stake.stake === "win" ? Option.Over : stake.stake === "lose" ? Option.Under : Option.Same
 			}
-			const stakeResult = await stakeCustomBet({
-				poolId: stake?.poolData?.poolId,
-				amount: stakeAmount.toString(),
-				option: stakeOption,
-				signer
-			});
-			const response = await saveUserBet({
+
+			if (stake.poolData?.paymentToken === "BNB") {
+				stakeResult = await stakeNativeBet({
+					poolId: stake?.poolData?.poolId,
+					amount: stakeAmount.toString(),
+					option: stakeOption,
+					signer,
+					ref: referralAddress
+				});
+			} else {
+				const payment = await approveTransaction({
+					amount: stakeAmount.toString(),
+					address: stake.poolData?.paymentToken,
+					signer
+				});
+				if (!payment) return;
+
+				stakeResult = await stakeCustomBet({
+					poolId: stake?.poolData?.poolId,
+					amount: stakeAmount.toString(),
+					option: stakeOption,
+					signer,
+					ref: referralAddress
+				});
+			}
+
+			await saveUserBet({
 				uuid: userData?.uuid,
 				poolId: stake?.poolData?.poolId,
 				amount: stakeAmount,

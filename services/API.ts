@@ -6,7 +6,7 @@ export const API = axios.create({
     headers: { "content-Type": "application/json" }
 });
 
-export const createProfile = async (walletAddress) => {
+export const createProfile = async (walletAddress: string) => {
     try {
         const response = await API.get(`/users/${walletAddress}`)
         return response.data
@@ -17,7 +17,34 @@ export const createProfile = async (walletAddress) => {
 
 export const updateUsername = async (data: { walletAddress: string, username: string }) => {
     try {
-        const response = await API.post('users/update_username', data)
+        const response = await API.post('users/updateUsername', data)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const updateReferral = async (data: { uuid: string, referredBy: string }) => {
+    try {
+        const response = await API.post('users/updateReferral', data)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const fetchUserByRefId = async (refId: string) => {
+    try {
+        const response = await API.get(`/users/fetchUserByRefId/${refId}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const fetchUserInvites = async (uuid: string) => {
+    try {
+        const response = await API.get(`/users/fetchUserInvites/${uuid}`)
         return response.data
     } catch (error) {
         console.log(error)
@@ -26,7 +53,16 @@ export const updateUsername = async (data: { walletAddress: string, username: st
 
 export const getPoolsByType = async (type: string) => {
     try {
-        const response = await API.get(`pool/get_pools_by_type/${type}`)
+        const response = await API.get(`pool/getPoolsByType/${type}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getFootballCompetitions = async () => {
+    try {
+        const response = await API.get(`pool/getFootballCompetitions`)
         return response.data
     } catch (error) {
         console.log(error)

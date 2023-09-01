@@ -9,7 +9,7 @@ const Profile = (): ReactElement => {
 	const { account } = useWeb3React();
 	return (
 		<ProfileLayout>
-			{/* {!account ? (
+			{!account ? (
 				<div
 					style={{
 						width: "100%",
@@ -20,9 +20,9 @@ const Profile = (): ReactElement => {
 				>
 					<ConnectWallet />
 				</div>
-			) : ( */}
-			<ProfileView />
-			{/* )} */}
+			) : (
+				<ProfileView />
+			)}
 		</ProfileLayout>
 	);
 };

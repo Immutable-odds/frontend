@@ -4,9 +4,8 @@ import styles from "./DashboardTrendingCard.module.scss";
 import Image from "next/legacy/image";
 import { Countdown, OddsCard } from "@/shared";
 import { convertEpochToFormattedDate } from "@/utils";
-import { footballMatches } from "@/mock";
 
-const DashboardTrendingCard = () => {
+const DashboardTrendingCard = ({ match }) => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -15,9 +14,9 @@ const DashboardTrendingCard = () => {
 				</div>
 			</div>
 			<Card
-				epochTime={1757859200}
-				odds={{ winOdds: 2.45, drawOdds: 3.45, lossOdds: 4.56 }}
-				match={footballMatches[0]}
+				epochTime={match?.timestamp / 1000}
+				odds={{ winOdds: match?.apy?.win, drawOdds: match?.apy?.draw, lossOdds: match?.apy?.loss}}
+				match={match}
 			/>
 		</div>
 	);

@@ -4,6 +4,7 @@ import React from "react";
 import OddsCard from "../../../shared/oddsCard/OddsCard";
 import styles from "./LeagueContainer.module.scss";
 import { Icon } from "@/shared";
+import { getPoolStage } from "@/utils";
 
 interface Props {
 	data: any;
@@ -77,19 +78,32 @@ const LeagueContainer = ({ data, showAll = false, league }: Props) => {
 
 export default LeagueContainer;
 
-const Card = ({ match }: any) => {
-	const localTime = new Date(match.utcDate).toLocaleString(undefined, {
+const getTimeAndDate = (datetime: string | number) => {
+	const localTime = new Date(datetime).toLocaleString(undefined, {
 		timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 	});
 	const [date, time] = localTime.split(", ");
 	const formattedTime = time.slice(0, -3);
+
+	return { date, time: formattedTime }
+}
+
+const Card = ({ match }: any) => {
+	const betClosingTime = getTimeAndDate(match?.poolData?.duration)
+	const poolClosingTime = getTimeAndDate(match?.poolData?.stakeDuration)
+	const poolStage = getPoolStage(match)
+
+	const poolStatusText = poolStage === 'open'
+		? `${poolStage}: ${betClosingTime.date}, ${betClosingTime.time}`
+		: poolStage === 'vesting' ? `${poolStage}: ${poolClosingTime.date}, ${poolClosingTime.time}`
+			: poolStage
 	return (
 		<div className={styles.card}>
 			<div className={styles.header}>
 				<div className={styles.row}>
 					<div className={styles.text}>
 						<p>
-							{date}, {formattedTime}{" "}
+							{poolStatusText}
 						</p>
 					</div>
 					<div className={styles.title_container}>
@@ -126,7 +140,7 @@ const Card = ({ match }: any) => {
 						</div>
 					</div>
 				</div>
-				<OddsCard winOdds={2.45} drawOdds={3.45} lossOdds={4.45} data={match} />
+				<OddsCard winOdds={match?.apy?.win} drawOdds={match?.apy?.draw} lossOdds={match?.apy?.loss} data={match} />
 			</div>
 		</div>
 	);

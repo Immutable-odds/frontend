@@ -12,20 +12,20 @@ import { Fetcher } from "@/utils/fetcher";
 const DashboardSider = ({ page }: { page?: string }) => {
 	const router = useRouter();
 	const [competitionList, setCompetitionList] = useState<any[]>([]);
-	const { data: competitionsResponse } = useSWR<any>("pool/getFootballCompetitions", Fetcher);
+	const { data: competitionsResponse } = useSWR<any>(page === 'football' ? "pool/getFootballCompetitions" : null, Fetcher);
+
 	const checkActive = (url: string) => {
 		let isActive = url === router.asPath;
 		return isActive;
 	};
-	
+
 	useEffect(() => {
-		if(competitionsResponse?.result?.length){
+		if (competitionsResponse?.result?.length) {
 			const _competitionList = formatCompetitons(competitionsResponse.result);
-			console.log(_competitionList);
-			
 			setCompetitionList(_competitionList)
 		}
-	}, [competitionsResponse, competitionList])
+	}, [competitionsResponse])
+
 	return (
 		<div className={styles.container}>
 			<SearchBox />
@@ -53,16 +53,14 @@ const DashboardSider = ({ page }: { page?: string }) => {
 						</div>
 						{match.leagues.map((league: any, index: number) => (
 							<Link
-								href={`/football/${match.area.name.toLowerCase()}/${
-									league.info.id
-								}`}
+								href={`/football/${match.area.name.toLowerCase()}/${league.info.id
+									}`}
 								key={index}
 							>
 								<div
 									className={styles.row}
 									data-active={checkActive(
-										`/football/${match.area.name.toLowerCase()}/${
-											league.info.id
+										`/football/${match.area.name.toLowerCase()}/${league.info.id
 										}`
 									)}
 								>
