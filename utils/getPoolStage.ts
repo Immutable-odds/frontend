@@ -4,8 +4,9 @@ export const getPoolStage = (bet) => {
 	const poolEnds = new Date(bet?.poolData?.stakeDuration).getTime()
 	const timeNow = Date.now()
 
-	if (betEnds > timeNow && poolEnds < timeNow) poolStage = "vesting";
-	if (poolEnds > timeNow) poolStage = "closed"
+	if (betEnds <= timeNow && poolEnds > timeNow){
+		poolStage = "vesting";
+	} else if (timeNow >= poolEnds) poolStage = "closed"
 
 	return poolStage
 }
