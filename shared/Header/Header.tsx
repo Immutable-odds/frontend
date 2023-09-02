@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { Logo } from "@/shared";
 import styles from "./Header.module.scss";
 import { ConnectWallet } from "@/shared";
-import { navLinks } from "@/mock";
+import { navLinks, profileNav } from "@/mock";
 
 const Header = () => {
 	const router = useRouter();
@@ -98,6 +98,7 @@ const Header = () => {
 				"/history",
 				"/bet-history",
 				"/withdraw",
+				"/referral",
 			])
 		)
 			isActive = true;
@@ -151,9 +152,50 @@ const Header = () => {
 								);
 							})}
 						</ul>
+						<ul className={styles.header_mob_navList}>
+							{navLinks
+								.slice(0, 1)
+								.map(({ title, external, url }, index) => {
+									return (
+										<li
+											key={index}
+											className={`${styles.header_navLink} ${title}`}
+											data-active={checkActive(url)}
+											onClick={() => handleNavClick(title)}
+										>
+											{external ? (
+												<a
+													href={url}
+													rel="noreferrer"
+													target="_blank"
+												>
+													{title}
+												</a>
+											) : (
+												<Link href={url}>{title}</Link>
+											)}
+										</li>
+									);
+								})}
+							{profileNav.map(({ title, url }, index) => {
+								return (
+									<li
+										key={index}
+										className={`${styles.header_navLink} ${title}`}
+										data-active={checkActive(url)}
+										onClick={() => handleNavClick(title)}
+									>
+										<Link href={url}>{title}</Link>
+									</li>
+								);
+							})}
+						</ul>
 					</nav>
+					<div className={styles.mob_button}>
+						<ConnectWallet />
+					</div>
 				</div>
-				<div className={styles.button}>
+				<div className={styles.desk_button}>
 					<ConnectWallet />
 				</div>
 				<div

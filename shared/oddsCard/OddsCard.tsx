@@ -34,16 +34,18 @@ const OddsCard = ({
 			if (stake === "win") stake = "i agree";
 			if (stake === "lose") stake = "i don't Agree";
 		}
-		
+
 		const formattedMatch = {
 			...data,
 			stake,
 			odd,
-		}
-		
+		};
+
 		const index =
 			localMatch.length !== 0
-				? localMatch.findIndex((obj: any) => obj?.poolData?.id === formattedMatch?.poolData?.id)
+				? localMatch.findIndex(
+						(obj: any) => obj?.poolData?.id === formattedMatch?.poolData?.id
+				  )
 				: 0;
 
 		if (index !== -1) {
@@ -59,13 +61,18 @@ const OddsCard = ({
 	};
 
 	const isFoundInSlip = useMemo(() => {
-		const index = localMatch.findIndex((obj: any) => obj?.poolData?.id === formattedMatch?.poolData?.id);
+		return (apy: number) => {
+			const index = localMatch.findIndex(
+				obj => obj?.poolData?.id === formattedMatch?.poolData?.id
+			);
+			const isApyType = localMatch.some(match => match.odd === apy);
 
-		if (index !== -1) {
-			// Object already exists, replace it
-			return true;
-		}
-		return false;
+			if (index !== -1 && isApyType) {
+				// Object already exists, replace it
+				return true;
+			}
+			return false;
+		};
 	}, [localMatch, formattedMatch]);
 
 	return (
@@ -75,10 +82,7 @@ const OddsCard = ({
 				onClick={() => handleClick(winOdds, "win", 1)}
 				className={styles.button}
 			>
-				<div
-					data-active={isFoundInSlip && activeNumber === 1}
-					className={styles.box}
-				>
+				<div data-active={isFoundInSlip(winOdds)} className={styles.box}>
 					<div className={styles.text}>
 						{showTitle && <p>HW</p>}
 						<h3>{winOdds}</h3>
@@ -91,10 +95,7 @@ const OddsCard = ({
 					onClick={() => handleClick(drawOdds, "draw", 2)}
 					className={styles.button}
 				>
-					<div
-						data-active={isFoundInSlip && activeNumber === 2}
-						className={styles.box}
-					>
+					<div data-active={isFoundInSlip(drawOdds)} className={styles.box}>
 						<div className={styles.text}>
 							{showTitle && <p>D</p>}
 							<h3>{drawOdds}</h3>
@@ -107,10 +108,7 @@ const OddsCard = ({
 				onClick={() => handleClick(lossOdds, "lose", 3)}
 				className={styles.button}
 			>
-				<div
-					data-active={isFoundInSlip && activeNumber === 3}
-					className={styles.box}
-				>
+				<div data-active={isFoundInSlip(lossOdds)} className={styles.box}>
 					<div className={styles.text}>
 						{showTitle && <p>AW</p>}
 						<h3>{lossOdds}</h3>

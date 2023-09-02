@@ -11,91 +11,18 @@ import { fetchUserByRefId, saveUserBet } from "@/services/API";
 import { getDaysFactor } from "@/utils/getDaysFactor";
 import { useRouter } from "next/router";
 import { ADDRESS_ZERO } from "@/config";
+import DashboardStakeSiderForm from "./DashboardStakeSiderForm";
 
 export enum Option {
-    Nil,
-    Under, // Lose
-    Same, // Draw
-    Over // Win
+	Nil,
+	Under, // Lose
+	Same, // Draw
+	Over, // Win
 }
 
 const DashboardStakeSider = () => {
-	const { active, library } = useWeb3React()
-	const [userData] = useStore()
-	const { stakeSlip, setStakeSlip }: any = useGlobalContext()
-	const [stakeAmount, setStakeAmount] = useState<number>(0)
-	const [showSlip, setShowSlip] = useState<boolean>(false)
-	const [referralAddress, setReferralAddress] = useState<string>(ADDRESS_ZERO)
-	const totalOdds = stakeSlip.reduce((sum: number, number: any) => {
-		return sum + number.odd;
-	}, 0)
-	const router = useRouter();
-	
-	useEffect(() => {
-		const loadData = async (refId) => {
-			const data = await fetchUserByRefId(refId)
-			setReferralAddress(data?.result?.walletAddress ?? ADDRESS_ZERO);
-		}
-		if(router.query?.ref) loadData(router.query.ref)
-	}, [router.query?.ref])
-
-	const handleSubmit = async (stake: any) => {
-		try {
-			if (stakeAmount < 1) {
-				toast.error(
-					"Amount too low to stake"
-				);
-				return;
-			}
-			const signer = library?.getSigner()
-
-			let stakeOption = Option.Nil;
-			let stakeResult;
-			if (stake?.betType === 'crypto') {
-				stakeOption = stake.stake === "i agree" ? Option.Over : Option.Under
-			} else {
-				stakeOption = stake.stake === "win" ? Option.Over : stake.stake === "lose" ? Option.Under : Option.Same
-			}
-
-			if (stake.poolData?.paymentToken === "BNB") {
-				stakeResult = await stakeNativeBet({
-					poolId: stake?.poolData?.poolId,
-					amount: stakeAmount.toString(),
-					option: stakeOption,
-					signer,
-					ref: referralAddress
-				});
-			} else {
-				const payment = await approveTransaction({
-					amount: stakeAmount.toString(),
-					address: stake.poolData?.paymentToken,
-					signer
-				});
-				if (!payment) return;
-
-				stakeResult = await stakeCustomBet({
-					poolId: stake?.poolData?.poolId,
-					amount: stakeAmount.toString(),
-					option: stakeOption,
-					signer,
-					ref: referralAddress
-				});
-			}
-
-			await saveUserBet({
-				uuid: userData?.uuid,
-				poolId: stake?.poolData?.poolId,
-				amount: stakeAmount,
-				odd: +stake?.odd,
-				status: 'open'
-			})
-			if (stakeResult) toast.success("Your bets have been placed")
-		} catch (error) {
-			toast.error(
-				"Could not process stake"
-			);
-		}
-	};
+	const { stakeSlip, setStakeSlip }: any = useGlobalContext();
+	const [showSlip, setShowSlip] = useState<boolean>(false);
 
 	return (
 		<div className={styles.container} data-active={showSlip}>
@@ -135,62 +62,12 @@ const DashboardStakeSider = () => {
 				</div>
 				<div className={styles.body_container}>
 					<div className={styles.body}>
-						{stakeSlip.length > 0 ? (
-							stakeSlip.map((stake: any, index: number) => (
-								<div key={index}>
-									<Box stake={stake} key={index} />
-									<form className={styles.payment_body} onSubmit={(e) => {
-										e.preventDefault()
-										handleSubmit(stake)
-									}}>
-										<InputField
-											label="Staking Amount"
-											value={stakeAmount}
-											onChange={(e: any) => setStakeAmount(e.target.value)}
-										/>
-										<div className={styles.details_card}>
-											<div className={styles.details_header}>
-												<div className={styles.text}>
-													<h4>My Bet Stats</h4>
-												</div>
-											</div>
-											<div className={styles.detail_body}>
-												<DetailContainer
-													title="Odds"
-													value={totalOdds}
-												/>
-												<DetailContainer
-													title="Your stake amount"
-													value={stakeAmount}
-													prefix="$"
-												/>
-												<DetailContainer
-													title="Expected payout"
-													value={stakeAmount * totalOdds}
-													prefix="$"
-													description="Total amount you'll earn if your bet wins"
-												/>
-												<DetailContainer
-													title="Days factor"
-													value={getDaysFactor(stake?.poolData?.stakeDuration)}
-													description="Duration of this pool"
-												/>
-											</div>
-										</div>
-										{
-											active ? (<Button
-												buttonType="primary"
-												type="submit"
-												className={styles.button}
-											>
-												Stake Bet
-											</Button>) : (
-												<p style={{ textAlign: 'center', marginTop: '1rem' }}>Connect wallet to stake</p>
-											)
-										}
-
-									</form>
-								</div>
+						{stakeSlip.length ? (
+							stakeSlip.map((stake: any) => (
+								<DashboardStakeSiderForm
+									stake={stake}
+									key={stake.poolData.id}
+								/>
 							))
 						) : (
 							<div className={styles.empty_body}>
@@ -255,7 +132,11 @@ const Box = ({ stake }: any) => {
 							stake?.token2?.icon && (
 								<div className={styles.small_icon_container}>
 									<div className={styles.small_icon}>
-										<Image src={stake?.token2?.icon} layout="fill" alt="" />
+										<Image
+											src={stake?.token2?.icon}
+											layout="fill"
+											alt=""
+										/>
 									</div>
 								</div>
 							)

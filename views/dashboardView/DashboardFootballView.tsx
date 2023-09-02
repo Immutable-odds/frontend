@@ -19,7 +19,7 @@ const DashboardFootballView = () => {
 
 	useEffect(() => {
 		if (matchResponse?.result?.length) {
-			setMatches(matchResponse.result)
+			setMatches(matchResponse.result);
 		}
 	}, [matchResponse]);
 
@@ -62,7 +62,6 @@ const DashboardFootballView = () => {
 
 	// 	setMatches(formattedMatches);
 	// };
-
 
 	return (
 		<div className={styles.section}>

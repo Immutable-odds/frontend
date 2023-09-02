@@ -11,28 +11,28 @@ import { createProfile } from "@/services/API";
 import { StoreActionType, useStore } from "@/contexts/StoreContext";
 
 const ConnectWallet = () => {
-	const { account, activate, deactivate } = useWeb3React()
-	const [showConnectWallet, setShowConnectWallet] = useState<boolean>(false)
-	const { connectorName, setConnectorName } = useGlobalContext()
-	const [userData, setUserData] = useStore()
+	const { account, activate, deactivate } = useWeb3React();
+	const [showConnectWallet, setShowConnectWallet] = useState<boolean>(false);
+	const { connectorName, setConnectorName } = useGlobalContext();
+	const [userData, setUserData] = useStore();
 
 	const walletIcon = useMemo(
 		() => (connectorName || account ? `/svgs/${connectorName}.svg` : null),
-		[connectorName],
-	)
+		[connectorName]
+	);
 
 	const onClickConnectWalletBtn = useCallback(
 		(e: any) => {
 			if (account) {
-				deactivate()
-				setConnectorName('')
+				deactivate();
+				setConnectorName("");
 			} else {
-				setShowConnectWallet(true)
-				e.stopPropagation()
+				setShowConnectWallet(true);
+				e.stopPropagation();
 			}
 		},
-		[account, setShowConnectWallet],
-	)
+		[account, setShowConnectWallet]
+	);
 
 	useEffect(() => {
 		const registerUser = async (account: string) => {
@@ -43,25 +43,25 @@ const ConnectWallet = () => {
 					...userData,
 					username: response?.result?.username,
 					uuid: response?.result?.uuid,
-					walletAddress: response?.result?.walletAddress
-				}
-			})
-		}
-		
-		if(account && userData?.walletAddress !== account) registerUser(account)
-	}, [account, userData?.uuid])
+					walletAddress: response?.result?.walletAddress,
+				},
+			});
+		};
+
+		if (account && userData?.walletAddress !== account) registerUser(account);
+	}, [account, userData?.uuid]);
 
 	useEffect(() => {
 		try {
-			const provider = window.localStorage.getItem('provider')
+			const provider = window.localStorage.getItem("provider");
 			if (provider) {
-				activate(connectors[provider])
-				setConnectorName(provider.toLowerCase())
+				activate(connectors[provider]);
+				setConnectorName(provider.toLowerCase());
 			}
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
-	}, [activate])
+	}, [activate]);
 
 	return (
 		<>
@@ -72,11 +72,18 @@ const ConnectWallet = () => {
 					</div>
 				)}
 
-				<p className={styles.text}>{account ? truncateAddress(account) : 'Connect Wallet'}</p>
+				<p className={styles.text}>
+					{account ? truncateAddress(account) : "Connect Wallet"}
+				</p>
 			</Button>
-			{showConnectWallet && <ConnectWalletModal openModal={showConnectWallet} setOpenModal={setShowConnectWallet} />}
-		</>)
-
+			{showConnectWallet && (
+				<ConnectWalletModal
+					openModal={showConnectWallet}
+					setOpenModal={setShowConnectWallet}
+				/>
+			)}
+		</>
+	);
 };
 
 export default ConnectWallet;

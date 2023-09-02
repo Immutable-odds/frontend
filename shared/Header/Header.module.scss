@@ -27,7 +27,8 @@
 		min-width: 20%;
 		margin-right: 5.5rem;
 
-		.header_navList {
+		.header_navList,
+		.header_mob_navList {
 			@include flex(space-between, center, nowrap);
 			padding: 0;
 			margin: 0;
@@ -71,16 +72,20 @@
 				}
 			}
 		}
+		.header_mob_navList {
+			display: none;
+		}
 	}
 	@include screenMax("mobile") {
 		padding: 3rem 2.4rem;
-		.button {
-			display: none;
-		}
+		// .button {
+		// 	display: none;
+		// }
 		.header_nav {
 			margin-right: 0;
-			.header_navList {
-				display: block;
+			.header_navList,
+			.header_mob_navList {
+				display: none;
 				padding: 0;
 				margin: 0;
 				.header_navLink {
@@ -93,6 +98,9 @@
 						color: rgba(93, 94, 103, 1);
 					}
 				}
+			}
+			.header_mob_navList {
+				display: block;
 			}
 		}
 	}
@@ -135,15 +143,6 @@
 .header_wrapper__collapsed {
 	@include screenMax("mobile") {
 		transform: translateX(101vw);
-	}
-}
-
-.header_scrolled {
-	padding: 1.4rem 4.4rem 1rem;
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-	transition: $all-transition;
-	@include screenMax("mobile") {
-		padding: 2.4rem 1.4rem;
 	}
 }
 
@@ -197,12 +196,16 @@
 	}
 }
 
-.button_container {
-	@include flex(flex-start, center);
-	.button {
-		padding: 1.6rem 3.2rem;
-		border-radius: 0.8rem;
-		font-size: 2rem;
-		font-family: $font-700;
+.mob_button {
+	display: none;
+	margin-top: 3rem;
+	@include screenMax("mobile") {
+		display: block;
+	}
+}
+.desk_button {
+	display: block;
+	@include screenMax("mobile") {
+		display: none;
 	}
 }
