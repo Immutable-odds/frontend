@@ -2,7 +2,7 @@ import { useCopy } from "@/hooks";
 import { networks, tokens } from "@/mock";
 import { AdvanceSelect, Button } from "@/shared";
 import { ModalLoader } from "@/shared/loaders";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -144,7 +144,8 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 											>
 												<Image
 													src="/svgs/icon-copy.svg"
-													layout="fill"
+													fill
+													sizes="100vw"
 													alt=""
 												/>
 											</div>
@@ -174,7 +175,8 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 										<div className={styles.qr_code}>
 											<Image
 												src="/svgs/qr-code.svg"
-												layout="fill"
+												fill
+												sizes="100vw"
 												alt=""
 											/>
 										</div>
@@ -184,7 +186,8 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 										<div className={styles.qr_description}>
 											<Image
 												src="/svgs/qr-description.svg"
-												layout="fill"
+												fill
+												sizes="100vw"
 												alt=""
 											/>
 										</div>
@@ -207,7 +210,8 @@ const CryptoDepositModal = ({ setOpenModal, openModal }: Props) => {
 							<div className={styles.loading_icon}>
 								<Image
 									src="/svgs/icon-loading.svg"
-									layout="fill"
+									fill
+									sizes="100vw"
 									alt=""
 								/>
 							</div>

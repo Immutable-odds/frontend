@@ -1,5 +1,5 @@
 import { formatNum } from "@/utils";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React from "react";
 import styles from "./StatCard.module.scss";
 
@@ -19,7 +19,7 @@ const StatCard = ({ stats }: Props) => {
 			</div>
 			<div className={styles.row}>
 				<div className={styles.icon}>
-					<Image src="/svgs/icon-bets.svg" layout="fill" alt="" />
+					<Image src="/svgs/icon-bets.svg" fill sizes="100vw" alt="" />
 				</div>
 				<div className={styles.text}>
 					<h6>Bets Made</h6>
@@ -28,7 +28,7 @@ const StatCard = ({ stats }: Props) => {
 			</div>
 			<div className={styles.row}>
 				<div className={styles.icon}>
-					<Image src="/svgs/icon-amount-won.svg" layout="fill" alt="" />
+					<Image src="/svgs/icon-amount-won.svg" fill sizes="100vw" alt="" />
 				</div>
 				<div className={styles.text}>
 					<h6>Total Amount Won</h6>
@@ -37,7 +37,7 @@ const StatCard = ({ stats }: Props) => {
 			</div>
 			<div className={styles.row}>
 				<div className={styles.icon}>
-					<Image src="/svgs/icon-points-won.svg" layout="fill" alt="" />
+					<Image src="/svgs/icon-points-won.svg" fill sizes="100vw" alt="" />
 				</div>
 				<div className={styles.text}>
 					<h6>Points Won</h6>

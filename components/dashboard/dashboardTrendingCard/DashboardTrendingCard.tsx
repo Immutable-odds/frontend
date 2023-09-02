@@ -1,7 +1,7 @@
 import React from "react";
 import "swiper/css";
 import styles from "./DashboardTrendingCard.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Countdown, OddsCard } from "@/shared";
 import { convertEpochToFormattedDate } from "@/utils";
 
@@ -15,7 +15,11 @@ const DashboardTrendingCard = ({ match }) => {
 			</div>
 			<Card
 				epochTime={match?.timestamp / 1000}
-				odds={{ winOdds: match?.apy?.win, drawOdds: match?.apy?.draw, lossOdds: match?.apy?.loss}}
+				odds={{
+					winOdds: match?.apy?.win,
+					drawOdds: match?.apy?.draw,
+					lossOdds: match?.apy?.loss,
+				}}
 				match={match}
 			/>
 		</div>
@@ -42,7 +46,12 @@ const Card = ({ epochTime, odds, match }: CardProps) => {
 			<div className={styles.card_header}>
 				<div className={styles.small_row}>
 					<div className={styles.icon}>
-						<Image src={"/svgs/premier-league.svg"} layout="fill" alt="" />
+						<Image
+							src={"/svgs/premier-league.svg"}
+							fill
+							sizes="100vw"
+							alt=""
+						/>
 					</div>
 					<div className={styles.text}>
 						<h3>Premier League</h3>
@@ -50,7 +59,7 @@ const Card = ({ epochTime, odds, match }: CardProps) => {
 				</div>
 				<div className={styles.small_row}>
 					<div className={styles.share_icon}>
-						<Image src="/svgs/icon-share.svg" layout="fill" alt="" />
+						<Image src="/svgs/icon-share.svg" fill sizes="100vw" alt="" />
 					</div>
 					<div className={styles.text}>
 						<p>Share</p>
@@ -65,7 +74,8 @@ const Card = ({ epochTime, odds, match }: CardProps) => {
 								<div className={styles.icon}>
 									<Image
 										src={match.homeTeam.crest}
-										layout="fill"
+										fill
+										sizes="100vw"
 										alt=""
 									/>
 								</div>
@@ -104,7 +114,8 @@ const Card = ({ epochTime, odds, match }: CardProps) => {
 								<div className={styles.icon}>
 									<Image
 										src={match.awayTeam.crest}
-										layout="fill"
+										fill
+										sizes="100vw"
 										alt=""
 									/>
 								</div>

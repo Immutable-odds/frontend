@@ -1,6 +1,6 @@
 import { ProgressBar } from "@/shared";
 import { formatNum } from "@/utils";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React from "react";
 import styles from "./DashboardPointsCard.module.scss";
 
@@ -20,7 +20,12 @@ const DashboardPointsCard = ({
 	return (
 		<div className={styles.card}>
 			<div className={styles.icon}>
-				<Image src={icon ? icon : "/svgs/icon-bronze.svg"} layout="fill" alt="" />
+				<Image
+					src={icon ? icon : "/svgs/icon-bronze.svg"}
+					fill
+					sizes="100vw"
+					alt=""
+				/>
 			</div>
 			<div className={styles.block}>
 				<div className={styles.text}>

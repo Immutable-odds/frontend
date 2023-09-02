@@ -1,7 +1,7 @@
 import { useGlobalContext } from "@/contexts/AppContext";
 import { Button, Countdown, DetailContainer, InputField, Select } from "@/shared";
 import { formatNum } from "@/utils";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import styles from "./PredictionCard.module.scss";
@@ -53,11 +53,11 @@ const PredictionCard = ({ prediction }: CardProps) => {
 				<div className={styles.icon_block}>
 					<div className={styles.icon_container}>
 						<div className={styles.icon}>
-							<Image src={prediction.icon1} layout="fill" alt="" />
+							<Image src={prediction.icon1} fill sizes="100vw" alt="" />
 						</div>
 						{prediction.icon2 && (
 							<div className={styles.icon}>
-								<Image src={prediction.icon2} layout="fill" alt="" />
+								<Image src={prediction.icon2} fill sizes="100vw" alt="" />
 							</div>
 						)}
 					</div>
@@ -65,7 +65,12 @@ const PredictionCard = ({ prediction }: CardProps) => {
 				{stakeDetails.stakeAmount && stakeDetails.stakePrediction && (
 					<div className={styles.options_block}>
 						<div className={styles.more_icon}>
-							<Image src="/svgs/dots-horizontal.svg" layout="fill" alt="" />
+							<Image
+								src="/svgs/dots-horizontal.svg"
+								fill
+								sizes="100vw"
+								alt=""
+							/>
 							<div
 								className={styles.more_details}
 								onClick={() =>
@@ -147,7 +152,8 @@ const PredictionCard = ({ prediction }: CardProps) => {
 									>
 										<Image
 											src="/svgs/edit.svg"
-											layout="fill"
+											fill
+											sizes="100vw"
 											alt=""
 										/>
 									</div>
@@ -227,7 +233,7 @@ const PredictionCard = ({ prediction }: CardProps) => {
 							onClick={() => setView(View.DEFAULT)}
 						>
 							<div className={styles.back_icon}>
-								<Image src="/svgs/arrow.svg" layout="fill" alt="" />
+								<Image src="/svgs/arrow.svg" fill sizes="100vw" alt="" />
 							</div>
 							<div className={styles.text}>
 								<p>Back</p>

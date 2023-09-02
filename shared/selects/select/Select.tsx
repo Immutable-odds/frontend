@@ -72,7 +72,7 @@ const Select: React.FunctionComponent<SelectProps> = ({
 						<div className={styles.flex}>
 							{icon && (
 								<div className={`${styles.icon} ${iconClass}`}>
-									<Image src={icon} layout="fill" alt="" />
+									<Image src={icon} fill sizes="100vw" alt="" />
 								</div>
 							)}
 							<p>
@@ -88,7 +88,7 @@ const Select: React.FunctionComponent<SelectProps> = ({
 							</p>
 						</div>
 						<div className={`${styles.select_dropDownImage}`}>
-							<Image src="/svgs/chevron.svg" layout="fill" alt="" />
+							<Image src="/svgs/chevron.svg" fill sizes="100vw" alt="" />
 						</div>
 					</div>
 				</div>

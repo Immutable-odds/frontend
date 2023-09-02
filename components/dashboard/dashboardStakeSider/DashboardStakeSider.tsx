@@ -1,17 +1,8 @@
 import { useGlobalContext } from "@/contexts/AppContext";
-import { Button, DetailContainer, InputField } from "@/shared";
-import Image from "next/legacy/image";
-import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import styles from "./DashboardStakeSider.module.scss";
-import { useWeb3React } from "@web3-react/core";
-import { approveTransaction, stakeCustomBet, stakeNativeBet } from "@/utils/callContract";
-import { useStore } from "@/contexts/StoreContext";
-import { fetchUserByRefId, saveUserBet } from "@/services/API";
-import { getDaysFactor } from "@/utils/getDaysFactor";
-import { useRouter } from "next/router";
-import { ADDRESS_ZERO } from "@/config";
+import Image from "next/image";
+import React, { useState } from "react";
 import DashboardStakeSiderForm from "./DashboardStakeSiderForm";
+import styles from "./DashboardStakeSider.module.scss";
 
 export enum Option {
 	Nil,
@@ -27,7 +18,7 @@ const DashboardStakeSider = () => {
 	return (
 		<div className={styles.container} data-active={showSlip}>
 			<div className={styles.referral_container}>
-				<Image src="/svgs/referral.svg" layout="fill" alt="" />
+				<Image src="/svgs/referral.svg" fill sizes="100vw" alt="" />
 				<div className={styles.referral}>
 					<div className={styles.text}>
 						<h1>Get 500 Points</h1>
@@ -56,7 +47,7 @@ const DashboardStakeSider = () => {
 							className={styles.chevron_icon}
 							onClick={() => setShowSlip(!showSlip)}
 						>
-							<Image src="/svgs/chevron.svg" layout="fill" alt="" />
+							<Image src="/svgs/chevron.svg" fill sizes="100vw" alt="" />
 						</div>
 					</div>
 				</div>
@@ -72,7 +63,12 @@ const DashboardStakeSider = () => {
 						) : (
 							<div className={styles.empty_body}>
 								<div className={styles.empty_icon}>
-									<Image src="/svgs/paper.svg" layout="fill" alt="" />
+									<Image
+										src="/svgs/paper.svg"
+										fill
+										sizes="100vw"
+										alt=""
+									/>
 								</div>
 								<div className={styles.empty_text}>
 									<div
@@ -80,7 +76,7 @@ const DashboardStakeSider = () => {
 										style={{ textAlign: "center" }}
 									>
 										<h3>
-											To stake on a match, click the odds.Or insert
+											To stake on a match, click the odds, Or insert
 											a booking code
 										</h3>
 									</div>
@@ -123,7 +119,8 @@ const Box = ({ stake }: any) => {
 											? stake?.token1.icon
 											: stake.homeTeam.crest
 									}
-									layout="fill"
+									fill
+									sizes="100vw"
 									alt=""
 								/>
 							</div>
@@ -134,7 +131,8 @@ const Box = ({ stake }: any) => {
 									<div className={styles.small_icon}>
 										<Image
 											src={stake?.token2?.icon}
-											layout="fill"
+											fill
+											sizes="100vw"
 											alt=""
 										/>
 									</div>
@@ -145,7 +143,8 @@ const Box = ({ stake }: any) => {
 								<div className={styles.small_icon}>
 									<Image
 										src={stake.awayTeam.crest}
-										layout="fill"
+										fill
+										sizes="100vw"
 										alt=""
 									/>
 								</div>

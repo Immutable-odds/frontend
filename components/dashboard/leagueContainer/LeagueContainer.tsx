@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import OddsCard from "../../../shared/oddsCard/OddsCard";
@@ -53,7 +53,8 @@ const LeagueContainer = ({ data, showAll = false, league }: Props) => {
 										<div className={styles.chevron}>
 											<Image
 												src="/svgs/chevron-primary.svg"
-												layout="fill"
+												fill
+												sizes="100vw"
 												alt=""
 											/>
 										</div>
@@ -85,26 +86,26 @@ const getTimeAndDate = (datetime: string | number) => {
 	const [date, time] = localTime.split(", ");
 	const formattedTime = time?.slice(0, -3);
 
-	return { date, time: formattedTime }
-}
+	return { date, time: formattedTime };
+};
 
 const Card = ({ match }: any) => {
-	const betClosingTime = getTimeAndDate(match?.poolData?.duration)
-	const poolClosingTime = getTimeAndDate(match?.poolData?.stakeDuration)
-	const poolStage = getPoolStage(match)
+	const betClosingTime = getTimeAndDate(match?.poolData?.duration);
+	const poolClosingTime = getTimeAndDate(match?.poolData?.stakeDuration);
+	const poolStage = getPoolStage(match);
 
-	const poolStatusText = poolStage === 'open'
-		? `${poolStage}: ${betClosingTime.date}, ${betClosingTime.time}`
-		: poolStage === 'vesting' ? `${poolStage}: ${poolClosingTime.date}, ${poolClosingTime.time}`
-			: poolStage
+	const poolStatusText =
+		poolStage === "open"
+			? `${poolStage}: ${betClosingTime.date}, ${betClosingTime.time}`
+			: poolStage === "vesting"
+			? `${poolStage}: ${poolClosingTime.date}, ${poolClosingTime.time}`
+			: poolStage;
 	return (
 		<div className={styles.card}>
 			<div className={styles.header}>
 				<div className={styles.row}>
 					<div className={styles.text}>
-						<p>
-							{poolStatusText}
-						</p>
+						<p>{poolStatusText}</p>
 					</div>
 					<div className={styles.title_container}>
 						<div className={styles.title}>
@@ -140,7 +141,12 @@ const Card = ({ match }: any) => {
 						</div>
 					</div>
 				</div>
-				<OddsCard winOdds={match?.apy?.win} drawOdds={match?.apy?.draw} lossOdds={match?.apy?.loss} data={match} />
+				<OddsCard
+					winOdds={match?.apy?.win}
+					drawOdds={match?.apy?.draw}
+					lossOdds={match?.apy?.loss}
+					data={match}
+				/>
 			</div>
 		</div>
 	);

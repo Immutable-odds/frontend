@@ -1,5 +1,5 @@
 import { profileNav } from "@/mock";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -23,7 +23,7 @@ const ProfileSider = () => {
 					<Link href={nav.url}>
 						<div className={styles.row} data-active={checkActive(nav.url)}>
 							<div className={styles.icon}>
-								<Image src={nav.icon} layout="fill" alt="" />
+								<Image src={nav.icon} fill sizes="100vw" alt="" />
 							</div>
 							<div className={styles.text}>
 								<p>{nav.title}</p>

@@ -1,6 +1,6 @@
 import { Button, InputField } from "@/shared";
 import { formatNum } from "@/utils";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./WithdrawCard.module.scss";
 import { toast } from "react-toastify";
@@ -37,7 +37,7 @@ const WithdrawCard = ({
 				<>
 					<div className={styles.row}>
 						<div className={styles.icon}>
-							<Image src="/svgs/logo-small.svg" layout="fill" alt="" />
+							<Image src="/svgs/logo-small.svg" fill sizes="100vw" alt="" />
 						</div>
 						<div className={styles.text}>
 							<p>Immutable Points</p>

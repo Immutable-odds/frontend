@@ -74,7 +74,8 @@ const AdvanceSelect: React.FunctionComponent<SelectProps> = ({
 										<div className={`${styles.icon} ${iconClass}`}>
 											<Image
 												src={options[selectedOptionIndex].icon!}
-												layout="fill"
+												fill
+												sizes="100vw"
 												alt=""
 											/>
 										</div>
@@ -92,7 +93,7 @@ const AdvanceSelect: React.FunctionComponent<SelectProps> = ({
 							</p>
 						</div>
 						<div className={`${styles.select_dropDownImage}`}>
-							<Image src="/svgs/chevron.svg" layout="fill" alt="" />
+							<Image src="/svgs/chevron.svg" fill sizes="100vw" alt="" />
 						</div>
 					</div>
 				</div>

@@ -9,7 +9,7 @@
 	width: 100%;
 	background-color: $col-grey-10;
 	transition: $all-transition;
-	z-index: 3;
+	z-index: 12;
 	.header_container {
 		@include flex(space-between, center, nowrap);
 		padding: 2.4rem;

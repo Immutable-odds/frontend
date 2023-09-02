@@ -1,6 +1,6 @@
 import { ProgressBar } from "@/shared";
 import { formatNum } from "@/utils";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React from "react";
 import styles from "./ProfileBalanceCard.module.scss";
 
@@ -16,11 +16,22 @@ const ProfileBalanceCard = ({ points, balance }: Props) => {
 				<h3>Finance & Balance</h3>
 			</div>
 			<div className={styles.small_card}>
-				<Image src="/svgs/background-points.svg" layout="fill" alt="" />
+				<Image
+					src="/svgs/background-points.svg"
+					fill
+					sizes="100vw"
+					alt=""
+					priority
+				/>
 				<div className={styles.small_card_container}>
 					<div className={styles.small_card_row}>
 						<div className={styles.icon}>
-							<Image src="/svgs/icon-points.svg" layout="fill" alt="" />
+							<Image
+								src="/svgs/icon-points.svg"
+								fill
+								sizes="100vw"
+								alt=""
+							/>
 						</div>
 						<div className={styles.block}>
 							<div className={styles.text}>
@@ -41,11 +52,16 @@ const ProfileBalanceCard = ({ points, balance }: Props) => {
 				</div>
 			</div>
 			<div className={styles.small_card}>
-				<Image src="/svgs/background-balance.svg" layout="fill" alt="" />
+				<Image src="/svgs/background-balance.svg" fill sizes="100vw" alt="" />
 				<div className={styles.small_card_container}>
 					<div className={styles.small_card_row}>
 						<div className={styles.icon}>
-							<Image src="/svgs/icon-wallet.svg" layout="fill" alt="" />
+							<Image
+								src="/svgs/icon-wallet.svg"
+								fill
+								sizes="100vw"
+								alt=""
+							/>
 						</div>
 						<div className={styles.text}>
 							<p>Wallet Balance</p>

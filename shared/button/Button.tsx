@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Button.module.scss";
 
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 interface Props extends React.HTMLProps<HTMLButtonElement> {
 	buttonType?: "primary" | "transparent";
@@ -31,13 +31,13 @@ const Button = ({
 		>
 			{!!iconPrefix && (
 				<figure className={styles.button_icon}>
-					<Image src={iconPrefix} layout="fill" alt="" />
+					<Image src={iconPrefix} fill sizes="100vw" alt="" />
 				</figure>
 			)}
 			{children}
 			{!!iconSuffix && (
 				<figure className={styles.button_icon}>
-					<Image src={iconSuffix} layout="fill" alt="" />
+					<Image src={iconSuffix} fill sizes="100vw" alt="" />
 				</figure>
 			)}
 		</button>

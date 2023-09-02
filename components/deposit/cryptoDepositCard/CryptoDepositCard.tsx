@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useState } from "react";
 import CryptoDepositModal from "../cryptoDepositModal/CryptoDepositModal";
 import styles from "./CryptoDepositCard.module.scss";
@@ -15,7 +15,7 @@ const CryptoDepositCard = () => {
 				}}
 			>
 				<div className={styles.icon}>
-					<Image src="/svgs/icon-crypto.svg" layout="fill" alt="" />
+					<Image src="/svgs/icon-crypto.svg" fill sizes="100vw" alt="" />
 				</div>
 				<div className={styles.text}>
 					<h3>Pay With Crypto</h3>

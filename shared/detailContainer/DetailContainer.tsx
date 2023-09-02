@@ -1,5 +1,5 @@
 import { formatLargeNum, formatNumber } from "@/utils";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React from "react";
 import styles from "./DetailContainer.module.scss";
 
@@ -32,7 +32,7 @@ const DetailContainer = ({
 				</div>
 				{description && (
 					<div className={styles.icon}>
-						<Image src="/svgs/info.svg" layout="fill" alt="" />
+						<Image src="/svgs/info.svg" fill sizes="100vw" alt="" />
 						<div className={styles.info_container}>
 							<div className={styles.text}>
 								<h6>{description}</h6>

@@ -1,7 +1,7 @@
 import { Select } from "@/shared";
 import { LineChart } from "@/shared/charts";
 import { formatNum } from "@/utils";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React from "react";
 import styles from "./ProfileProfitCard.module.scss";
 
@@ -27,7 +27,12 @@ const ProfileProfitCard = ({ chartData, earnings, points }: Props) => {
 				<div className={styles.small_card}>
 					<div className={styles.small_card_row}>
 						<div className={styles.icon}>
-							<Image src="/svgs/icon-wallet.svg" layout="fill" alt="" />
+							<Image
+								src="/svgs/icon-wallet.svg"
+								fill
+								sizes="100vw"
+								alt=""
+							/>
 						</div>
 						<div className={styles.text}>
 							<p>
@@ -39,7 +44,12 @@ const ProfileProfitCard = ({ chartData, earnings, points }: Props) => {
 				<div className={styles.small_card}>
 					<div className={styles.small_card_row}>
 						<div className={styles.icon}>
-							<Image src="/svgs/icon-points.svg" layout="fill" alt="" />
+							<Image
+								src="/svgs/icon-points.svg"
+								fill
+								sizes="100vw"
+								alt=""
+							/>
 						</div>
 						<div className={styles.text}>
 							<p>

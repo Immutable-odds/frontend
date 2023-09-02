@@ -1,7 +1,7 @@
 import { popularTokens } from "@/mock";
 import { SearchBox } from "@/shared";
 import { formatCompetitons, shortenTitle } from "@/utils";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -12,7 +12,10 @@ import { Fetcher } from "@/utils/fetcher";
 const DashboardSider = ({ page }: { page?: string }) => {
 	const router = useRouter();
 	const [competitionList, setCompetitionList] = useState<any[]>([]);
-	const { data: competitionsResponse } = useSWR<any>(page === 'football' ? "pool/getFootballCompetitions" : null, Fetcher);
+	const { data: competitionsResponse } = useSWR<any>(
+		page === "football" ? "pool/getFootballCompetitions" : null,
+		Fetcher
+	);
 
 	const checkActive = (url: string) => {
 		let isActive = url === router.asPath;
@@ -22,9 +25,9 @@ const DashboardSider = ({ page }: { page?: string }) => {
 	useEffect(() => {
 		if (competitionsResponse?.result?.length) {
 			const _competitionList = formatCompetitons(competitionsResponse.result);
-			setCompetitionList(_competitionList)
+			setCompetitionList(_competitionList);
 		}
-	}, [competitionsResponse])
+	}, [competitionsResponse]);
 
 	return (
 		<div className={styles.container}>
@@ -37,7 +40,7 @@ const DashboardSider = ({ page }: { page?: string }) => {
 					{popularTokens.map((token: any, index) => (
 						<div className={styles.row} key={index}>
 							<div className={styles.icon}>
-								<Image src={token.icon} layout="fill" alt="" />
+								<Image src={token.icon} fill sizes="100vw" alt="" />
 							</div>
 							<div className={styles.text}>
 								<p>{token.token}</p>
@@ -53,21 +56,24 @@ const DashboardSider = ({ page }: { page?: string }) => {
 						</div>
 						{match.leagues.map((league: any, index: number) => (
 							<Link
-								href={`/football/${match.area.name.toLowerCase()}/${league.info.id
-									}`}
+								href={`/football/${match.area.name.toLowerCase()}/${
+									league.info.id
+								}`}
 								key={index}
 							>
 								<div
 									className={styles.row}
 									data-active={checkActive(
-										`/football/${match.area.name.toLowerCase()}/${league.info.id
+										`/football/${match.area.name.toLowerCase()}/${
+											league.info.id
 										}`
 									)}
 								>
 									<div className={styles.icon}>
 										<Image
 											src={league.info.icon}
-											layout="fill"
+											fill
+											sizes="100vw"
 											alt=""
 										/>
 									</div>

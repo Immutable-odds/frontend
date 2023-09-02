@@ -39,7 +39,6 @@ const Card = ({ bet }: CardProps) => {
 	const betClosingTime = getTimeAndDate(bet?.poolData?.duration);
 	const poolClosingTime = getTimeAndDate(bet?.poolData?.stakeDuration);
 	const poolStage = getPoolStage(bet);
-	console.log(bet?.token1?.icon);
 
 	const poolStatusText =
 		poolStage === "open"
@@ -111,11 +110,11 @@ const Card = ({ bet }: CardProps) => {
 				<div className={styles.small_row}>
 					<div className={styles.icon_container}>
 						<div className={styles.icon}>
-							<Image src={bet?.token1?.icon1} layout="fill" alt="" />
+							<Image src={bet?.token1?.icon1} fill sizes="100vw" alt="" />
 						</div>
 						{bet?.token2?.icon && (
 							<div className={styles.icon}>
-								<Image src={bet?.token2.icon} layout="fill" alt="" />
+								<Image src={bet?.token2.icon} fill sizes="100vw" alt="" />
 							</div>
 						)}
 					</div>
