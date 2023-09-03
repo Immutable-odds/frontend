@@ -110,11 +110,14 @@ const Card = ({ bet }: CardProps) => {
 				<div className={styles.small_row}>
 					<div className={styles.icon_container}>
 						<div className={styles.icon}>
-							<Image src={bet?.token1?.icon1} fill sizes="100vw" alt="" />
+							<Icon src={bet?.token1?.icon1} title={bet?.token1?.symbol} />
 						</div>
 						{bet?.token2?.icon && (
 							<div className={styles.icon}>
-								<Image src={bet?.token2.icon} fill sizes="100vw" alt="" />
+								<Icon
+									src={bet?.token2.icon}
+									title={bet?.token2?.symbol}
+								/>
 							</div>
 						)}
 					</div>

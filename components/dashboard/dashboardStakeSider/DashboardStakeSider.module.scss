@@ -96,7 +96,7 @@
 			.box {
 				border-radius: 1.2rem;
 				background-color: $col-grey-9;
-				margin-top: 0.8rem;
+
 				.box_header {
 					border-bottom: 0.1rem solid $col-grey-8;
 					padding: 1.6rem;
@@ -120,29 +120,29 @@
 							margin-left: -1rem;
 						}
 					}
-					.close {
-						width: 1.4rem;
-						height: 1.4rem;
-						margin-left: 1rem;
-						position: relative;
-						cursor: pointer;
-						span {
-							position: absolute;
-							display: block;
-							width: 1.4rem;
-							height: 0.2rem;
-							background-color: $col-grey-4;
-							&:first-child {
-								margin-top: 0.5rem;
-								rotate: 45deg;
-								top: -0.5rem;
-							}
-							&:last-child {
-								rotate: -45deg;
-								margin-bottom: 0.5rem;
-							}
-						}
-					}
+					// .close {
+					// 	width: 1.4rem;
+					// 	height: 1.4rem;
+					// 	margin-left: 1rem;
+					// 	position: relative;
+					// 	cursor: pointer;
+					// 	span {
+					// 		position: absolute;
+					// 		display: block;
+					// 		width: 1.4rem;
+					// 		height: 0.2rem;
+					// 		background-color: $col-grey-4;
+					// 		&:first-child {
+					// 			margin-top: 0.5rem;
+					// 			rotate: 45deg;
+					// 			top: -0.5rem;
+					// 		}
+					// 		&:last-child {
+					// 			rotate: -45deg;
+					// 			margin-bottom: 0.5rem;
+					// 		}
+					// 	}
+					// }
 				}
 				.box_body {
 					padding: 0.8rem 1.6rem 1.6rem 4.8rem;
@@ -176,10 +176,42 @@
 			margin-top: 0.5rem;
 			rotate: 180deg;
 		}
-		.button {
+		.button_container {
+			@include grid(repeat(2, 1fr), 2.4rem);
 			width: 100%;
-			padding: 0.8rem;
-			margin-top: 2.4rem;
+			.button {
+				width: 100%;
+				padding: 0.8rem;
+				margin-top: 2.4rem;
+				&:last-child {
+					color: $col-primary-4;
+					border: 0.1rem solid $col-primary-4;
+					border-radius: 10rem;
+				}
+			}
+		}
+	}
+	.accordion {
+		border: 0.1rem solid $col-grey-8;
+		margin-top: 0.8rem;
+		border-radius: 1.2rem;
+		overflow: hidden;
+		height: 5.6rem;
+		transition: height 1s ease-in-out;
+		.chevron {
+			position: relative;
+			width: 2.4rem;
+			height: 2.4rem;
+			cursor: pointer;
+			transition: rotate 0.2s ease-in-out;
+		}
+		&[data-active="true"] {
+			height: auto;
+			transition: height 1s ease-in-out;
+			.chevron {
+				rotate: 180deg;
+				transition: rotate 0.2s ease-in-out;
+			}
 		}
 	}
 	@include screenMax("mobile") {

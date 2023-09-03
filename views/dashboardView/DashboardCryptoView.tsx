@@ -25,11 +25,14 @@ const DashboardCryptoView = () => {
 	const [cryptoBetList, setCryptoBetList] = useState<any[]>([]);
 	const [network, setNetwork] = useState<string>("");
 	const [isSearching, setIsSearching] = useState<boolean>(false);
-	const { data: cryptoBetResponse } = useSWR<any>("pool/getPoolsByType/crypto", Fetcher);
+	const { data: cryptoBetResponse } = useSWR<any>(
+		"pool/getPoolsByType/crypto",
+		Fetcher
+	);
 
 	useEffect(() => {
 		if (cryptoBetResponse?.result?.length) {
-			setCryptoBetList(cryptoBetResponse.result)
+			setCryptoBetList(cryptoBetResponse.result);
 		}
 	}, [cryptoBetResponse]);
 

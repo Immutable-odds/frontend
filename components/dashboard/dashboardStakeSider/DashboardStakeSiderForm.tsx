@@ -21,14 +21,25 @@ export enum Option {
 const DashboardStakeSiderForm = ({ stake }: any) => {
 	const { active, library } = useWeb3React();
 	const [userData] = useStore();
-	const { stakeSlip, setStakeSlip }: any = useGlobalContext();
+	const { stakeSlip, setStakeSlip, setReRender }: any = useGlobalContext();
 	const [stakeAmount, setStakeAmount] = useState<number>(0);
+	const [isActive, setIsActive] = useState<boolean>(false);
 	const [referralAddress, setReferralAddress] = useState<string>(ADDRESS_ZERO);
 	const totalOdds = stakeSlip.reduce((sum: number, number: any) => {
 		return sum + number.odd;
 	}, 0);
 	const router = useRouter();
+	const localSlip = stakeSlip;
+	const handleDelete = () => {
+		const index = localSlip.findIndex((match: any) => match.id === stake.id);
 
+		if (index !== -1) {
+			// Object found, delete it
+			localSlip.splice(index, 1);
+		}
+		setReRender((reRender: boolean) => !reRender);
+		setStakeSlip(localSlip);
+	};
 	useEffect(() => {
 		const loadData = async refId => {
 			const data = await fetchUserByRefId(refId);
@@ -95,9 +106,90 @@ const DashboardStakeSiderForm = ({ stake }: any) => {
 			toast.error("Could not process stake");
 		}
 	};
+	const handleAccordion = () => {
+		setIsActive(isActive => !isActive);
+	};
 	return (
-		<div>
-			<Box stake={stake} />
+		<div className={styles.accordion} data-active={isActive}>
+			<div className={styles.box}>
+				<div className={styles.box_header}>
+					<div className={styles.small_row}>
+						<div
+							className={styles.small_row}
+							style={{ marginRight: "0.8rem" }}
+						>
+							<div className={styles.small_icon_container}>
+								<div className={styles.small_icon}>
+									<Image
+										src={
+											stake.betType && stake.betType === "crypto"
+												? stake?.token1.icon
+												: stake.homeTeam.crest
+										}
+										fill
+										sizes="100vw"
+										alt=""
+									/>
+								</div>
+							</div>
+							{stake.betType && stake.betType === "crypto" ? (
+								stake?.token2?.icon && (
+									<div className={styles.small_icon_container}>
+										<div className={styles.small_icon}>
+											<Image
+												src={stake?.token2?.icon}
+												fill
+												sizes="100vw"
+												alt=""
+											/>
+										</div>
+									</div>
+								)
+							) : (
+								<div className={styles.small_icon_container}>
+									<div className={styles.small_icon}>
+										<Image
+											src={stake.awayTeam.crest}
+											fill
+											sizes="100vw"
+											alt=""
+										/>
+									</div>
+								</div>
+							)}
+						</div>
+						{stake.betType && stake.betType === "crypto" ? (
+							<div
+								className={styles.text}
+								data-active={stake.betType && stake.betType === "crypto"}
+							>
+								<h4>
+									{stake?.token1?.symbol}
+									{stake?.token2?.symbol && `/${stake?.token2?.symbol}`}
+								</h4>
+							</div>
+						) : (
+							<div className={styles.text}>
+								<h4>
+									{stake.homeTeam.shortName} /{" "}
+									{stake.awayTeam.shortName}
+								</h4>
+							</div>
+						)}
+					</div>
+					<div className={styles.chevron} onClick={handleAccordion}>
+						<Image src="/svgs/chevron.svg" fill sizes="100vw" alt="" />
+					</div>
+				</div>
+				<div className={styles.box_body}>
+					<div className={styles.text}>
+						<p>{stake.stake}</p>
+					</div>
+					<div className={styles.text}>
+						<p>{stake.odd}</p>
+					</div>
+				</div>
+			</div>
 			<form
 				className={styles.payment_body}
 				onSubmit={e => {
@@ -137,9 +229,22 @@ const DashboardStakeSiderForm = ({ stake }: any) => {
 					</div>
 				</div>
 				{active ? (
-					<Button buttonType="primary" type="submit" className={styles.button}>
-						Stake Bet
-					</Button>
+					<div className={styles.button_container}>
+						<Button
+							buttonType="primary"
+							type="submit"
+							className={styles.button}
+						>
+							Stake Bet
+						</Button>
+						<Button
+							buttonType="transparent"
+							className={styles.button}
+							onClick={handleDelete}
+						>
+							Cancel Bet
+						</Button>
+					</div>
 				) : (
 					<p
 						style={{
@@ -156,97 +261,3 @@ const DashboardStakeSiderForm = ({ stake }: any) => {
 };
 
 export default DashboardStakeSiderForm;
-
-const Box = ({ stake }: any) => {
-	const { stakeSlip, setStakeSlip, setReRender, reRender }: any = useGlobalContext();
-	const localSlip = stakeSlip;
-	const handleDelete = () => {
-		const index = localSlip.findIndex((match: any) => match.id === stake.id);
-
-		if (index !== -1) {
-			// Object found, delete it
-			localSlip.splice(index, 1);
-		}
-		setReRender((reRender: boolean) => !reRender);
-		setStakeSlip(localSlip);
-	};
-
-	return (
-		<div className={styles.box}>
-			<div className={styles.box_header}>
-				<div className={styles.small_row}>
-					<div className={styles.small_row} style={{ marginRight: "0.8rem" }}>
-						<div className={styles.small_icon_container}>
-							<div className={styles.small_icon}>
-								<Image
-									src={
-										stake.betType && stake.betType === "crypto"
-											? stake?.token1.icon
-											: stake.homeTeam.crest
-									}
-									fill
-									sizes="100vw"
-									alt=""
-								/>
-							</div>
-						</div>
-						{stake.betType && stake.betType === "crypto" ? (
-							stake?.token2?.icon && (
-								<div className={styles.small_icon_container}>
-									<div className={styles.small_icon}>
-										<Image
-											src={stake?.token2?.icon}
-											fill
-											sizes="100vw"
-											alt=""
-										/>
-									</div>
-								</div>
-							)
-						) : (
-							<div className={styles.small_icon_container}>
-								<div className={styles.small_icon}>
-									<Image
-										src={stake.awayTeam.crest}
-										fill
-										sizes="100vw"
-										alt=""
-									/>
-								</div>
-							</div>
-						)}
-					</div>
-					{stake.betType && stake.betType === "crypto" ? (
-						<div
-							className={styles.text}
-							data-active={stake.betType && stake.betType === "crypto"}
-						>
-							<h4>
-								{stake?.token1?.symbol}
-								{stake?.token2?.symbol && `/${stake?.token2?.symbol}`}
-							</h4>
-						</div>
-					) : (
-						<div className={styles.text}>
-							<h4>
-								{stake.homeTeam.shortName} / {stake.awayTeam.shortName}
-							</h4>
-						</div>
-					)}
-				</div>
-				<div className={styles.close} onClick={handleDelete}>
-					<span></span>
-					<span></span>
-				</div>
-			</div>
-			<div className={styles.box_body}>
-				<div className={styles.text}>
-					<p>{stake.stake}</p>
-				</div>
-				<div className={styles.text}>
-					<p>{stake.odd}</p>
-				</div>
-			</div>
-		</div>
-	);
-};

@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import DashboardStakeSiderForm from "./DashboardStakeSiderForm";
 import styles from "./DashboardStakeSider.module.scss";
+import { useRouter } from "next/router";
 
 export enum Option {
 	Nil,
@@ -12,6 +13,7 @@ export enum Option {
 }
 
 const DashboardStakeSider = () => {
+	const router = useRouter();
 	const { stakeSlip, setStakeSlip }: any = useGlobalContext();
 	const [showSlip, setShowSlip] = useState<boolean>(false);
 
@@ -23,7 +25,9 @@ const DashboardStakeSider = () => {
 					<div className={styles.text}>
 						<h1>Get 500 Points</h1>
 						<h6>For every friend you refer</h6>
-						<span>Get Started</span>
+						<span onClick={() => router.push("/settings/referral")}>
+							Get Started
+						</span>
 					</div>
 				</div>
 			</div>
