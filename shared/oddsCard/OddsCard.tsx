@@ -75,12 +75,15 @@ const OddsCard = ({
 		};
 	}, [localMatch, formattedMatch]);
 
+	const isDisabled = formattedMatch.poolData.status === "vesting";
+
 	return (
 		<div className={`${styles.container} ${className}`} data-type={type}>
 			<Button
 				buttonType="transparent"
 				onClick={() => handleClick(winOdds, "win", 1)}
 				className={styles.button}
+				disabled={isDisabled}
 			>
 				<div data-active={isFoundInSlip(winOdds)} className={styles.box}>
 					<div className={styles.text}>
@@ -94,6 +97,7 @@ const OddsCard = ({
 					buttonType="transparent"
 					onClick={() => handleClick(drawOdds, "draw", 2)}
 					className={styles.button}
+					disabled={isDisabled}
 				>
 					<div data-active={isFoundInSlip(drawOdds)} className={styles.box}>
 						<div className={styles.text}>
@@ -107,6 +111,7 @@ const OddsCard = ({
 				buttonType="transparent"
 				onClick={() => handleClick(lossOdds, "lose", 3)}
 				className={styles.button}
+				disabled={isDisabled}
 			>
 				<div data-active={isFoundInSlip(lossOdds)} className={styles.box}>
 					<div className={styles.text}>

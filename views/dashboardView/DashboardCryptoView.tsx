@@ -12,6 +12,7 @@ import { getPoolsByType } from "@/services/API";
 import Image from "next/image";
 import useSWR from "swr";
 import { Fetcher } from "@/utils/fetcher";
+import { PageLoader } from "@/shared/loaders";
 
 const networkList: SelectOption[] = [
 	{ label: "all networks", value: "all" },
@@ -23,6 +24,7 @@ const networkList: SelectOption[] = [
 
 const DashboardCryptoView = () => {
 	const [cryptoBetList, setCryptoBetList] = useState<any[]>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [network, setNetwork] = useState<string>("");
 	const [isSearching, setIsSearching] = useState<boolean>(false);
 	const { data: cryptoBetResponse } = useSWR<any>(
@@ -33,6 +35,7 @@ const DashboardCryptoView = () => {
 	useEffect(() => {
 		if (cryptoBetResponse?.result?.length) {
 			setCryptoBetList(cryptoBetResponse.result);
+			setIsLoading(false);
 		}
 	}, [cryptoBetResponse]);
 
@@ -87,7 +90,9 @@ const DashboardCryptoView = () => {
 						<Select options={networkList} onOptionChange={setNetwork} />
 					</div>
 				</div>
-				{cryptoBetList.length ? (
+				{isLoading ? (
+					<PageLoader />
+				) : cryptoBetList.length ? (
 					<CryptoContainer cryptoBets={cryptoBetList} />
 				) : (
 					<div className={styles.center}>

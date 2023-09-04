@@ -12,14 +12,17 @@ import { ButtonNav } from "@/shared";
 import Image from "next/image";
 import useSWR from "swr";
 import { Fetcher } from "@/utils/fetcher";
+import { PageLoader } from "@/shared/loaders";
 
 const DashboardFootballView = () => {
 	const [matches, setMatches] = useState<any[]>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const { data: matchResponse } = useSWR<any>("pool/getPoolsByType/football", Fetcher);
 
 	useEffect(() => {
 		if (matchResponse?.result?.length) {
 			setMatches(matchResponse.result);
+			setIsLoading(false);
 		}
 	}, [matchResponse]);
 
@@ -74,7 +77,9 @@ const DashboardFootballView = () => {
 					<ButtonNav />
 				</div>
 				{matches.length && <DashboardTrendingCard match={matches[0]} />}
-				{matchList.length ? (
+				{isLoading ? (
+					<PageLoader />
+				) : matchList.length ? (
 					matchList.map((matchesData, index) => (
 						<LeagueContainer data={matchesData} key={index} />
 					))
