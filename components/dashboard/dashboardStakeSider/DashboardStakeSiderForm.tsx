@@ -123,7 +123,7 @@ const DashboardStakeSiderForm = ({ stake }: any) => {
 									<Image
 										src={
 											stake.betType && stake.betType === "crypto"
-												? stake?.token1.icon
+												? `/svgs/tokens/${stake?.token1.symbol.toLowerCase()}.svg`
 												: stake.homeTeam.crest
 										}
 										fill
@@ -137,7 +137,7 @@ const DashboardStakeSiderForm = ({ stake }: any) => {
 									<div className={styles.small_icon_container}>
 										<div className={styles.small_icon}>
 											<Image
-												src={stake?.token2?.icon}
+												src={`/svgs/tokens/${stake?.token2.symbol.toLowerCase()}.svg`}
 												fill
 												sizes="100vw"
 												alt=""

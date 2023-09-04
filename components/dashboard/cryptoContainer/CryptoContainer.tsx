@@ -74,15 +74,13 @@ const Card = ({ bet }: CardProps) => {
 				<div className={styles.small_row}>
 					<div className={styles.icon_container}>
 						<Icon
-							src={
-								"https://assets-cdn.trustwallet.com/blockchains/smartchain/assets/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/logo.png"
-							}
+							src={`/svgs/tokens/${bet?.token1.symbol.toLowerCase()}.svg`}
 							className={styles.icon}
 							title={bet?.token1?.symbol}
 						/>
 						{bet?.token2?.icon && (
 							<Icon
-								src={bet?.token2?.icon}
+								src={`/svgs/tokens/${bet?.token2.symbol.toLowerCase()}.svg`}
 								className={styles.icon}
 								title={bet?.token2?.symbol}
 							/>
