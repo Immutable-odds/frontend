@@ -2,7 +2,7 @@ import React from "react";
 import "swiper/css";
 import styles from "./DashboardTrendingCard.module.scss";
 import Image from "next/image";
-import { Countdown, OddsCard } from "@/shared";
+import { Countdown, OddsCard, Icon } from "@/shared";
 import { convertEpochToFormattedDate } from "@/utils";
 
 const DashboardTrendingCard = ({ match }) => {
@@ -40,27 +40,22 @@ interface CardProps {
 
 const Card = ({ epochTime, odds, match }: CardProps) => {
 	const formattedDate = convertEpochToFormattedDate(epochTime);
+	const checkForEPL = (competition: any) => {
+		if (competition.code === "PL") return "/svgs/premier-league.svg";
+		return competition.emblem;
+	};
 
 	return (
 		<div className={styles.card}>
 			<div className={styles.card_header}>
 				<div className={styles.small_row}>
-					<div className={styles.icon}>
-						<Image
-							src={"/svgs/premier-league.svg"}
-							fill
-							sizes="100vw"
-							alt=""
-						/>
-					</div>
+					<Icon src={checkForEPL(match.competition)} className={styles.icon} />
 					<div className={styles.text}>
-						<h3>Premier League</h3>
+						<h3>{match.competition.name}</h3>
 					</div>
 				</div>
 				<div className={styles.small_row}>
-					<div className={styles.share_icon}>
-						<Image src="/svgs/icon-share.svg" fill sizes="100vw" alt="" />
-					</div>
+					<Icon src="/svgs/icon-share.svg" className={styles.share_icon} />
 					<div className={styles.text}>
 						<p>Share</p>
 					</div>
@@ -71,14 +66,10 @@ const Card = ({ epochTime, odds, match }: CardProps) => {
 					<div className={styles.block}>
 						<div className={styles.icon_block}>
 							<div className={styles.icon_container}>
-								<div className={styles.icon}>
-									<Image
-										src={match.homeTeam.crest}
-										fill
-										sizes="100vw"
-										alt=""
-									/>
-								</div>
+								<Icon
+									src={match.homeTeam.crest}
+									className={styles.icon}
+								/>
 							</div>
 						</div>
 						<div className={styles.text}>
@@ -111,14 +102,10 @@ const Card = ({ epochTime, odds, match }: CardProps) => {
 					<div className={styles.block}>
 						<div className={styles.icon_block}>
 							<div className={styles.icon_container}>
-								<div className={styles.icon}>
-									<Image
-										src={match.awayTeam.crest}
-										fill
-										sizes="100vw"
-										alt=""
-									/>
-								</div>
+								<Icon
+									src={match.awayTeam.crest}
+									className={styles.icon}
+								/>
 							</div>
 						</div>
 						<div className={styles.text}>
